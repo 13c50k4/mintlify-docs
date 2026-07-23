@@ -135,5 +135,6 @@
         "label": "Request demo for Companies"
       }
     ]
-  }
+  },
+  "description": "Hackrate is an ethical hacking platform that brings together companies looking to strengthen their security posture and skilled security researchers ready to find real vulnerabilities."
 }
