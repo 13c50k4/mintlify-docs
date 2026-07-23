@@ -1,0 +1,240 @@
+---
+title: "Vulnerability Report Statuses: A Complete Reference"
+sidebarTitle: "Report Statuses"
+description: "A complete reference for all 14 Hackrate report statuses — what each one means, who can see it, and how reports move through the triage workflow."
+---
+
+Every report on Hackrate carries a status that tells your team — and the submitting researcher — exactly where that report stands in the triage lifecycle. Statuses are divided into two fundamental types: **Open** (the report is active and requires attention) and **Closed** (a final decision has been recorded and the report is no longer pending action). Understanding the full set of statuses, and what each one signals, is the single most important skill for running an effective vulnerability management programme.
+
+There are **14 statuses** in total: 5 open and 9 closed.
+
+## Open vs. Closed
+
+An **Open** status means the report is still in flight. Someone — whether a researcher, a reviewer, or a team member — still has an action to take. Open reports appear in the **Open reports** view of your inbox and are counted in the pending-reports badge at the top of the page.
+
+A **Closed** status means the report has reached a terminal decision. No further action is expected unless the report is explicitly reopened. Closed reports are hidden from the Open view but remain fully accessible in the **All reports** and **Advanced** views for audit, reference, and analytics purposes.
+
+<Note>
+  Closing a report does not delete it. All comments, evidence, CVSS data, bounty records, and status history are permanently retained and can be reviewed at any time.
+</Note>
+
+## All 14 statuses at a glance
+
+| ID | Status Name | Type | Appears in New queue |
+|----|-------------|------|----------------------|
+| 1  | Pre-submission | Open | No |
+| 2  | New | Open | ✓ Yes |
+| 3  | Accepted | Open | No |
+| 4  | Needs more info | Open | ✓ Yes |
+| 5  | Resolved | Closed | No |
+| 6  | Informative | Closed | No |
+| 7  | Duplicate | Closed | No |
+| 8  | Not Accepted (Invalid) | Closed | No |
+| 9  | Not Accepted (Spam) | Closed | No |
+| 10 | Not Accepted (Out of Scope) | Closed | No |
+| 11 | Not Accepted (Self-Closed) | Closed | No |
+| 12 | New – To review | Open | ✓ Yes |
+| 13 | Good quality duplicate | Closed | No |
+| 14 | Accepted risk | Closed | No |
+
+## The New reports queue
+
+The **New reports** view (available in the inbox view switcher) shows all reports in statuses **2 (New)**, **4 (Needs more info)**, and **12 (New – To review)**. These are the reports that most urgently need a human action: a first-time review, a follow-up on a clarification request, or formal routing before triage begins. Monitoring this queue daily helps your team avoid letting reports go stale.
+
+## Detailed status descriptions
+
+### Open statuses
+
+<Accordion title="1 · Pre-submission — Open">
+  A report that has been started by a researcher but **not yet formally submitted**. The researcher may be drafting their findings, uploading evidence, or completing required fields before hitting the submit button. Pre-submission reports are not visible to researchers on the platform as complete submissions, and they do not appear in the standard triage queue.
+
+  **For the company:** Pre-submission reports represent work in progress on the researcher's side. You generally do not need to take action until the report advances to **New** upon submission. SuperAdmin and StandardAdmin roles can see these reports for awareness purposes.
+
+  **Visibility:** SuperAdmin and StandardAdmin only. Non-super-admin team members cannot see reports in this status.
+</Accordion>
+
+<Accordion title="2 · New — Open">
+  A **freshly submitted report** that has not yet been reviewed by any member of your team. This is the entry point for every standard submission from a registered researcher. The report contains the researcher's full write-up — title, description, summary, impact, CVSS score, severity, vulnerability type, target, and any attached proof-of-concept files — but your team has not yet made any triage decision.
+
+  **For the company:** New reports should be reviewed as promptly as possible. Your first actions will typically be to read the submission, check the pre-validation checklist, assign the report to a team member, and either accept it for further investigation, request clarification, or close it with an appropriate status.
+
+  **For the researcher:** The researcher knows their report has been received and is awaiting review. They cannot yet see whether their report has been read.
+
+  **Visibility:** SuperAdmin and StandardAdmin only. Other roles cannot see reports in this status.
+</Accordion>
+
+<Accordion title="3 · Accepted — Open">
+  The report has been **reviewed and confirmed as a valid vulnerability** by your triage team. Accepting a report signals to the researcher that the issue is real, in-scope, and that your team is working on a fix or mitigation. The report remains Open because remediation is still in progress.
+
+  **For the company:** Once you accept a report, it is good practice to communicate an estimated timeline to the researcher and begin your internal remediation workflow. You may also award a bounty at this stage, or wait until the vulnerability is fully resolved.
+
+  **For the researcher:** Acceptance is a positive signal — it means their finding is being taken seriously. Many researchers view the Accepted status as the trigger for bounty payment, though programmes vary on exact timing.
+
+  **Visibility:** All roles with any level of access to the report.
+</Accordion>
+
+<Accordion title="4 · Needs more info — Open">
+  Your team has reviewed the submission and **requires additional information or clarification** from the researcher before a triage decision can be made. This status pauses the review clock on your side while the researcher provides what is needed — for example, a clearer reproduction case, an updated CVSS justification, or additional evidence.
+
+  **For the company:** When setting this status, always leave a clear comment explaining exactly what information you need and what format is preferred. Vague requests slow down resolution and create a poor researcher experience.
+
+  **For the researcher:** The researcher is notified and is expected to respond. Once they provide the requested information, the report is typically moved back to **New** or directly to **Accepted** depending on your workflow.
+
+  **Visibility:** SuperAdmin and StandardAdmin only. Other roles cannot see reports in this status.
+</Accordion>
+
+<Accordion title="12 · New – To review — Open">
+  A report that a SuperAdmin has explicitly moved into this state for formal team review. A SuperAdmin can apply this status to any report currently in **Pre-submission**, **New**, or **Needs more info** to signal that the report has been picked up and is pending assignment to a reviewer. It is commonly applied to reports received via an embedded form (VDP), but can also be used for any report that needs an explicit routing step before triage proceeds.
+
+  **For the company:** Treat New – To review reports with the same urgency as standard **New** reports. When working with embedded-form submissions, you can check the **VDP** indicator on the report to confirm the submission channel. If the submitter's email matches an existing Hackrate account, you can link the account to the report from the management view.
+
+  **For the researcher / submitter:** Depending on whether they have an account, the submitter may or may not be able to see updates. Inviting them to the platform from the report view enables full two-way communication.
+
+  **Visibility:** SuperAdmin and StandardAdmin only. Other roles cannot see reports in this status.
+</Accordion>
+
+---
+
+### Closed statuses
+
+<Accordion title="5 · Resolved — Closed">
+  The vulnerability described in the report has been **fully remediated**. Your engineering or security team has deployed a fix, and the issue no longer exists in the affected target. Resolved is the most positive closed outcome and typically accompanies a bounty payout if the report was previously Accepted.
+
+  **For the company:** Before marking a report Resolved, verify that the fix has been deployed and, where possible, validated against the original reproduction steps. Leave a comment for the researcher explaining what was done.
+
+  **For the researcher:** Resolved is the expected end state for a valid, accepted report. It confirms that their work had a real impact on your security posture.
+</Accordion>
+
+<Accordion title="6 · Informative — Closed">
+  The report describes a **real observation** — something factually accurate about your environment — but it does not constitute a security vulnerability that requires remediation. The finding may describe expected behaviour, a known limitation, or a low-impact behaviour that does not meet your programme's risk threshold.
+
+  **For the company:** Use Informative thoughtfully. Researchers who receive this status may be frustrated if they believe the finding is more serious. A well-written comment explaining why the finding is informative rather than a vulnerability (e.g. "this behaviour is by design and documented in our security policy") leads to a much better outcome than a bare status change.
+
+  **For the researcher:** The report is not being rewarded but is acknowledged as a genuine, good-faith submission. Some programmes offer points or recognition for Informative reports.
+</Accordion>
+
+<Accordion title="7 · Duplicate — Closed">
+  The vulnerability has **already been reported by another researcher**. The report is closed to avoid double-counting or double-paying for the same issue. The **Duplicate Of** field on the report records the ID of the original (first-reported) report.
+
+  **For the company:** Only mark a report as a duplicate when you are confident the root cause and the affected asset match. A partial overlap is not automatically a duplicate. Always point the researcher to the original report ID using the Duplicate Of field, and consider leaving a brief comment.
+
+  **For the researcher:** Receiving a Duplicate status is disappointing but normal in active programmes. The researcher should be told which report was the original so they understand the decision.
+
+  **Visibility:** SuperAdmin and StandardAdmin only. Other roles cannot see duplicate reports.
+</Accordion>
+
+<Accordion title="8 · Not Accepted (Invalid) — Closed">
+  The submission **does not demonstrate a real security vulnerability**. The reported behaviour may be expected, the proof of concept may be non-functional, or the claimed impact may be inaccurate or unachievable. This is a firm rejection of the security claim itself — not a procedural rejection.
+
+  **For the company:** Provide a clear, specific explanation in your closing comment. Vague rejections damage trust and discourage good-faith researchers. Where possible, explain exactly which part of the submission did not hold up (e.g. "the SSRF requires an internal network position that is not attainable from the internet").
+
+  **Visibility:** SuperAdmin and StandardAdmin only. Other roles cannot see reports in this status.
+</Accordion>
+
+<Accordion title="9 · Not Accepted (Spam) — Closed">
+  The submission is **low-quality, automated, or clearly irrelevant** — for example, a generic scanner output dumped without context, an off-topic message, or a repeated submission with no new information. Spam reports typically show little to no effort from the researcher.
+
+  **For the company:** Use this status only for genuinely low-quality submissions, not as a shortcut for reports that are merely wrong. Mislabelling a sincere-but-incorrect report as Spam has a significant negative impact on researcher relations and programme reputation.
+
+  **Visibility:** SuperAdmin and StandardAdmin only. Other roles cannot see reports in this status.
+</Accordion>
+
+<Accordion title="10 · Not Accepted (Out of Scope) — Closed">
+  The vulnerability is **real** and may even be valid, but it affects an asset, domain, subdomain, or feature that is explicitly **not covered by your programme scope**. The report is closed because your programme cannot accept or reward findings outside its defined boundaries.
+
+  **For the company:** Before closing as Out of Scope, double-check your programme's in-scope and out-of-scope asset list. If the target is ambiguous, consider clarifying your scope definition rather than penalising the researcher. Leave a comment pointing the researcher to your programme scope documentation.
+
+  **Visibility:** SuperAdmin and StandardAdmin only. Other roles cannot see reports in this status.
+</Accordion>
+
+<Accordion title="11 · Not Accepted (Self-Closed) — Closed">
+  The report was **closed without a formal resolution** — either by the researcher themselves withdrawing the submission, or by an admin closing the report after the researcher became unresponsive or explicitly withdrew their finding. This status documents that the report ended without a definitive technical verdict from your team.
+
+  **For the company:** Self-Closed is appropriate when a researcher retracts their own report, when communication has broken down entirely after reasonable attempts, or when a pre-submission report was never completed. It is not a substitute for proper rejection when you have reviewed the submission.
+
+  **Visibility:** SuperAdmin and StandardAdmin only. Other roles cannot see reports in this status.
+</Accordion>
+
+<Accordion title="13 · Good quality duplicate — Closed">
+  This report covers a vulnerability that was **already reported by another researcher**, but the submission itself is of **notably high quality** — well-written, thoroughly documented, with clear reproduction steps and meaningful impact analysis. While it cannot be accepted as a primary finding, its quality warrants recognition.
+
+  **For the company:** Use Good quality duplicate when you want to acknowledge a researcher's effort even though they were not the first to report the issue. Some programmes pair this status with a partial bounty, a bonus payment, or a public thanks to reward thoroughness and professionalism.
+
+  **For the researcher:** This status signals that their work was seen and valued, even if the vulnerability was already known. It is a meaningful distinction from a plain Duplicate status.
+</Accordion>
+
+<Accordion title="14 · Accepted risk — Closed">
+  The vulnerability is **confirmed as valid and real**, but your organisation has made a **conscious, deliberate decision to accept the risk** rather than remediating it. This might be because the cost or complexity of remediation outweighs the business risk, the vulnerability is only exploitable under conditions considered sufficiently unlikely, or a compensating control is already in place.
+
+  **For the company:** Accepted risk should be used with care and proper internal sign-off. Document your rationale in the **Team Summary** field (visible only to your team) and communicate the outcome clearly to the researcher. Consider whether a bounty or partial reward is appropriate given that the finding was valid.
+
+  **For the researcher:** Accepted risk confirms their finding is real and has been reviewed at a senior level. It is a closed status, so the issue is not expected to be fixed, but the researcher's work is acknowledged.
+</Accordion>
+
+## Status flow overview
+
+Reports do not follow a single linear path. The diagram below describes the most common transitions:
+
+```
+Researcher submits
+        │
+        ▼
+   [2] New ──► (SuperAdmin routes) ──► [12] New – To review
+        │                                       │
+        │◄──────────────────────────────────────┘
+        │
+        ├──► [4] Needs more info ──► (researcher responds) ──► [2] New
+        │
+        ├──► [3] Accepted ──► [5] Resolved
+        │         │
+        │         └──► [14] Accepted risk
+        │
+        ├──► [6] Informative
+        ├──► [7] Duplicate ──► or ──► [13] Good quality duplicate
+        ├──► [8] Not Accepted (Invalid)
+        ├──► [9] Not Accepted (Spam)
+        ├──► [10] Not Accepted (Out of Scope)
+        └──► [11] Not Accepted (Self-Closed)
+```
+
+<Tip>
+  Closed reports can be **reopened** by an admin if new information comes to light — for example, if a researcher provides compelling additional evidence after a rejection, or if a Resolved vulnerability regresses in a later release.
+</Tip>
+
+## Role-based status visibility
+
+The statuses visible to a team member depend on their assigned role. This ensures that sensitive pre-decision reports are only seen by those responsible for triaging them.
+
+<Tabs>
+  <Tab title="SuperAdmin / StandardAdmin">
+    Full visibility across **all 14 statuses**, including:
+    - Pre-submission (1)
+    - New (2)
+    - Needs more info (4)
+    - Duplicate (7)
+    - Not Accepted — Invalid (8)
+    - Not Accepted — Spam (9)
+    - Not Accepted — Out of Scope (10)
+    - Not Accepted — Self-Closed (11)
+    - All other open and closed statuses
+
+    SuperAdmins can also export the sensitive report fields (Summary, Description, Impact) via CSV.
+  </Tab>
+  <Tab title="Analytics / Read-Only">
+    Can only see reports that have been reviewed and have progressed past the initial triage stage. The following statuses are **hidden** from these roles:
+    - Pre-submission (1)
+    - New (2)
+    - Needs more info (4)
+    - Duplicate (7)
+    - Not Accepted — Invalid (8)
+    - Not Accepted — Spam (9)
+    - Not Accepted — Out of Scope (10)
+    - Not Accepted — Self-Closed (11)
+
+    Visible statuses include: Accepted, Resolved, Informative, New – To review, Good quality duplicate, and Accepted risk.
+  </Tab>
+</Tabs>
+
+<Warning>
+  Never share access credentials with individuals who should not see pre-decision reports. Use the Analytics or Read-Only roles for team members whose responsibility is reporting and analysis rather than active triage.
+</Warning>

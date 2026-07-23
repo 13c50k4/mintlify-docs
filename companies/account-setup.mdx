@@ -1,0 +1,110 @@
+---
+title: "Account Setup: Configure Your Hackrate Organization"
+sidebarTitle: "Account Setup"
+description: "Set up your company account on Hackrate — create your organization, configure settings, invite team members, and control who can access each program."
+---
+
+Your Hackrate account is the foundation for everything your security team does on the platform. This guide covers creating and configuring your organization, inviting teammates, understanding permission roles, and managing your account preferences. Taking time to set this up correctly ensures the right people can act on reports quickly and that no access is inadvertently over- or under-provisioned.
+
+## Creating your organization
+
+When you register as a company on Hackrate, your first task is to create an **Organization**. An organization is the top-level container for all of your programs, team members, and settings.
+
+To create an organization, go to **Organizations** in the main navigation and click **New Organization**. You will need to provide:
+
+| Field | Description |
+|---|---|
+| **Name** | Your company's full display name, shown to researchers on program pages |
+| **Alias** | A short, URL-safe identifier (for example, `acme`). This appears in your program URLs and cannot be changed later, so choose carefully. |
+
+<Tip>
+  If your company runs multiple distinct products or business units with separate security budgets, consider creating one organization per unit. This makes it easier to manage team permissions and report access independently.
+</Tip>
+
+## Inviting team members
+
+Security programs work best when the right colleagues have access. Hackrate uses a role-based permission system that lets you control exactly what each person can see and do.
+
+### Roles and permissions
+
+<Accordion title="SuperAdmin">
+  Full control over the program and organization. SuperAdmins can publish programs, pause programs, manage bounty tables, invite and remove administrators, and configure integrations. This role should be reserved for security leads or program owners.
+</Accordion>
+
+<Accordion title="StandardAdmin">
+  Can update program details, manage the scope, publish announcements, send notifications to researchers, and triage reports. StandardAdmins cannot pause or publish programs. This is the right role for day-to-day security team members who operate the program.
+</Accordion>
+
+<Accordion title="Read-Only">
+  Can view program details and reports but cannot make changes. Suitable for stakeholders such as legal, compliance, or executive team members who need visibility without operational access.
+</Accordion>
+
+<Accordion title="Analytics">
+  Access to the program analytics dashboard, including report counts, bounty spend, and budget utilization. Useful for security managers who need reporting data without access to individual vulnerability details.
+</Accordion>
+
+### How to invite a teammate
+
+<Steps>
+  <Step title="Navigate to program permissions">
+    Open the program you want to grant access to and click **Permissions** (or **Administrators**) in the program management menu.
+  </Step>
+  <Step title="Enter the email address">
+    Type the colleague's work email address and select the appropriate role from the dropdown.
+  </Step>
+  <Step title="Send the invitation">
+    Click **Add User**. If the colleague already has a Hackrate account, they receive an email notification and gain access immediately. If they do not yet have an account, they receive an invitation email prompting them to register — their role will be applied automatically once they complete registration.
+  </Step>
+</Steps>
+
+<Note>
+  Pending invitations are visible in the **Permissions** panel under the program. You can monitor whether a colleague has accepted, declined, or not yet responded to their invitation.
+</Note>
+
+### Admin groups
+
+For organizations with multiple programs, managing permissions program-by-program can become time-consuming. **Admin Groups** let you bundle a set of users and assign the group a role across one or more programs in a single step. Create and manage admin groups from the **Organization** settings page.
+
+## Organization-level vs. program-level access
+
+Permissions can be granted at two levels:
+
+- **Organization level** — grants access to all current and future programs within the organization. Use this for core security team members who work across all programs.
+- **Program level** — grants access to a specific program only. Use this for external consultants, product team liaisons, or temporary reviewers.
+
+<Warning>
+  Organization-level roles are powerful — a SuperAdmin at the organization level has full access to every program in that organization. Grant this level only to colleagues who genuinely need it.
+</Warning>
+
+## Account and notification preferences
+
+### Email notifications
+
+Hackrate sends email notifications for key activity on your programs. From your **Account Settings** page you can toggle each category on or off and choose your preferred content level:
+
+**Notification categories:**
+- **New reports** — notified when a researcher submits a new vulnerability report
+- **Report updates** — notified when a report's status or severity changes
+- **Comments** — notified when someone posts a comment on a report
+- **Internal comments** — notified for internal notes visible only to your team
+- **Files** — notified when a file attachment is added to a report
+- **Program updates** — notified about changes to program settings or announcements
+- **Marketing updates** — product news and platform announcements from Hackrate
+- **News and communication** — general Hackrate community news
+
+**Content level** controls how much detail is included in each notification email:
+- **Minimal** — brief summary only
+- **Typical** *(default)* — standard detail level suitable for most users
+- **Full** — complete report content and context included in the email
+
+### Security.txt integration
+
+If your organization publishes a `security.txt` file (as recommended by [RFC 9116](https://www.rfc-editor.org/info/rfc9116)), you can reference your Hackrate VDP form URL in it. The platform provides a ready-to-use snippet from the program's embed settings. This makes it easy for researchers who discover your assets independently to find the right reporting channel.
+
+### Two-factor authentication
+
+Hackrate strongly recommends enabling two-factor authentication (2FA) on your account, especially if you hold a SuperAdmin role. You can enable 2FA from your account security settings.
+
+## Business units
+
+If your organization is structured into distinct business units — for example, separate product teams with their own security responsibilities — Hackrate supports **Business Units** as an optional organizational layer. Business units allow you to associate specific targets with a particular team and restrict visibility of reports and scope to the appropriate group. Contact the Hackrate team to enable this feature for your organization.

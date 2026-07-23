@@ -1,0 +1,98 @@
+---
+title: "Hackrate Admin Groups for Team-Based Access Control"
+sidebarTitle: "Admin Groups"
+description: "Create named groups of admins and assign roles to the whole group at once, so new team members inherit the right access the moment they join."
+---
+
+Managing access one person at a time gets unwieldy as your security team grows. Admin Groups solve this by letting you create named collections of users — say, "Triage Team" or "Frontend Engineers" — and assign roles to the group as a whole. When you add someone to a group, they immediately inherit every permission that group holds. When you remove them, those permissions are revoked at the same time. You never have to track down a dozen individual role assignments just to offboard someone.
+
+## What Admin Groups Are
+
+An Admin Group is a reusable container that belongs to your organization. It has a name, an optional description, and a list of members. You can then assign the group one or more roles at any scope — organization, program, Business Unit, or individual report. When Hackrate evaluates a user's access, it expands their group memberships and combines them with any direct assignments, always applying the most privileged role that results.
+
+Groups are visible from your organization management page alongside Business Units, programs, and individual user rights.
+
+## Creating a Group
+
+<Steps>
+  <Step title="Open Organization Management">
+    From your organization dashboard, click **Organization Management** (or your organization name in the top navigation). You need a SuperAdmin role at the organization level to manage groups.
+  </Step>
+  <Step title="Navigate to Admin Groups">
+    Scroll to the **Admin Groups** section. You'll see a list of existing groups and an option to create a new one.
+  </Step>
+  <Step title="Name and describe the group">
+    Give the group a clear, purpose-driven name (e.g., "Triage Team", "Security Researchers", "Frontend Team"). Add an optional description so other admins understand who belongs here.
+  </Step>
+  <Step title="Save the group">
+    Click **Create**. The group is now available to receive members and role assignments.
+  </Step>
+</Steps>
+
+## Adding Members to a Group
+
+<Steps>
+  <Step title="Select the group">
+    From the Admin Groups list, click the group you want to manage.
+  </Step>
+  <Step title="Invite members">
+    Click **Add member** and enter the email address of the person you want to add. If they already have a Hackrate account, they are added immediately. If not, they receive an invitation email.
+  </Step>
+  <Step title="Confirm membership">
+    The user appears in the group's member list. Pending invitations are shown separately until the invitee registers.
+  </Step>
+</Steps>
+
+<Note>
+  A user can belong to multiple groups. Their effective role at any scope is always the most privileged role they hold, whether it comes from a direct assignment or any of their groups.
+</Note>
+
+## Assigning a Role to a Group
+
+You can assign a group a role at any of the four scope levels — organization, program, Business Unit, or report. The assignment works exactly the same way as assigning a role to an individual user.
+
+<Tabs>
+  <Tab title="Organization scope">
+    Assign the group a role at the organization level to give every member access across all programs. This is appropriate for a core security team that triages reports from multiple programs.
+
+    From the organization management page, find the **User Rights** section, choose **Add right**, select the group instead of an individual user, pick the role, and set the scope to the organization.
+  </Tab>
+  <Tab title="Program scope">
+    Restrict the group's role to a single program. Members will only see reports from that program, nothing else. This is the most common assignment for product-team security contacts.
+
+    In the program's settings or the organization management panel, add a right for the group with the desired role and select the specific program as the scope.
+  </Tab>
+  <Tab title="Business Unit scope">
+    Scope the group's role to a Business Unit so members only see reports for the targets in that unit. Ideal for siloed teams (e.g., a "Mobile Team" group whose role is scoped to a "Mobile Apps" Business Unit).
+  </Tab>
+  <Tab title="Report scope">
+    Give the group access to a single report. Useful when a vulnerability requires input from a cross-functional team but you don't want to expose the rest of your program.
+  </Tab>
+</Tabs>
+
+## Worked Example: Creating a Triage Team
+
+<Steps>
+  <Step title="Create the group">
+    Create a new group named **Triage Team** with the description "First-line reviewers for all inbound reports."
+  </Step>
+  <Step title="Add your triagers">
+    Invite the three engineers responsible for first-pass triage. They receive email invitations.
+  </Step>
+  <Step title="Assign a role at program level">
+    Once the group is created, assign it the **StandardAdmin** role scoped to your main bug bounty program. This gives every member triage access to that program's reports.
+  </Step>
+  <Step title="Add future members as needed">
+    When a new engineer joins the triage rotation, add them to the group. They immediately inherit StandardAdmin access — no extra role assignment required.
+  </Step>
+</Steps>
+
+<Accordion title="How group rights interact with direct rights">
+  If a user is both a member of the Triage Team group (which has StandardAdmin at program level) and has a separate direct assignment of Read-Only at the organization level, Hackrate evaluates all of their rights together and applies the most privileged one. In this case, they would have StandardAdmin on the specific program and Read-Only everywhere else.
+
+  Group membership never *reduces* access — it can only add to it.
+</Accordion>
+
+<Warning>
+  Removing a user from a group revokes the rights that came from that group. If the user also has direct assignments, those remain. Always review a user's direct rights before assuming removal from a group fully revokes their access.
+</Warning>

@@ -1,0 +1,101 @@
+---
+title: "Business Units for Target-Scoped Access Control in Hackrate"
+sidebarTitle: "Business Units"
+description: "Group your program's targets into Business Units so each team only sees the reports relevant to their area, without access to unrelated assets."
+---
+
+A typical bug bounty program spans many different targets — web applications, mobile apps, APIs, and infrastructure. Not every team member needs to see every report. A mobile developer shouldn't wade through backend API vulnerabilities, and an infrastructure engineer doesn't need to review UI-layer issues. Business Units let you slice your targets into meaningful groups so that each team's access is limited to the reports that are actually relevant to them.
+
+## What Business Units Are
+
+A Business Unit is a named grouping that belongs to your organization and contains one or more targets from your programs. You can then assign admin rights — for an individual user, an Admin Group, or both — scoped specifically to that Business Unit. When a report comes in against a target, Hackrate automatically associates the report with the Business Units that contain that target, and anyone whose role is scoped to that Business Unit can see and manage that report.
+
+Business Units exist at the organization level, which means the same unit can span targets across multiple programs if your targets are organized that way.
+
+## How Business Units Connect to Targets
+
+The link between a Business Unit and a target is called a **Business Unit Scope**. Each scope entry says: "this target belongs to this Business Unit." A single target can belong to multiple Business Units — for example, a shared authentication service might belong to both a "Backend Team" unit and a "Security Core" unit.
+
+When someone holds a role scoped to a Business Unit, Hackrate resolves access like this:
+
+1. Look up all targets assigned to that Business Unit.
+2. Find all reports submitted against those targets.
+3. Grant the user the assigned role over exactly those reports.
+
+Reports outside the Business Unit's targets remain invisible to that user (unless they have broader access through another assignment).
+
+## Creating a Business Unit
+
+<Steps>
+  <Step title="Open Organization Management">
+    Navigate to your organization dashboard and open **Organization Management**. You need a SuperAdmin role at the organization level to create and manage Business Units.
+  </Step>
+  <Step title="Go to Business Units">
+    Scroll to the **Business Units** section. Existing units are listed here; click **Create Business Unit** to start a new one.
+  </Step>
+  <Step title="Name the unit">
+    Choose a name that clearly describes the team or area it represents — for example, **Mobile Team**, **Web Frontend**, **Cloud Infrastructure**, or **Payment Services**.
+  </Step>
+  <Step title="Save the unit">
+    Click **Create**. The Business Unit is now available for target assignment and access control.
+  </Step>
+</Steps>
+
+## Assigning Targets to a Business Unit
+
+<Steps>
+  <Step title="Open the Business Unit">
+    From the Business Units list, select the unit you just created.
+  </Step>
+  <Step title="Add targets">
+    Use the target selector to assign the relevant targets from your programs to this unit. You can add any target that belongs to a program in your organization.
+  </Step>
+  <Step title="Confirm the scope">
+    The unit's scope list shows every target it covers. Future reports submitted against any of these targets will be accessible to anyone whose role is scoped to this Business Unit.
+  </Step>
+</Steps>
+
+<Tip>
+  If a target is part of more than one Business Unit, all users with access to either unit will see reports for that target. Use this intentionally — for example, a shared login service could live in both a "Backend Team" unit and an "Authentication Team" unit.
+</Tip>
+
+## Granting Access at the Business Unit Level
+
+Once a Business Unit has targets assigned, you can give users or groups a role scoped to that unit. They will only be able to see and act on reports whose target falls within the unit.
+
+<Steps>
+  <Step title="Navigate to team management">
+    From the organization management page, go to **User Rights** or the **Team** section.
+  </Step>
+  <Step title="Add a right">
+    Click **Add right**, select the user or Admin Group, choose their role (e.g., StandardAdmin), and set the scope to the Business Unit you created.
+  </Step>
+  <Step title="Verify the assignment">
+    The user now appears in the team list with their role and the Business Unit scope noted. They will see only the reports tied to that unit's targets when they log in.
+  </Step>
+</Steps>
+
+## Use Case: Mobile Team Access
+
+<Accordion title="Scenario: Mobile Team only sees mobile app reports">
+  Your program has six targets: a web app, an iOS app, an Android app, a REST API, an admin portal, and a payment gateway. Your mobile developers should only triage vulnerabilities found in the iOS and Android apps.
+
+  **Setup:**
+
+  1. Create a Business Unit called **Mobile Apps**.
+  2. Assign the iOS app target and the Android app target to the Mobile Apps unit.
+  3. Create an Admin Group called **Mobile Triage Team** and add your mobile engineers.
+  4. Assign the Mobile Triage Team the **StandardAdmin** role scoped to the **Mobile Apps** Business Unit.
+
+  **Result:**
+
+  Your mobile engineers can log in, see a report queue containing only reports against the iOS and Android targets, triage them, and leave internal comments — all without ever seeing vulnerabilities in the web app, API, or payment gateway.
+</Accordion>
+
+<Note>
+  Business Unit membership is shown on individual report management pages, so reviewers always know which organizational area a report belongs to. This is also reflected in CSV exports, where a "Business Unit" column shows the unit or units associated with each report's target.
+</Note>
+
+<Warning>
+  Removing a target from a Business Unit immediately affects the access of everyone whose role is scoped only to that unit. They will lose visibility into reports for that target. If you are reorganizing Business Units, coordinate with your team first.
+</Warning>

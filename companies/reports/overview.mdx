@@ -1,0 +1,117 @@
+---
+title: "Managing Vulnerability Reports on Hackrate Platform"
+sidebarTitle: "Overview"
+description: "Learn how vulnerability reports flow from researchers to your security team, how to navigate the report inbox, and how to export report data for analysis."
+---
+
+The Hackrate report management system is the central hub where your security team reviews, triages, and resolves every vulnerability submission that researchers send to your programs. When a researcher discovers a security issue and submits a report — whether through your program's dedicated page or an embedded submission form — it lands immediately in your inbox, ready for your team to act on. Understanding how to navigate the inbox, use the right view for each workflow, and export data when you need it will help you run a faster, more organised triage process.
+
+## How reports reach your team
+
+Every report goes through a defined lifecycle from the moment a researcher presses **Submit**. All submissions — whether through your program's dedicated page or an embedded form — enter with a **New** status. From there, your admin team takes ownership: reviewing the evidence, assessing severity, communicating with the researcher, and ultimately moving the report to a closed status once a decision has been made. A SuperAdmin can move a report to **New – To review** to signal that it has been routed and is awaiting formal assignment.
+
+<Note>
+  Reports submitted via an embedded form are flagged automatically so you can identify them at a glance in the management view. The reporter may or may not have a registered Hackrate account at the time of submission.
+</Note>
+
+At every stage, the report retains a full audit trail: the original description, proof-of-concept attachments, all comments (public and internal), the CVSS vector, the assigned team member, and the full status history. Nothing is lost as the report moves through its lifecycle.
+
+## The report inbox
+
+Your report inbox is found under **Reports → My Program Reports**. It displays all vulnerability reports submitted to the programs you have administrative access to. The inbox is built around four distinct **view modes** that let you focus on exactly the subset of reports relevant to your current task.
+
+<CardGroup cols={2}>
+  <Card title="Open reports" icon="folder-open">
+    Shows every report whose status is classified as **Open** — meaning it is still active and requires attention. This is the default view and the best starting point for your daily triage work.
+  </Card>
+  <Card title="New reports" icon="plus-circle">
+    Shows only reports in **New**, **Needs more info**, or **New – To review** status. This is your incoming queue: reports that are waiting for an initial review or are pending a researcher's response to your clarification request.
+  </Card>
+  <Card title="All reports" icon="list">
+    Shows every report you have access to, regardless of status — including all open and closed reports. Use this when you need a complete picture of your program's history or want to audit past decisions.
+  </Card>
+  <Card title="Advanced view" icon="sliders-h">
+    Opens a side-panel with granular filters so you can build custom queries across your entire report dataset. Combine any mix of filters to get exactly the slice of data you need.
+  </Card>
+</CardGroup>
+
+A **pending reports** counter at the top of the inbox shows how many reports are currently in the New queue (New, Needs more info, or New – To review), giving you an at-a-glance measure of your team's outstanding workload.
+
+## Searching and filtering
+
+A global search bar is always visible regardless of the active view mode. It searches across report ID, title, program name, status, severity, and the reporter's alias in real time, letting you jump directly to a specific report without changing your current view.
+
+In **Advanced view**, a persistent side panel exposes the following filters, which can be combined freely:
+
+<Accordion title="Available advanced filters">
+  - **From date / To date** — filter by report creation date within an inclusive date range
+  - **Programs** — select one or more of your accessible programs; leave empty to include all
+  - **Hacker alias** — filter by the submitting researcher's username
+  - **Statuses** — filter by one or more specific status names (e.g. Accepted, Resolved)
+  - **Open / Closed** — filter by status type to see only open or only closed reports
+  - **Severities** — filter by Critical, High, Medium, Low, or None
+</Accordion>
+
+<Tip>
+  Use **Advanced view** when preparing for a sprint review, a bug bounty programme audit, or a board-level report. You can combine a date range with a specific severity level to see, for example, all Critical and High reports submitted in the last quarter.
+</Tip>
+
+The table columns — ID, Report title, Program, Created, Last activity, Status, and Severity — are all sortable. Last activity reflects the most recent comment on the report, so sorting by it descending puts the most recently active reports at the top.
+
+## Exporting reports to CSV
+
+The **Export CSV** button in the inbox header opens an export dialog that lets you select exactly which data columns to include and apply optional filters before generating the file.
+
+### Available export columns
+
+| Column | Description |
+|---|---|
+| ID | Unique report identifier |
+| Report Title | The name/title of the report |
+| Program | Program the report was submitted to |
+| Created At | Submission date |
+| Reporter | Researcher's alias |
+| Severity | Critical / High / Medium / Low / None |
+| Status | Current status name |
+| Status Type | Open or Closed |
+| Target | The specific asset the vulnerability affects |
+| Tier | Target tier (Tier 1 or Tier 2) |
+| Bounty | Bounty amount awarded |
+| Duplicate Of | ID of the original report if this is a duplicate |
+| CAPEC ID | Vulnerability type classification name (e.g. "SQL Injection") |
+| Business Unit | Business unit associated with the target |
+| Bonus | Additional bonus amount awarded |
+| Last Activity | Date and time of the most recent comment; falls back to the creation date if no comments exist |
+| CVSS Score | CVSS vector string |
+| VDP | Whether the report was submitted via an embedded/VDP form |
+| Assigned To (Email) | Email address of the team member assigned to the report |
+
+<Note>
+  **SuperAdmin** users can additionally export the **Summary**, **Description**, and **Impact** fields, which contain the full technical content of the report. These fields are restricted to protect sensitive vulnerability details in environments where not all export recipients have SuperAdmin clearance.
+</Note>
+
+You can use the **Use current table filters** shortcut in the export dialog to carry over whatever program, status, date, and severity filters you already have active in the Advanced view, making it easy to export exactly the subset you are currently looking at.
+
+## Role-based report visibility
+
+Not all team members see the same reports. Your effective role determines which statuses appear in your inbox:
+
+- **SuperAdmin** and **StandardAdmin** — full access to all 14 report statuses, including early-stage statuses like Pre-submission, New, Needs more info, and all Not Accepted variants
+- **Analytics** — read-only access to aggregate data; cannot see reports in early triage statuses (Pre-submission, New, Needs more info, Duplicate, or any Not Accepted variant)
+- **Read-Only** — read-only access to the same report subset as Analytics
+
+This means that team members without a SuperAdmin or StandardAdmin role will only see reports that have progressed beyond initial triage — keeping sensitive pre-decision reports visible only to those responsible for triaging them.
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Report Statuses" icon="tag" href="/companies/reports/report-statuses">
+    A complete reference for all 14 statuses in the triage workflow, including what each one means and who can see it.
+  </Card>
+  <Card title="Triaging Reports" icon="clipboard-check" href="/companies/reports/triaging">
+    Step-by-step guidance for reviewing, validating, assigning, and closing reports as a company admin.
+  </Card>
+  <Card title="Bounty Rewards" icon="dollar-sign" href="/companies/reports/bounty-rewards">
+    Learn how the bounty table works, how to award payouts from the report view, and how to add bonus amounts.
+  </Card>
+</CardGroup>

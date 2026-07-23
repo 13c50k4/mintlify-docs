@@ -1,0 +1,103 @@
+---
+title: "Quickstart: Launch Your First Security Program on Hackrate"
+sidebarTitle: "Quickstart"
+description: "Go from zero to a live security program in six steps: register, create your organization, define your scope, and start receiving vulnerability reports."
+---
+
+Getting your first Hackrate security program off the ground is straightforward. This guide walks you through every step, from creating your account to receiving your first vulnerability report. Most organizations complete the initial setup in under an hour; the Hackrate team is available to assist with program configuration at any point.
+
+<Steps>
+  <Step title="Register your company account">
+    Go to [hckrt.com](https://www.hckrt.com) and sign up for an account. During registration, you will provide your name and email address and create a password. After verifying your email, you will be prompted to indicate that you are joining as an organization (rather than as a security researcher).
+
+    <Tip>
+      Use a shared security team email alias (for example, `security@yourcompany.com`) so that multiple colleagues can receive platform notifications without depending on a single individual's inbox.
+    </Tip>
+  </Step>
+
+  <Step title="Create your organization">
+    Once you are logged in, create your Organization. An organization is your company's top-level workspace — it holds all of your programs and allows you to manage team members and permissions centrally.
+
+    You will provide:
+    - **Organization name** — your company's display name on the platform
+    - **Alias** — a short, unique identifier used in program URLs (for example, `acme`)
+
+    If you have multiple subsidiaries or product lines that need separate program configurations, you can create additional organizations later.
+  </Step>
+
+  <Step title="Choose your service type and create your first program">
+    From your organization dashboard, create a new program. The most important decision at this stage is which service type fits your current needs.
+
+    <Tabs>
+      <Tab title="Bug Bounty">
+        Choose a **Managed Bug Bounty Program** if you want ongoing, continuous security testing with monetary rewards for researchers. Bug bounty works best when you already have a mature product that can tolerate creative, open-ended testing. You will configure a bounty table that sets payout amounts by severity and asset tier.
+      </Tab>
+      <Tab title="VDP">
+        Choose a **Managed Vulnerability Disclosure Policy (mVDP)** if you want a structured, safe channel for researchers to report vulnerabilities without offering cash rewards. VDP is a lower-cost entry point and is often the right choice for organizations beginning their security testing journey. Pricing starts at 200 EUR/month.
+      </Tab>
+      <Tab title="PTaaS">
+        Choose **Penetration Testing as a Service (PTaaS)** if you need a time-boxed, methodical test — for example, before a product launch, as part of an annual compliance review, or when assessing a newly acquired system. Hackrate coordinates a team of verified researchers for the engagement duration.
+      </Tab>
+    </Tabs>
+
+    <Tip>
+      A common maturity path is to start with a VDP to establish a reporting channel, then layer in a bug bounty program once your team is comfortable triaging reports. PTaaS can run in parallel at any stage.
+    </Tip>
+
+    Fill in your program's **Name**, **Description** (about your company), **Policy** (program rules for researchers), and set the program's **currency** (USD or EUR). You can also choose whether the program should be **public** (visible in the Hackrate catalog) or **private** (accessible only to researchers you invite).
+  </Step>
+
+  <Step title="Define your targets and scope">
+    Scope is one of the most important parts of any security program. Add the assets you want researchers to test as **Targets**. For each target, provide:
+
+    - **Name** — a clear, recognizable label (for example, `Main Web App` or `Customer API`)
+    - **Type** — the asset category (web application, API, mobile app, etc.)
+    - **Description** — context that helps researchers understand what the asset does
+    - **Tier** — Tier 1 for your primary or highest-value assets; Tier 2 for secondary assets. Tier affects bounty payouts in a bug bounty program.
+    - **Bounty eligible** — whether valid findings on this target are eligible for a monetary reward
+
+    Also specify any **out-of-scope** items — assets that researchers must not test. Being explicit about exclusions protects your production systems and sets clear expectations.
+
+    <Warning>
+      Never leave your scope vague. Ambiguous boundaries lead to off-target testing and disputes over report validity. Be as specific as possible about what is in scope and what is not.
+    </Warning>
+  </Step>
+
+  <Step title="Invite researchers and publish your program">
+    With your scope defined, you are ready to open the program to researchers.
+
+    - **Public programs** — click **Publish** to list the program in the Hackrate catalog. Any registered researcher can apply to participate.
+    - **Private programs** — use the **Invite Hackers** feature to select specific researchers from the Hackrate community. You can resend invitations at any time.
+
+    Once published, Hackrate notifies the relevant researcher community. Researchers who apply to a public program receive a confirmation email with a link back to the program.
+
+    <Note>
+      Before publishing, the Hackrate team will review your program configuration to ensure the scope, rules, and bounty table are clear and complete. This review is part of the managed service.
+    </Note>
+  </Step>
+
+  <Step title="Receive and triage your first report">
+    When a researcher submits a vulnerability, it appears in your **Reports** inbox. Each report includes a title, description, reproduction steps, supporting evidence, and the researcher's assessment of severity.
+
+    Your team reviews each report, communicates with the researcher through the platform's messaging thread, and updates the report status. For bug bounty programs, once a report is validated you can approve the bounty payout — Hackrate handles the payment to the researcher.
+
+    Use the **Analytics** dashboard to track total reports by severity, bounties paid, budget consumption, and researcher activity over time.
+  </Step>
+</Steps>
+
+## What to do next
+
+<CardGroup cols={2}>
+  <Card title="Account Setup" icon="gear" href="/companies/account-setup">
+    Invite your security team, configure notification preferences, and manage organization settings.
+  </Card>
+  <Card title="Programs Overview" icon="list-check" href="/companies/programs/overview">
+    Learn about program lifecycle stages, public vs. private programs, and key configuration fields.
+  </Card>
+  <Card title="Targets & Scope" icon="crosshairs" href="/companies/programs/targets-scope">
+    Deep-dive into defining targets, assigning tiers, and managing out-of-scope assets.
+  </Card>
+  <Card title="Bug Bounty" icon="bug" href="/companies/programs/bug-bounty">
+    Configure bounty tables, set payout ranges, and manage your program budget.
+  </Card>
+</CardGroup>

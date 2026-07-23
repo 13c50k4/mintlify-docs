@@ -1,0 +1,126 @@
+---
+title: "Webhooks, Email Alerts, and the Embedded Report Form"
+sidebarTitle: "Webhooks"
+description: "Configure email notification preferences, set up Zapier webhooks, and embed the Hackrate report form on your own website for VDP programs."
+---
+
+Hackrate offers several ways to push information out of the platform and into your team's workflow: per-user email notifications that each person can tune to their own preferences, Zapier webhooks for custom automation pipelines, and — for Vulnerability Disclosure Programs (VDP) — an embeddable report form that lets researchers submit reports without ever visiting the Hackrate website. This page explains all three and how to configure each one.
+
+## Email Notifications
+
+Every Hackrate user can configure their own email notification preferences. Notifications are sent from the platform to your registered email address and can be enabled or disabled per event type.
+
+### Notification Event Types
+
+<CardGroup cols={2}>
+  <Card title="New Reports" icon="inbox">
+    Receive an email when a new vulnerability report is submitted to a program you administer. Useful for ensuring nothing is missed even when you're not actively logged in.
+  </Card>
+  <Card title="Report Updates" icon="arrows-rotate">
+    Get notified when the status of a report changes — for example, when a report you submitted or are managing moves to Accepted, Resolved, or Duplicate.
+  </Card>
+  <Card title="Comments" icon="comment">
+    Receive an email when a new public comment is posted on a report you're involved with.
+  </Card>
+  <Card title="Internal Comments" icon="lock">
+    Receive an email when a new internal (team-only) comment is posted on a report. Only visible to admins with triage access.
+  </Card>
+  <Card title="File Attachments" icon="paperclip">
+    Get notified when a new file or evidence attachment is added to a report.
+  </Card>
+  <Card title="Marketing Updates" icon="envelope">
+    Platform announcements, new feature releases, and other communications from the Hackrate team.
+  </Card>
+</CardGroup>
+
+### Email Content Level
+
+In addition to toggling individual event types, you can control how much detail each notification email contains:
+
+| Level | What you receive |
+|---|---|
+| **Minimal** | A brief subject line and a link to the item in Hackrate — no vulnerability details in the email body. Best for security-conscious environments where email may be archived or forwarded. |
+| **Typical** | A short summary with the report title, severity, and status — enough context to prioritize without the full report content. |
+| **Full** | The complete report content, including title, description, summary, impact, and any comments included in the notification trigger. Convenient for quick triage from your inbox. |
+
+<Warning>
+  If your organization has a policy against including sensitive information in email, set all users to **Minimal** content level. This ensures vulnerability details stay inside Hackrate and are only accessible to authenticated users with the correct role.
+</Warning>
+
+### Configuring Your Email Preferences
+
+Navigate to your **Profile Settings → Notification Preferences** to enable or disable each event type and to select your preferred content level. Each user manages their own preferences independently — there is no org-wide default override.
+
+## Zapier Webhook Integration
+
+For teams that need to route Hackrate events into custom automation pipelines, the Zapier integration provides a webhook trigger that fires on report events. You can connect this to hundreds of downstream apps — from project management tools and ticketing systems to communication platforms and custom APIs.
+
+<Steps>
+  <Step title="Create a Zapier webhook trigger">
+    In [Zapier](https://zapier.com), create a new Zap and choose **Webhooks by Zapier → Catch Hook** as the trigger. Zapier provides a unique webhook URL for this Zap.
+  </Step>
+  <Step title="Add the webhook to your program">
+    In Hackrate, go to your program's **Settings → Integrations** and find the Zapier section. Paste the webhook URL and save.
+  </Step>
+  <Step title="Trigger a test event">
+    Update a report status or add a comment in Hackrate. Zapier will receive the payload, allowing you to inspect the data fields and map them to your automation's next steps.
+  </Step>
+  <Step title="Build and activate your Zap">
+    Add action steps in Zapier — for example, create a Jira ticket, send a formatted Slack message, update a Google Sheet row, or trigger a PagerDuty alert. Activate the Zap when ready.
+  </Step>
+</Steps>
+
+<Note>
+  Each program can have one Zapier webhook URL configured. If you need to fan out events to multiple systems, use Zapier's **Multi-Step Zaps** or a tool like Make (formerly Integromat) with a single inbound webhook that dispatches to multiple actions.
+</Note>
+
+## Embedded Report Form for VDP Programs
+
+If your program is a Vulnerability Disclosure Program (VDP), you can embed the Hackrate report submission form directly on your own company website — for example, on a `security.yourcompany.com` page or in your security policy. This allows researchers to submit reports without needing to navigate to Hackrate directly, making it easier for non-technical reporters and reducing friction in the disclosure process.
+
+### How the Embedded Form Works
+
+When a program is marked as **embeddable**, Hackrate serves a standalone report form that you can include in your website via an `<iframe>`. Reports submitted through the embedded form are received and processed exactly like any other report — they appear in your Hackrate inbox and trigger the same notifications, triage workflow, and status management.
+
+The embedded form is only available on active, non-paused VDP programs that have been explicitly enabled for embedding in program settings.
+
+### Enabling and Embedding the Form
+
+<Steps>
+  <Step title="Enable embedding in program settings">
+    In your program's **Settings**, find the **Embedded Report Form** option and enable it. This marks the program as embeddable.
+  </Step>
+  <Step title="Get the embed URL">
+    The form is served at the following URL, where `{alias}` is your program's alias:
+    ```
+    https://app.hackrate.com/Reports/EmbeddedReportForm?program={alias}
+    ```
+    Replace `{alias}` with your actual program alias.
+  </Step>
+  <Step title="Add the iframe to your website">
+    Embed the form on your security disclosure page using a standard HTML iframe:
+    ```html
+    <iframe
+      src="https://app.hackrate.com/Reports/EmbeddedReportForm?program=your-program-alias"
+      width="100%"
+      height="800"
+      frameborder="0"
+      title="Vulnerability Disclosure Report Form">
+    </iframe>
+    ```
+    Adjust the `height` value to suit your page layout.
+  </Step>
+  <Step title="Test the submission">
+    Submit a test report through the embedded form on your website and confirm it appears in your Hackrate inbox. Check that your notification settings fire correctly for embedded submissions.
+  </Step>
+</Steps>
+
+<Accordion title="How embedded submissions are identified in Hackrate">
+  Reports submitted through the embedded form are flagged as embedded submissions in Hackrate. This distinction is visible on the report management page and in CSV exports (the "VDP" column), letting your triage team know the report came in through the public disclosure form rather than through a registered hacker account.
+
+  If the submitter provides an email address and that address matches an existing Hackrate account, the report is linked to that account automatically. Otherwise, the submission is stored with the contact information the reporter provided.
+</Accordion>
+
+<Tip>
+  Link your embedded form directly from your `security.txt` file and your website's footer. Researchers actively looking for a place to report vulnerabilities will check both of these locations first.
+</Tip>

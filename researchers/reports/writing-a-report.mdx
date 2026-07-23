@@ -1,0 +1,245 @@
+---
+title: "How to Write a High-Quality Vulnerability Report on Hackrate"
+sidebarTitle: "Writing a Report"
+description: "A step-by-step guide to crafting clear, complete vulnerability reports on Hackrate that maximize your chances of acceptance and reward."
+---
+
+Every great bug bounty payout starts with a great report. Even the most critical vulnerability can be rejected — or downgraded — if it is poorly written, lacks evidence, or fails to explain the real-world impact. This guide walks you through how to navigate to the report form, fill in every field correctly, and submit work that triagers can act on immediately.
+
+<Warning>
+  **One issue per report.** Submit each security issue as a separate report. The only exception is when multiple vulnerabilities form a single, inseparable exploit chain — in that case you may combine them in one report and clearly explain how each step builds on the previous.
+</Warning>
+
+## Before you start
+
+Make sure you have:
+
+- **Confirmed the target is in scope.** Check the program's scope table before testing. Reports targeting out-of-scope assets will be closed as **Not Accepted (Out of Scope)**.
+- **Collected your evidence.** Screenshots, screen recordings, HTTP request/response logs, or PoC code should be ready before you open the form.
+- **Verified reproducibility.** Run through the full reproduction path at least once from scratch so your steps are accurate.
+
+---
+
+## Step-by-step: submitting a report
+
+<Steps>
+  <Step title="Navigate to the program">
+    Open the program page you want to report to. You must be an approved participant in the program — private programs require an accepted application before the Submit Report button is visible.
+  </Step>
+
+  <Step title="Click Submit Report">
+    On the program page, click the **Submit Report** button. This opens the report creation form scoped to that program.
+  </Step>
+
+  <Step title="Fill in all required fields">
+    Complete every field described in the section below. The platform will run pre-validation checks before accepting your submission — incomplete reports will be blocked at this stage.
+  </Step>
+
+  <Step title="Upload at least one evidence file">
+    Use the **Upload Evidences** panel at the bottom of the form to drag and drop your files. You need at least one evidence file for the report to pass pre-validation.
+  </Step>
+
+  <Step title="Review and submit">
+    Re-read your report before clicking **Submit**. Once submitted, the report enters **New** status and the company triage team is notified.
+  </Step>
+</Steps>
+
+---
+
+## Field reference
+
+### Report Name
+
+The title of your report — up to 127 characters. A good title is specific enough that a triager immediately understands what type of vulnerability it is and where it lives.
+
+<CardGroup cols={2}>
+  <Card title="Good example" icon="check">
+    `Stored XSS in profile bio field allows session hijacking`
+  </Card>
+  <Card title="Poor example" icon="xmark">
+    `XSS found` or `Security bug`
+  </Card>
+</CardGroup>
+
+Write the vulnerability class, the affected component, and the primary impact. Avoid vague titles like "Multiple issues" — that is a signal to triagers that the report may violate the one-issue rule.
+
+---
+
+### Target
+
+Select the affected asset from the program's in-scope target list. Only active, in-scope targets are shown. If the asset you tested is not in the list, it is either out of scope or not yet included in the program — do not submit reports against unlisted assets.
+
+---
+
+### CVSS Score
+
+The report form includes a **built-in CVSS calculator**. Use it to score the vulnerability by setting each metric (Attack Vector, Attack Complexity, Privileges Required, User Interaction, Scope, Confidentiality, Integrity, Availability). The calculator outputs a numeric score and a vector string that are automatically attached to your report.
+
+<Tip>
+  Be honest with your CVSS assessment. The triage team will re-evaluate the score independently. Artificially inflating CVSS to boost severity is a common mistake that damages your credibility with reviewers.
+</Tip>
+
+For guidance on matching CVSS scores to severity levels, see [Severity & CVSS](/researchers/reports/severity-cvss).
+
+---
+
+### Severity
+
+Select one of the following levels from the dropdown:
+
+| Severity | When to use it |
+|---|---|
+| **Low** | Minor issues with limited real-world impact |
+| **Medium** | Moderate risk; requires certain conditions to exploit |
+| **High** | Significant risk; data exposure or privilege escalation possible |
+| **Critical** | Severe; can lead to full system compromise or mass data leak |
+| **Exceptional** | Reserved for extraordinary findings (e.g., RCE on core infrastructure) — do not self-assign unless you are certain |
+
+The company may adjust your chosen severity during triage. This is normal and not a penalty.
+
+---
+
+### Summary
+
+A concise executive summary — a few sentences that capture *what* the vulnerability is and *why* it matters. Write for a non-specialist reader: a manager or legal reviewer should be able to understand the summary without reading the full technical description.
+
+**Markdown is supported.** You can use bold text, inline code, and short bullet lists if they improve clarity.
+
+<Accordion title="Summary writing tips">
+  - State the vulnerability class upfront (e.g., "A stored cross-site scripting vulnerability exists in…")
+  - Name the affected component or endpoint
+  - Mention the highest-impact consequence in one sentence
+  - Keep it under 10 sentences — save technical depth for the Description field
+  - Avoid copy-pasting from OWASP or CVE descriptions; write in your own words based on what you observed
+</Accordion>
+
+---
+
+### Description
+
+The full technical write-up of the vulnerability. This section must include **step-by-step reproduction instructions** that an independent researcher could follow without any prior context.
+
+**Markdown is supported.** Use numbered lists for reproduction steps, code blocks for payloads and HTTP requests, and headings to separate logical sections.
+
+A strong Description answers these questions:
+
+1. What is the root cause of the vulnerability?
+2. Exactly how do you reproduce it? (Numbered steps, specific URLs, parameters, payloads)
+3. What environment or configuration is required? (Authenticated vs. unauthenticated, specific role, etc.)
+4. What did you observe that proves the vulnerability exists? (Error messages, unexpected responses, etc.)
+
+<Accordion title="Description template">
+```
+## Vulnerability
+
+[One sentence description of the root cause]
+
+## Prerequisites
+
+- [Account type / role required]
+- [Any special configuration or state needed]
+
+## Steps to Reproduce
+
+1. Navigate to [URL]
+2. [Action taken]
+3. Observe [result that demonstrates the bug]
+
+## Observed Behavior
+
+[What happens, including any payloads, responses, or error messages]
+
+## Expected Behavior
+
+[What should happen instead]
+```
+</Accordion>
+
+---
+
+### Impact
+
+Describe what a malicious actor could realistically do if they exploited this vulnerability. Be specific — "an attacker could read other users' private messages" is far stronger than "there is a data exposure risk."
+
+**Markdown is supported.** Consider bullet points when there are multiple distinct impact scenarios.
+
+Good impact statements cover:
+- **Who is affected** (single user, all users, administrators, the organization itself)
+- **What data or actions are at risk** (PII, financial records, authentication tokens, arbitrary code execution)
+- **Realistic attack scenarios** (e.g., phishing amplification, session takeover, lateral movement)
+
+<Note>
+  Avoid overstating impact. Claiming that a low-severity reflected XSS "could lead to full database compromise" without a realistic chain is a fast path to a downgrade or rejection.
+</Note>
+
+---
+
+### Vulnerability Type (CAPEC)
+
+Select the most appropriate CAPEC (Common Attack Pattern Enumeration and Classification) category from the dropdown. This helps the triage team categorize and route the report correctly.
+
+---
+
+### CWE Type
+
+Select the CWE (Common Weakness Enumeration) identifier that best matches the underlying root cause. CWE and CAPEC are complementary:
+
+- **CWE** describes the *weakness* in the code (e.g., CWE-79: Improper Neutralization of Input During Web Page Generation)
+- **CAPEC** describes the *attack pattern* (e.g., CAPEC-86: XSS Through HTTP Request Headers)
+
+You can provide either or both. If you are unsure, CWE is more commonly used in vulnerability classification.
+
+---
+
+### CVE
+
+If a CVE identifier has already been assigned to this vulnerability (e.g., because it affects a third-party component), enter it here. This field is optional — leave it blank if no CVE exists.
+
+---
+
+### Evidences
+
+Upload your proof-of-concept files using the evidence uploader. The platform accepts screenshots, videos, PoC code files, and text files up to **150 MB per file**. Accepted formats include `.jpg`, `.jpeg`, `.png`, `.gif`, `.txt`, `.md`, `.mp4`, `.avi`, `.flv`, `.wmv`, `.mov`.
+
+**At least one evidence file is required.** Reports without evidence will be blocked by pre-validation before submission.
+
+For detailed guidance on what makes good evidence and how to handle sensitive findings, see [Evidence Guidelines](/researchers/reports/evidence-guidelines).
+
+---
+
+## Common mistakes to avoid
+
+<CardGroup cols={2}>
+  <Card title="Skipping reproduction steps" icon="triangle-exclamation">
+    Without clear steps, triagers cannot verify the issue. Always write steps you could hand to a stranger and have them reproduce the bug.
+  </Card>
+  <Card title="Multiple bugs in one report" icon="triangle-exclamation">
+    Bundle separate issues and the whole report may be rejected. One issue, one report — except for genuine exploit chains.
+  </Card>
+  <Card title="Vague impact statements" icon="triangle-exclamation">
+    "This could be dangerous" is not impact. Describe who is affected, what is at risk, and how.
+  </Card>
+  <Card title="No evidence" icon="triangle-exclamation">
+    Reports without a screenshot or PoC are difficult to verify and are more likely to be rejected or deprioritized.
+  </Card>
+  <Card title="Out-of-scope targets" icon="triangle-exclamation">
+    Always verify the target is listed and active in the program scope before submitting.
+  </Card>
+  <Card title="Overstated severity" icon="triangle-exclamation">
+    Self-assigning Critical to every report signals poor judgment. Accurate severity self-assessments build reviewer trust.
+  </Card>
+</CardGroup>
+
+---
+
+## Markdown support
+
+The **Summary**, **Description**, and **Impact** fields all support [Markdown syntax](https://www.markdownguide.org/cheat-sheet/). Use it to format code blocks, create numbered lists for reproduction steps, bold key terms, and add inline code for payloads or parameter names. Well-formatted reports are faster to review and make a stronger impression.
+
+---
+
+## After you submit
+
+Once you click **Submit**, your report's status changes to **New**. The company triage team receives a notification and will begin reviewing your report. You will be notified when the status changes.
+
+If the team needs more information, the status will move to **Needs More Info** — check the report's comment thread and respond promptly. For a full explanation of every possible status, see [Report Statuses](/researchers/reports/report-statuses).

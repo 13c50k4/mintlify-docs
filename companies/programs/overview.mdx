@@ -1,0 +1,105 @@
+---
+title: "Programs Overview: Security Engagements on Hackrate"
+sidebarTitle: "Overview"
+description: "Understand what a Hackrate program is, how public and private programs differ, the full program lifecycle, and which program type suits your organization."
+---
+
+A **program** is the central unit of work on Hackrate. It defines what should be tested, by whom, under what rules, and — for bug bounty programs — what rewards are available. Every vulnerability report on the platform is associated with a program, and every program belongs to an organization. Understanding how programs work helps you configure them well and get the most out of your security testing investment.
+
+## What a program contains
+
+When you create a program on Hackrate, you configure a set of fields that together describe the engagement completely. Researchers use this information to understand what to test and how to report; your team uses it to triage findings and manage budget.
+
+| Field | Purpose |
+|---|---|
+| **Name** | The display name of the program, visible to researchers |
+| **Alias** | A short, unique identifier used in URLs and notifications |
+| **Description** | Background about your company and the product under test |
+| **Policy** | The rules of the engagement — what researchers can and cannot do |
+| **Targets** | The in-scope assets researchers are authorized to test |
+| **Bounty Table** | Payout amounts organized by severity and target tier (bug bounty programs only) |
+| **Budget** | The total funds allocated for bounty payments |
+| **Currency** | USD or EUR |
+| **Launch Date / End Date** | Optional scheduled start and end dates |
+| **Visibility** | Whether the program is invite-only or open to all researchers |
+| **Rewards enabled** | Whether valid reports are eligible for monetary rewards |
+| **Managed** | Whether Hackrate's team provides managed triage and researcher communication |
+| **Testing Period** | The allowed testing hours or windows that researchers must respect |
+
+<Note>
+  Markdown formatting is supported in the Description and Policy fields, allowing you to use headings, lists, code blocks, and emphasis to make your program page clear and professional.
+</Note>
+
+## Public vs. private programs
+
+One of the most important decisions when creating a program is whether it should be public or private.
+
+<CardGroup cols={2}>
+  <Card title="Public Programs" icon="globe">
+    Public programs appear in the Hackrate catalog and are open to any registered researcher who chooses to apply. This maximizes your testing coverage and exposes your assets to a diverse range of skill sets and approaches. Public programs are well-suited to mature products that have already been through initial hardening.
+  </Card>
+  <Card title="Private Programs" icon="lock">
+    Private programs are invite-only. You select specific researchers from the Hackrate community and send them invitations. This approach gives you tighter control over who is testing and is ideal for sensitive systems, early-stage products, or situations where a smaller, focused group of researchers is preferred.
+  </Card>
+</CardGroup>
+
+<Tip>
+  A common progression is to start with a private program to validate your scope and triage workflow with a small group of trusted researchers, then open the program publicly once you are confident in your process.
+</Tip>
+
+## Program lifecycle
+
+A Hackrate program moves through a series of states from initial setup to completion. Understanding this lifecycle helps you know what actions are available at each stage and what researchers experience.
+
+```
+Draft → Published → Active → (Paused) → Ended
+```
+
+<Accordion title="Draft">
+  The program has been created but has not yet been reviewed and published. Only your team can see it. Use this stage to finalize your scope, write your policy, and configure your bounty table before going live.
+</Accordion>
+
+<Accordion title="Published">
+  The program has been reviewed by the Hackrate team and is now visible to researchers (if public) or to invited researchers (if private). Researchers can view the program details and apply or accept invitations.
+</Accordion>
+
+<Accordion title="Active">
+  The program is open for submissions. Researchers can submit vulnerability reports, and your team receives notifications for each new report.
+</Accordion>
+
+<Accordion title="Paused">
+  The program has been temporarily suspended. No new reports can be submitted. All participating researchers receive an automatic email notification when a program is paused. Pausing is typically used when your team needs time to catch up on a backlog of reports, or when significant changes are being made to the product under test.
+</Accordion>
+
+<Accordion title="Ended">
+  The program has concluded. Existing reports remain accessible for your records and compliance needs, but no new submissions are accepted. For time-boxed engagements such as PTaaS, the end date is agreed upon at the start of the engagement.
+</Accordion>
+
+<Warning>
+  Only a SuperAdmin can publish or pause a program. Pausing sends an automatic email to all enrolled researchers, so use this action deliberately.
+</Warning>
+
+## Program announcements
+
+You can post **Announcements** to a program at any time. Announcements appear prominently on the program's details page and are useful for communicating scope changes, temporary restrictions, updated rules, or recognition of the research community's contributions. Only one announcement is highlighted as "recent" at any given time; previous announcements are archived but remain visible.
+
+To notify researchers of an announcement by email (rather than just posting it on the program page), use the separate **Send Notification** feature in the program management menu.
+
+## Program types on Hackrate
+
+Hackrate supports four service types. Each has its own dedicated setup guide.
+
+<CardGroup cols={2}>
+  <Card title="Managed Bug Bounty" icon="bug" href="/companies/programs/bug-bounty">
+    Continuous, reward-based vulnerability discovery with a global researcher community.
+  </Card>
+  <Card title="Vulnerability Disclosure Policy" icon="envelope-open-text" href="/companies/programs/vulnerability-disclosure">
+    A structured, no-bounty reporting channel that protects both your organization and researchers.
+  </Card>
+  <Card title="PTaaS" icon="shield-halved" href="/companies/programs/ptaas">
+    Time-boxed penetration testing with verified researchers and real-time report visibility.
+  </Card>
+  <Card title="Targets & Scope" icon="crosshairs" href="/companies/programs/targets-scope">
+    How to define, tier, and manage the assets within any program type.
+  </Card>
+</CardGroup>

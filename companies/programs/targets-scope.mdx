@@ -1,0 +1,159 @@
+---
+title: "Targets & Scope: Defining In-Scope Assets on Hackrate"
+sidebarTitle: "Targets & Scope"
+description: "Define in-scope and out-of-scope targets on Hackrate, assign asset tiers, set bounty eligibility per target, and provide test credentials to researchers."
+---
+
+Scope definition is one of the most consequential decisions you make when running a security program. A well-defined scope attracts focused, high-quality research, protects your production systems, and sets clear expectations that prevent disputes about report validity. A vague or poorly written scope leads to off-target testing, wasted researcher effort, and confusion for your triage team. This guide explains how to configure targets on Hackrate and how each field affects the researcher and reporting experience.
+
+## What is a target?
+
+A **target** is an individual asset that you add to a program's scope. Each program can have multiple targets, and each target is configured independently. Researchers see the full list of active, in-scope targets when they view the program — this is how they decide where to focus their efforts.
+
+Every target has the following properties:
+
+| Field | Description |
+|---|---|
+| **Name** | A clear, recognizable label for the asset (for example, `Customer Web App`, `Payment API`) |
+| **Type** | The asset category (web application, API, mobile app — iOS, mobile app — Android, network, other) |
+| **Description** | Context about the asset: what it does, what kind of users access it, and any hints about its architecture or sensitivity |
+| **Tier** | `1` for primary/critical assets; `2` for secondary assets. Tier directly affects bounty payouts in bug bounty programs. |
+| **Bounty eligible** | Whether valid findings on this target qualify for monetary rewards |
+| **Active** | Whether the target is currently visible to researchers. Inactive targets are hidden from the program's scope page. |
+| **In / Out of scope** | Whether the target is something researchers are authorized to test, or an asset they must explicitly avoid |
+
+## In scope vs. out of scope
+
+Every program on Hackrate has both an **in-scope** list (assets researchers are authorized to test) and an **out-of-scope** list (assets they must not touch). Being explicit about both is equally important.
+
+<CardGroup cols={2}>
+  <Card title="In Scope" icon="check-circle">
+    Assets that researchers are authorized to test. These are the targets you want tested and for which you will accept vulnerability reports. Only active, in-scope targets appear in the public-facing scope table on the program page.
+  </Card>
+  <Card title="Out of Scope" icon="ban">
+    Assets that researchers must not test. These are typically production databases, third-party services you do not own, infrastructure shared with other customers, or assets with legal or contractual restrictions on testing.
+  </Card>
+</CardGroup>
+
+<Warning>
+  Out-of-scope items should be explicit, not implied. If a researcher accidentally tests an out-of-scope asset, the report will be rejected — but this creates friction and erodes trust. The more specific your out-of-scope list, the better.
+</Warning>
+
+Common categories to consider for out-of-scope designation:
+
+- Third-party services and SaaS platforms you use but do not own
+- Shared hosting infrastructure
+- Rate-limiting and anti-brute-force mechanisms (often excluded to prevent DoS)
+- Social engineering and physical security testing
+- Denial-of-service (DoS/DDoS) attacks
+- Automated scanning at a rate that degrades service performance
+
+## Tier 1 vs. Tier 2 assets
+
+The tier system allows you to pay differentiated bounty amounts based on how critical an asset is to your business. This creates the right incentives: researchers spend more time on your highest-value targets because the potential reward is higher.
+
+<Tabs>
+  <Tab title="Tier 1 — Primary Assets">
+    Tier 1 targets are your most important assets — the ones where a vulnerability would have the greatest business impact. Examples:
+
+    - Main customer-facing web application
+    - Core payment processing API
+    - Authentication service
+    - Primary mobile app
+
+    Tier 1 targets receive the **highest bounty payouts** in the bounty table. Assign Tier 1 to assets where a critical vulnerability could lead to mass data exposure, financial loss, or reputational damage.
+  </Tab>
+  <Tab title="Tier 2 — Secondary Assets">
+    Tier 2 targets are lower-risk assets where a vulnerability is less likely to have severe business impact. Examples:
+
+    - Marketing website (no user data or transactions)
+    - Internal admin tool with limited external exposure
+    - Documentation portal
+    - Sandbox or developer environment
+
+    Tier 2 targets receive **lower bounty payouts** than Tier 1. This does not mean researchers ignore them — it means the risk-reward ratio accurately reflects the asset's importance.
+  </Tab>
+</Tabs>
+
+<Note>
+  You do not have to use both tiers. If all your in-scope assets are equally critical, you can assign everything to Tier 1. The tier system is a tool for differentiation, not a requirement.
+</Note>
+
+## Best practices for scope definition
+
+### Be specific with asset names
+
+Avoid vague names like `All web applications` or `Backend services`. Instead, name each asset specifically:
+
+- ✅ `app.yourcompany.com — Customer Portal (Vue.js frontend + REST API)`
+- ❌ `All customer-facing apps`
+
+Specific names help researchers understand exactly what to test and help your triage team quickly confirm which asset a report relates to.
+
+### Write meaningful descriptions
+
+The description field appears on the program's public scope page and is visible to researchers before they begin testing. Use it to explain:
+
+- What the asset does and who uses it
+- The technology stack (if you are comfortable sharing it)
+- Any known constraints or guidance (for example, "Test accounts are available via the credential request system")
+- Any historical context relevant to testing (for example, "This API was recently rewritten and is a high priority")
+
+### Separate test environments from production
+
+If you want researchers to test against a staging or test environment rather than production, create a separate target for each and name them clearly:
+
+- `Main App — Staging (app-staging.yourcompany.com)`
+- `Main App — Production (app.yourcompany.com)`
+
+You can then configure the staging target as active and in-scope, and leave the production target as active but with tighter restrictions in the policy.
+
+### Refresh your scope regularly
+
+Your product changes over time — new features are shipped, old services are deprecated, and the attack surface evolves. Review your target list at least quarterly and:
+
+- Deactivate targets for assets that no longer exist
+- Add targets for new assets
+- Upgrade Tier 2 targets to Tier 1 if their criticality has increased
+- Update descriptions to reflect architectural changes
+
+## Adding targets to a program
+
+Targets are managed from the **Scope** section of your program management page. Contact the Hackrate team to add new targets or modify existing ones — this ensures the change is reviewed and that researchers are notified appropriately when scope expands.
+
+<Note>
+  Adding a significant new target to an active program is treated as a scope expansion. It is good practice to post an **Announcement** to the program when you expand scope so that researchers are aware of the new testing opportunity.
+</Note>
+
+## Deactivating targets
+
+If you need to remove an asset from scope — for example, because it has been retired or because you need to take it offline for maintenance — you can **deactivate** the target rather than deleting it. Deactivated targets are hidden from the public scope table and from researcher view, but they remain in your program's history along with any reports associated with them.
+
+<Warning>
+  Deactivating a target does not automatically notify researchers. If the change is time-sensitive (for example, you are taking a production system offline for maintenance and need to prevent testing immediately), post an announcement or send a direct notification to enrolled researchers.
+</Warning>
+
+## Providing test credentials
+
+Many web applications and APIs require authenticated access to test properly. Hackrate's **credential management** system lets you securely provision test accounts to researchers.
+
+### How credentials work
+
+You upload test credentials (username and password pairs) via a CSV file or the credential dashboard. The platform assigns unique credentials to each researcher who joins the program, ensuring:
+
+- No two researchers share the same test account (preventing one researcher's actions from interfering with another's)
+- Each researcher knows which account is theirs
+- You can audit which researcher was using which account if an incident occurs
+
+Credentials can be configured at two levels:
+
+- **Program-wide** — A single set of credentials grants access to the entire program's test environment
+- **Target-specific** — Different credentials for each target, where each asset has its own authentication system
+
+### Setting a credential quantity per target
+
+For targets where you want each researcher to receive multiple test accounts (for example, to test different user roles), you can configure how many credential sets each researcher receives per target. If this is set to zero, each researcher receives one credential set by default.
+
+<Tip>
+  Create test accounts with realistic but clearly distinguishable names (for example, `testuser-hacker-001@yourcompany-test.com`) so that your application logs make it easy to separate genuine testing activity from real user traffic.
+</Tip>

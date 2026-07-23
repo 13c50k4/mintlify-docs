@@ -1,0 +1,92 @@
+---
+title: "Create Jira Tickets from Hackrate Reports Automatically"
+sidebarTitle: "Jira"
+description: "Connect your Jira project to a Hackrate program so your triage team can file tickets directly from the report management view without switching tools."
+---
+
+Security teams often work alongside engineering teams that live in Jira. The Hackrate–Jira integration removes the manual step of copying vulnerability details from Hackrate into a Jira ticket. Once configured, a **Create Jira Ticket** action becomes available on every report management page in your program. Your triagers can file a ticket without leaving Hackrate, keeping both systems up to date and reducing the risk of information getting lost in translation.
+
+## How It Works
+
+The Jira integration is configured at the program level. You supply your Jira instance URL and the target project details, and Hackrate stores those alongside your program. When an admin clicks to create a ticket, Hackrate uses those stored settings to open a pre-filled ticket in the correct Jira project.
+
+<Note>
+  The Jira integration is configured by an admin in program settings. Only one Jira project can be connected to a program at a time. If you need to route tickets to different projects depending on the type of finding, consider using multiple programs or routing rules in Jira itself.
+</Note>
+
+## Configuring the Jira Integration
+
+<Steps>
+  <Step title="Open Program Settings">
+    Go to your program in Hackrate and open **Settings**. You need a SuperAdmin or StandardAdmin role on the program to configure integrations.
+  </Step>
+  <Step title="Navigate to the Jira section">
+    In the **Integrations** tab, find the Jira card.
+  </Step>
+  <Step title="Enter your Jira Base URL">
+    Provide the base URL of your Jira instance. For Jira Cloud this looks like `https://your-company.atlassian.net`. For Jira Server or Data Center, use the URL your team navigates to when opening Jira.
+  </Step>
+  <Step title="Enter the Project ID">
+    Supply the numeric ID of the Jira project where security tickets should be created. You can find this in your Jira project settings.
+  </Step>
+  <Step title="Enter the Issue Type ID">
+    Provide the Issue Type ID for the kind of ticket you want to create — for example, the ID for "Bug" or "Security Vulnerability" in your project's issue type scheme.
+  </Step>
+  <Step title="Save the configuration">
+    Click **Save**. The Jira integration is now active for this program. The Jira details will appear in the report management sidebar for every report in the program.
+  </Step>
+</Steps>
+
+## Creating a Jira Ticket from a Report
+
+<Steps>
+  <Step title="Open a report">
+    Go to **Reports → Manage** and open any report within the program that has Jira configured.
+  </Step>
+  <Step title="Find the Jira section">
+    In the report management view, a Jira panel shows your configured base URL, project, and issue type. This confirms the integration is active.
+  </Step>
+  <Step title="Create the ticket">
+    Click **Create Jira Ticket**. Hackrate pre-fills the ticket with the report title, a description derived from the report content, the severity level, and a link back to the Hackrate report. Review and adjust the content if needed, then submit.
+  </Step>
+  <Step title="Track in Jira">
+    The ticket appears in your Jira project board. Your engineering team can pick it up from their normal Jira workflow. The Hackrate report retains a reference to the Jira ticket for traceability.
+  </Step>
+</Steps>
+
+## What Data Is Sent to Jira
+
+When you create a ticket from a report, the following information is included:
+
+<CardGroup cols={2}>
+  <Card title="Report Title" icon="heading">
+    The vulnerability title from Hackrate becomes the Jira ticket summary.
+  </Card>
+  <Card title="Severity" icon="triangle-exclamation">
+    The Hackrate severity level (Critical, High, Medium, Low) is included in the ticket body to help engineers prioritize.
+  </Card>
+  <Card title="Description" icon="file-lines">
+    The report's description, impact statement, and reproduction steps are included so engineers have the full context without needing Hackrate access.
+  </Card>
+  <Card title="Hackrate Link" icon="link">
+    A direct link back to the Hackrate report is embedded in the ticket so reviewers can navigate between systems easily.
+  </Card>
+</CardGroup>
+
+## Tips for Getting the Most Out of the Integration
+
+<Accordion title="Finding your Jira Project ID">
+  In Jira Cloud, go to your project, open **Project Settings → Details**, and look for the Project ID in the URL or the settings fields. In Jira Server, the Project ID is shown in **Project Settings → Edit Project**.
+</Accordion>
+
+<Accordion title="Finding your Jira Issue Type ID">
+  In Jira Cloud, go to **Project Settings → Issue Types**, click the issue type you want to use, and note the numeric ID in the URL. In Jira Server, you can find issue type IDs under **Jira Administration → Issues → Issue Types**.
+</Accordion>
+
+<Accordion title="Routing tickets to different projects by severity">
+  If your engineering workflow requires Critical and High findings in one project and Medium and Low in another, you can configure two separate Hackrate programs with different Jira settings, or handle routing automatically with Jira Automation rules that re-assign issues based on labels or custom fields you populate.
+</Accordion>
+
+<Warning>
+  The Jira integration stores your Jira base URL and project details in program settings. Only SuperAdmins and StandardAdmins can modify this configuration. If your Jira instance URL changes — for example, after a migration to Jira Cloud — remember to update the base URL in every program that uses the integration.
+</Warning>

@@ -1,0 +1,139 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "name": "Hackrate Ethical Hacking Platform",
+  "theme": "mint",
+  "colors": {
+    "primary": "#8739e6",
+    "light": "#D6BBFB",
+    "dark": "#7f4cc7"
+  },
+  "favicon": {
+    "light": "/images/favicon-32x32.png",
+    "dark": "/images/favicon-32x32.png"
+  },
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "For Companies",
+        "groups": [
+          {
+            "group": "Get Started",
+            "pages": [
+              "companies/introduction",
+              "companies/quickstart",
+              "companies/account-setup"
+            ]
+          },
+          {
+            "group": "Programs",
+            "pages": [
+              "companies/programs/overview",
+              "companies/programs/bug-bounty",
+              "companies/programs/vulnerability-disclosure",
+              "companies/programs/ptaas",
+              "companies/programs/targets-scope"
+            ]
+          },
+          {
+            "group": "Reports",
+            "pages": [
+              "companies/reports/overview",
+              "companies/reports/report-statuses",
+              "companies/reports/triaging",
+              "companies/reports/bounty-rewards"
+            ]
+          },
+          {
+            "group": "Team & Access",
+            "pages": [
+              "companies/team/roles-permissions",
+              "companies/team/admin-groups",
+              "companies/team/business-units"
+            ]
+          },
+          {
+            "group": "Integrations",
+            "pages": [
+              "companies/integrations/github",
+              "companies/integrations/jira",
+              "companies/integrations/slack",
+              "companies/integrations/webhooks"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "For Researchers",
+        "groups": [
+          {
+            "group": "Get Started",
+            "pages": [
+              "researchers/introduction",
+              "researchers/quickstart",
+              "researchers/profile-setup"
+            ]
+          },
+          {
+            "group": "Finding Programs",
+            "pages": [
+              "researchers/programs/catalog",
+              "researchers/programs/private-programs",
+              "researchers/programs/understanding-scope"
+            ]
+          },
+          {
+            "group": "Submitting Reports",
+            "pages": [
+              "researchers/reports/writing-a-report",
+              "researchers/reports/severity-cvss",
+              "researchers/reports/evidence-guidelines",
+              "researchers/reports/report-statuses"
+            ]
+          },
+          {
+            "group": "Rewards & Recognition",
+            "pages": [
+              "researchers/rewards/bounties",
+              "researchers/rewards/leaderboard",
+              "researchers/rewards/hacktivity"
+            ]
+          },
+          {
+            "group": "Account",
+            "pages": [
+              "researchers/account/verification",
+              "researchers/account/payment-settings"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "background": {
+    "color": {
+      "dark": "#181D27"
+    }
+  },
+  "icons": {
+    "library": "fontawesome"
+  },
+  "logo": {
+    "light": "/images/Hackrate-logo-horizontal-black.svg",
+    "dark": "/images/Hackrate-logo-horizontal-white.svg"
+  },
+  "interaction": {
+    "drilldown": true
+  },
+  "navbar": {
+    "links": [
+      {
+        "href": "https://www.hckrt.com",
+        "label": "Platform"
+      },
+      {
+        "href": "https://www.hckrt.com/Home/RequestADemo",
+        "label": "Request demo for Companies"
+      }
+    ]
+  }
+}

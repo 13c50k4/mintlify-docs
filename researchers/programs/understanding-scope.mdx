@@ -1,0 +1,138 @@
+---
+title: "Understanding Program Scope Before You Start Testing"
+sidebarTitle: "Understanding Scope"
+description: "Read program target lists, tell in-scope from out-of-scope assets, understand Tier 1 vs. Tier 2 bounties, and follow policy rules before you start testing."
+---
+
+Scope defines the boundary of what you are legally and contractually authorized to test. It is not a suggestion — it is the agreement between you, the researcher, and the organization running the program. Testing outside scope puts you at legal risk, wastes your time on reports that will be rejected, and can result in your account being suspended. Understanding scope thoroughly before you write your first test request is one of the most important habits you can build as a researcher on Hackrate.
+
+Every program on Hackrate defines its scope through a list of **targets** — specific assets that are either in scope (authorized for testing) or explicitly out of scope (prohibited). Targets also carry additional metadata like their type, tier, and bounty eligibility. This guide explains how to read and interpret all of it.
+
+## How to find and read the target list
+
+On any program detail page, the **Scope** section appears near the top of the page, above the company description and program rules. It shows the complete list of **in-scope targets** — assets that are currently active and have not been marked as out of scope.
+
+Each target entry includes:
+
+| Field | Meaning |
+|---|---|
+| **Name** | The specific identifier for the asset — a domain, URL, app store listing name, IP range, or API base URL (e.g., `app.example.com`, `Example iOS App`) |
+| **Type** | The category of the asset — Web Application, API, Mobile App (iOS or Android), Network, etc. |
+| **Tier** | The importance classification of the target: **Tier 1** for primary/critical assets, **Tier 2** for secondary assets |
+| **Bounty indicator** | Whether this target is eligible for monetary rewards, or recognition-only (even within a bounty program, individual targets may be VDP-only) |
+
+## In scope vs. out of scope
+
+Not every asset belonging to a company is authorized for testing, even if it shares the same domain or branding. Hackrate programs distinguish assets using two status flags:
+
+<Tabs>
+  <Tab title="In scope (test these)">
+    A target is **in scope** when both of the following are true:
+
+    - **Currently active** — The target is accepting reports and enabled by the program owner.
+    - **Not marked out of scope** — The target has not been explicitly excluded from the program.
+
+    Only targets that satisfy both conditions appear in the Scope section of the program page. If a target shows up in the list, you have authorization to test it — within the program's rules.
+  </Tab>
+  <Tab title="Out of scope (never test these)">
+    A target is **out of scope** when it has been explicitly excluded by the program owner. Out-of-scope assets do **not** appear in the program's scope list — but the program policy will typically name them or describe the categories.
+
+    Common examples of out-of-scope targets:
+    - Third-party services and integrations not owned by the company
+    - Internal corporate infrastructure (employee email, HR systems)
+    - Assets specifically called out in the policy (e.g., `*.cdn.example.com`)
+    - Social engineering and phishing targets
+    - Denial-of-service and volumetric testing
+    - Rate limiting and brute-force enumeration issues (on many programs)
+
+    <Warning>
+      Submitting a vulnerability report for an out-of-scope target will result in the report being closed as **Out of Scope** immediately. It will not earn you reputation points or a bounty, and repeated out-of-scope submissions may affect your standing on the platform. Always verify that the specific asset you are testing appears in the program's target list before testing it.
+    </Warning>
+  </Tab>
+  <Tab title="Inactive targets (skip for now)">
+    A target that has been temporarily deactivated by the program owner will not appear in the public scope list. Inactive targets may become testable again in the future if the program owner re-enables them, but they are not currently accepting reports. Do not submit against an asset if you have reason to believe it is inactive — reports against inactive targets will be rejected.
+  </Tab>
+</Tabs>
+
+## Tier 1 vs. Tier 2 targets
+
+Programs that offer monetary bounties typically classify their targets into tiers. Tiers reflect the business importance of the asset and determine the bounty amounts associated with it.
+
+<CardGroup cols={2}>
+  <Card title="Tier 1 — Primary assets" icon="star">
+    Tier 1 targets are the organization's most critical and sensitive assets. This typically includes the main production application, the core API, the primary authentication service, and any system that handles sensitive user data or financial transactions. Vulnerabilities on Tier 1 targets earn the **highest bounty amounts** in the bounty table — finding a critical severity issue on a Tier 1 target represents the maximum payout the program offers.
+  </Card>
+  <Card title="Tier 2 — Secondary assets" icon="circle-half-stroke">
+    Tier 2 targets are supporting or peripheral assets — marketing sites, staging environments shared with the scope, secondary APIs, or lower-risk services. Bounty amounts for Tier 2 targets are lower than Tier 1 across all severity levels. These targets are still fully in scope and worth testing, but the reward ceiling is lower.
+  </Card>
+</CardGroup>
+
+The bounty table on each program's detail page shows the exact reward matrix:
+
+|  | Critical | High | Medium | Low |
+|---|---|---|---|---|
+| **Tier 1** | Maximum payout | High payout | Moderate payout | Low payout |
+| **Tier 2** | High payout | Moderate payout | Low payout | Minimal payout |
+
+When you identify a vulnerability, check which tier the affected target belongs to before estimating your potential reward.
+
+## Reading the program policy
+
+The **Program Rules** section of the program detail page is as important as the target list. The policy extends and clarifies scope with rules that cannot be expressed as a simple list of targets. Always read the full policy before testing.
+
+Key things the policy typically covers:
+
+<Accordion title="Prohibited testing techniques">
+  Most programs forbid specific testing methods regardless of whether the target is in scope. Common prohibitions include automated scanning tools, denial-of-service testing, brute-force attacks on authentication endpoints, and any testing that could cause data loss or service disruption. Some programs permit these techniques with prior written approval — check the policy carefully.
+</Accordion>
+
+<Accordion title="Vulnerability types that are out of scope">
+  Even on in-scope targets, certain vulnerability classes may be excluded. Typical examples include issues that require physical access to a device, vulnerabilities in third-party components that the company does not control, missing HTTP security headers without demonstrated impact, theoretical vulnerabilities without a working proof of concept, and self-XSS.
+</Accordion>
+
+<Accordion title="Testing period and hours">
+  Some programs specify when you may test. The **Testing Period** field on the program detail page may indicate allowed testing windows (e.g., business hours only, or 24/7). Respect these windows — testing outside permitted hours can violate the program agreement.
+</Accordion>
+
+<Accordion title="Coordinated disclosure rules">
+  Programs typically require you to keep vulnerability details confidential until the issue is resolved. Public disclosure before the company has patched the vulnerability — even if the finding is legitimate — is a policy violation that can result in loss of your reward and account suspension. Follow the disclosure timeline specified in the policy.
+</Accordion>
+
+<Accordion title="Safe harbor">
+  Most well-run programs include a safe harbor clause that confirms you will not face legal action for good-faith security testing within the defined scope and rules. Read this carefully so you understand what protections you have and what behaviors are explicitly not covered.
+</Accordion>
+
+## Using test credentials
+
+Some programs provide **test credentials** — pre-created accounts, API keys, or test environment access details — to help you test without needing to create real accounts or interact with production user data.
+
+If a program has credentials available, they appear in your **Credential Store** (accessible from your Profiles section after being accepted to the program). Using test credentials where available is strongly encouraged:
+
+- It keeps your testing safely isolated from real user data
+- It ensures you are testing an environment the program team expects to be tested
+- It avoids policy violations that can arise from testing with real accounts
+
+<Tip>
+  If a program offers test credentials for a specific target, always use them for that target. Testing with self-created or real user accounts when test credentials are available may be considered a policy violation, even if unintentional.
+</Tip>
+
+## Common mistakes to avoid
+
+<CardGroup cols={2}>
+  <Card title="Testing a subdomain not in the list" icon="triangle-exclamation">
+    The scope list is exhaustive. `sub.example.com` being owned by the same company as `example.com` does not make it in scope. Only assets explicitly listed in the Scope section are authorized.
+  </Card>
+  <Card title="Ignoring recent announcements" icon="bell">
+    Program owners post announcements at the top of the program page when scope changes, when a known issue should be excluded, or when testing is temporarily paused. Always read the latest announcement before testing — scope can change at any time.
+  </Card>
+  <Card title="Conflating bounty with scope" icon="circle-xmark">
+    A target can be in scope but not eligible for a monetary bounty. Being in scope means you are authorized to test it; the bounty indicator on each target tells you whether a valid finding will earn a monetary reward or just reputation points.
+  </Card>
+  <Card title="Submitting before re-reading scope" icon="arrows-rotate">
+    If you find a vulnerability after an extended period away from a program, reload the program page and re-check the scope before submitting. Programs update their target lists over time, and an asset that was in scope six months ago may now be out of scope.
+  </Card>
+</CardGroup>
+
+<Warning>
+  When in doubt about whether a specific asset, technique, or vulnerability class is in scope, **do not test it first and ask later**. Reach out to the program owner through the platform's messaging features before proceeding. Taking the time to ask is always better than submitting an out-of-scope report or — worse — conducting unauthorized testing.
+</Warning>

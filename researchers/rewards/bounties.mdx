@@ -1,0 +1,90 @@
+---
+title: "Understanding Hackrate Bounties, Bonuses, and Awards"
+sidebarTitle: "Bounties"
+description: "Learn how monetary bounties are calculated, when they are paid, how bonus rewards work, and what non-monetary awards you can earn on Hackrate."
+---
+
+When a company accepts your vulnerability report on Hackrate, you are eligible to receive a bounty — a monetary reward that reflects the real-world value of your finding. The bounty amount is set by the company running the program and depends on both the severity of the vulnerability and the tier of the target you discovered it in. Understanding how this system works helps you prioritize your research and maximize what you earn.
+
+## How bounties are calculated
+
+Each bug bounty program defines its own payout table. The two main factors that determine your bounty are:
+
+- **Severity** — how critical the vulnerability is, rated across levels such as Informational, Low, Medium, High, and Critical.
+- **Target tier** — the relative importance of the affected asset within the program (for example, a core production API typically falls in a higher tier than a staging environment or a marketing subdomain).
+
+Higher severity combined with a higher-tier target produces the largest payouts. When you submit a report, you select the severity you believe applies. The company may adjust this rating during triage; the final bounty is based on their determination.
+
+<Note>
+  Programs display their bounty table in the program brief. Always review it before you start testing so you know what payouts to expect for each combination of severity and target tier.
+</Note>
+
+## Bonus payments
+
+In addition to the standard bounty, a program may award a **bonus** on top of your base payout. Bonuses are discretionary and are typically granted when a finding is especially impactful, demonstrates exceptional research quality, or comes with a particularly thorough write-up and proof of concept. A bonus is issued as a separate bounty record and appears as its own reward entry in your account activity log alongside the original bounty.
+
+<Tip>
+  To maximize your chances of receiving a bonus, include a clear reproduction path, a CVSS score breakdown, and a well-reasoned impact statement in your report.
+</Tip>
+
+## When bounties are paid
+
+Bounties are awarded by the company after your report reaches **Accepted** or **Resolved** status. The timeline looks like this:
+
+<Steps>
+  <Step title="Submit your report">
+    Write up your finding and submit it through the program's report form. The report enters a pending or triaging state.
+  </Step>
+  <Step title="Triage and review">
+    The security team reviews your report, may ask clarifying questions, and confirms reproducibility. Severity may be adjusted at this stage.
+  </Step>
+  <Step title="Report accepted or resolved">
+    Once the company accepts the validity of your finding or marks it resolved, the report moves to a qualifying status. This is the trigger for a bounty award.
+  </Step>
+  <Step title="Bounty awarded">
+    The company sets the bounty amount. You receive a notification and the reward appears in your account activity log.
+  </Step>
+  <Step title="Payment processed">
+    Your payment is processed to the method you have configured in your account. Make sure your payment information is up to date before this step.
+  </Step>
+</Steps>
+
+<Warning>
+  You must have valid payment information saved in your account settings before a bounty can be paid out. If your payment details are missing or incomplete, the transfer cannot be initiated. See [Payment Settings](/researchers/account/payment-settings) to set up your details.
+</Warning>
+
+## Currency
+
+Programs on Hackrate denominate their bounties in either **USD ($)** or **EUR (€)**. The currency used is set by the company and is shown in the program brief. You will be paid in the program's designated currency, so factor this into your expectations when participating in programs across different regions.
+
+## Non-monetary awards
+
+Not every recognition on Hackrate takes the form of a cash payout. Companies can issue **Awards** — named acknowledgements tied to a specific program and linked to your profile. Awards are visible on your public hacker profile and contribute to your standing on the platform.
+
+<CardGroup cols={2}>
+  <Card title="Thanks Awards" icon="heart">
+    A thanks award is a lightweight acknowledgement from a company — often given for a report that was informational or out of scope but still considered valuable feedback.
+  </Card>
+  <Card title="Named Program Awards" icon="trophy">
+    Program-specific awards carry the name chosen by the company and can represent milestones such as "First Blood," "Most Creative Finding," or program-specific recognition tiers.
+  </Card>
+</CardGroup>
+
+Awards appear on your profile alongside your reports and reputation score, helping demonstrate your track record to programs that review researchers before granting access.
+
+## Your shareable bounty page
+
+Each bounty you earn has a unique, publicly shareable page. You can access it from your account activity log by clicking the bounty entry. This page displays:
+
+- Your nickname and profile picture
+- The bounty amount and currency
+- The name of the program (or "a private program" if the program is private)
+- The date the bounty was awarded
+
+<Tip>
+  Share your bounty page on social media or your portfolio to celebrate your earnings and demonstrate your work to the security community. The page includes open graph metadata optimized for Twitter and LinkedIn.
+</Tip>
+
+## Setting up payment information
+
+Before your first bounty can be transferred to you, you need to configure your payment details. Navigate to **Account Settings → Payment** to add or update your information. See [Payment Settings](/researchers/account/payment-settings) for a full walkthrough, including the identity verification requirement that applies to first payouts.

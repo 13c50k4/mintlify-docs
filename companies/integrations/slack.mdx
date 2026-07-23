@@ -1,0 +1,100 @@
+---
+title: "Slack, Microsoft Teams, and Zapier Notification Setup"
+sidebarTitle: "Slack & Teams"
+description: "Route Hackrate report alerts to Slack channels, Microsoft Teams, or Zapier workflows so your team is notified the moment a new report arrives."
+---
+
+Staying on top of incoming vulnerability reports means being notified where your team already works. Hackrate supports real-time notification delivery to Slack and Microsoft Teams channels, so new reports and status changes appear in your existing communication tools without anyone having to log in and check the dashboard. For teams with more complex routing needs, the Zapier integration lets you build custom automation workflows that connect Hackrate to virtually any other tool.
+
+## Slack Notifications
+
+The Slack integration sends messages to a Slack channel of your choosing whenever a new report is submitted to your program or a report's status changes.
+
+### Setting Up Slack
+
+<Steps>
+  <Step title="Create an incoming webhook in Slack">
+    In your Slack workspace, go to **Apps → Incoming WebHooks** (or open Slack's App Directory and search for "Incoming WebHooks"). Click **Add to Slack**, choose the channel where Hackrate notifications should appear, and click **Add Incoming WebHooks Integration**. Copy the webhook URL that Slack generates.
+  </Step>
+  <Step title="Open Program Settings in Hackrate">
+    Navigate to your program in Hackrate and open **Settings**. You need a SuperAdmin role to configure integrations.
+  </Step>
+  <Step title="Paste the webhook URL">
+    In the **Integrations** section, find the Slack card and paste the webhook URL you copied from Slack. Click **Save**.
+  </Step>
+  <Step title="Test the integration">
+    Submit a test report or update a report status. Within seconds, you should see a notification appear in the Slack channel you configured.
+  </Step>
+</Steps>
+
+### What Triggers a Slack Notification
+
+| Event | Description |
+|---|---|
+| New report submitted | A new vulnerability report lands in the program |
+| Report status changed | A triager changes a report to Accepted, Resolved, Duplicate, etc. |
+| Comment added | A new comment (internal or external) is posted on a report |
+
+<Tip>
+  Point Slack notifications at a dedicated `#security-reports` channel rather than a general engineering channel. This keeps the signal clean and makes it easy to set up Slack notification preferences or integrations (like PagerDuty) on that channel independently.
+</Tip>
+
+## Microsoft Teams Notifications
+
+The Microsoft Teams integration works the same way as Slack — Hackrate sends a message to a Teams channel via an incoming webhook whenever a new report arrives or a report's status changes.
+
+### Setting Up Microsoft Teams
+
+<Steps>
+  <Step title="Create an incoming webhook in Teams">
+    In your Teams workspace, navigate to the channel where you want notifications to appear. Click the **⋯ (More options)** menu next to the channel name and select **Connectors**. Find **Incoming Webhook**, click **Configure**, give it a name (e.g., "Hackrate Alerts"), and click **Create**. Copy the webhook URL that Teams provides.
+  </Step>
+  <Step title="Open Program Settings in Hackrate">
+    Navigate to your program and open **Settings → Integrations**.
+  </Step>
+  <Step title="Paste the webhook URL">
+    Find the Microsoft Teams card and paste the webhook URL. Click **Save**.
+  </Step>
+  <Step title="Verify delivery">
+    Trigger a report event — for example, change a report status — and confirm the notification appears in your Teams channel.
+  </Step>
+</Steps>
+
+<Note>
+  Each Hackrate program holds one Slack webhook and one Teams webhook independently. If you run multiple programs and want notifications for all of them in the same channel, configure the same webhook URL in each program's settings.
+</Note>
+
+## Zapier Integration for Advanced Automation
+
+If Slack and Teams don't cover your workflow, the Zapier integration gives you a webhook endpoint that Hackrate calls for every report event. You can use this as the trigger for any Zapier automation — routing reports to a ticketing system, populating a spreadsheet, sending a formatted email, triggering an on-call alert, or anything else Zapier supports.
+
+### Setting Up Zapier
+
+<Steps>
+  <Step title="Create a new Zap in Zapier">
+    Log in to [zapier.com](https://zapier.com) and create a new Zap. For the trigger, choose **Webhooks by Zapier → Catch Hook**. Zapier will generate a unique webhook URL for this Zap.
+  </Step>
+  <Step title="Copy the webhook URL">
+    Copy the webhook URL that Zapier provides on the trigger configuration step.
+  </Step>
+  <Step title="Configure the Zap in Hackrate">
+    In your Hackrate program settings, open **Integrations** and find the Zapier card. Paste the Zapier webhook URL and click **Save**.
+  </Step>
+  <Step title="Build your Zap actions">
+    Back in Zapier, trigger a test event from Hackrate (by updating a report), then map the incoming data fields to your target app's action. Activate the Zap when you're satisfied.
+  </Step>
+</Steps>
+
+<Accordion title="Example: Send a formatted Teams message via Zapier">
+  If you want more control over how notifications look in Microsoft Teams than the default webhook message provides, you can use Zapier as a middleware:
+
+  1. Set up the Hackrate Zapier integration as described above.
+  2. Add a **Formatter** step in Zapier to reshape the incoming data.
+  3. Add a **Microsoft Teams** action step to send a card-formatted message with exactly the fields you care about.
+
+  This pattern also works for routing different severity levels to different Teams channels — add a **Filter** step between the trigger and the Teams action.
+</Accordion>
+
+<Warning>
+  Webhook URLs — whether for Slack, Teams, or Zapier — grant the ability to post to your channel or trigger your automation without authentication. Treat them as secrets. Do not share them publicly, commit them to source control, or include them in logs.
+</Warning>

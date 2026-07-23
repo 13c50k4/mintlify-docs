@@ -1,0 +1,138 @@
+---
+title: "Complete Guide to Your Hackrate Researcher Profile"
+sidebarTitle: "Profile Setup"
+description: "Configure your Hackrate researcher profile: pick a nickname, write a bio, add social links, upload a photo, and tune your email notification preferences."
+---
+
+Your Hackrate researcher profile is your public identity on the platform. Program owners read it when triaging your reports, when deciding whether to invite you to private programs, and when evaluating contested findings. A complete, professional profile signals seriousness and credibility — both of which translate directly into better opportunities.
+
+You can access all profile settings by navigating to **Manage → Profile Settings** after signing in.
+
+## Choosing your nickname
+
+Your nickname is the single most important field on your profile. It appears on every report you submit, on the public leaderboard, and on your public profile page. Choose it thoughtfully before you submit your first report, because it cannot be changed later.
+
+<Note>
+  Nicknames are limited to **16 characters** and must be unique across the platform. Once set, your nickname is permanent. Your report history and reputation are permanently tied to it.
+</Note>
+
+Good nicknames tend to be short, memorable, and professional. Avoid usernames that could be perceived as threatening or unprofessional — program owners are more likely to engage constructively with researchers whose identities feel trustworthy.
+
+Your nickname also serves as your platform email alias. Once set, you will have a `@letmehack.it` email alias in the format `yournickname@letmehack.it`, which you can use to receive program communications through the platform.
+
+## Basic profile information
+
+<Tabs>
+  <Tab title="Personal details">
+    | Field | Details |
+    |---|---|
+    | **Name** | Your real name. Used for payment records and identity verification. Not displayed publicly by default. |
+    | **Country** | Your country of residence. Shown on the leaderboard and required for identity verification. After your identity is verified, your country can only be changed through the verification process — it is locked on the profile settings form. |
+    | **About Me** | A short biography, up to **500 characters**. Hackrate supports [Markdown syntax](https://www.markdownguide.org/cheat-sheet/), so you can use bold, links, lists, and code formatting. Use this space to describe your security background, specialties (web, mobile, API, network), and any certifications or notable work. |
+  </Tab>
+  <Tab title="Social links">
+    Connecting your professional accounts to your Hackrate profile helps program owners verify your background and expertise. All social link fields are optional, but providing them increases trust.
+
+    | Platform | Field format |
+    |---|---|
+    | **GitHub** | Username only — `https://github.com/` is prepended automatically |
+    | **LinkedIn** | Profile handle — `https://linkedin.com/in/` is prepended automatically |
+    | **Twitter / X** | Handle — `https://x.com/` is prepended automatically |
+    | **Facebook** | Username — `https://facebook.com/` is prepended automatically |
+    | **Website** | Full URL to your personal site, blog, or portfolio |
+    | **CodersRank** | Full URL to your CodersRank profile |
+
+    <Tip>
+      Your GitHub profile is often the most valuable link for security researchers. A profile with public security tools, CTF write-ups, or proof-of-concept repositories demonstrates hands-on experience more effectively than a written bio alone.
+    </Tip>
+  </Tab>
+</Tabs>
+
+## Uploading a profile picture
+
+A profile picture makes your profile immediately recognizable and adds a personal touch to the reports and leaderboard entries associated with your nickname.
+
+To upload or update your photo:
+
+<Steps>
+  <Step title="Go to the profile picture upload page">
+    From **Manage → Profile Settings**, click **Add Photo** in the Actions sidebar on the right.
+  </Step>
+  <Step title="Select your image">
+    Choose a JPEG (`.jpg` / `.jpeg`), PNG (`.png`), or GIF (`.gif`) file. The maximum file size is **5 MB**.
+  </Step>
+  <Step title="Submit the upload">
+    The image is stored securely on the platform's CDN. After upload, it will appear on your profile, on the leaderboard, and beside your name in report activity feeds.
+  </Step>
+</Steps>
+
+<Note>
+  EXIF metadata (location data, device information) is automatically stripped from your uploaded photo before storage to protect your privacy.
+</Note>
+
+## Email notification preferences
+
+Hackrate sends email notifications to keep you informed about activity on your submitted reports. You can customize exactly which events trigger emails and how much detail those emails contain.
+
+Navigate to **Manage → Profile Settings** and scroll to the **E-mail preferences** section.
+
+### Notification types
+
+<Accordion title="New Reports">
+  Notifies you when a new report is submitted to a program you are associated with. Most useful if you manage or co-administer a program.
+</Accordion>
+
+<Accordion title="Report Updates">
+  Sends an email whenever the status of one of your submitted reports changes — for example, when it moves from "New" to "Triaged", or from "Triaged" to "Resolved". This is the most important notification type for active researchers.
+</Accordion>
+
+<Accordion title="Comments">
+  Notifies you when a program owner or triager adds a public comment to one of your reports. Enable this to stay on top of back-and-forth during the validation process.
+</Accordion>
+
+<Accordion title="Internal Comments">
+  Covers comments that are visible only to the program team. Depending on your role on a program, this may include notes about your report that are relevant to its outcome.
+</Accordion>
+
+<Accordion title="Files">
+  Sends a notification when a file is attached to one of your reports — for example, when a program owner uploads a patch confirmation or additional context.
+</Accordion>
+
+<Accordion title="Marketing Updates">
+  Occasional platform announcements, new program launches, and community news from Hackrate. You can disable this without affecting report-related notifications.
+</Accordion>
+
+### Content level
+
+In addition to toggling individual notification types, you can control the **level of detail** included in notification emails:
+
+| Level | Setting | Description |
+|---|---|---|
+| 1 | **Minimal** | Short notifications with just the essential information — report title and status change. No report body or comment text included. |
+| 2 | **Typical** | The default. Includes the key details of the update, enough to understand what changed without opening the platform. |
+| 3 | **Full** | Complete email content including full report descriptions, comment text, and attachments where applicable. |
+
+<Tip>
+  The **Typical** content level (level 2) is the recommended setting for most researchers. It keeps you informed without overwhelming your inbox, and it avoids sending sensitive vulnerability details in full through email.
+</Tip>
+
+## Security settings
+
+You can access additional account security settings from the **Actions** sidebar on the **Manage → Profile Settings** page:
+
+<CardGroup cols={2}>
+  <Card title="Password Reset" icon="lock">
+    Reset your account password at any time. Use a strong, unique password that you do not reuse on other platforms.
+  </Card>
+  <Card title="Two-Factor Authentication" icon="shield">
+    Enable two-factor authentication (2FA) for an additional layer of account security. Once enabled, sign-ins require both your password and a second factor. 2FA is strongly recommended for all researchers.
+  </Card>
+</CardGroup>
+
+## Privacy considerations
+
+Your **nickname**, **About Me** bio, **country**, **profile picture**, and **social links** are all visible to other platform users and to program owners. Your **name** and **email address** are not shown publicly.
+
+You can download a copy of all the personal data associated with your account at any time by clicking **Download** in the **Download Data** section of the Actions sidebar.
+
+If you want to delete your account and have all personal data removed, contact the Hackrate support team at [support@hckrt.com](mailto:support@hckrt.com). Account deletion is handled manually to ensure all associated data is properly removed.

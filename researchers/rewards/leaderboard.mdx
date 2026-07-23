@@ -1,0 +1,106 @@
+---
+title: "Hackrate Leaderboard: Rankings and Scoring Explained"
+sidebarTitle: "Leaderboard"
+description: "Discover how the four Hackrate leaderboard categories work, what each score measures, and practical ways to climb the rankings over time."
+---
+
+The Hackrate Leaderboard is a public ranking of security researchers on the platform. It gives companies a fast way to discover top talent and gives you a visible, verifiable record of your hacking effectiveness. Rankings are refreshed from cached data updated every 24 hours, so changes you make today will be reflected by the following day.
+
+## The four leaderboard categories
+
+The leaderboard is divided into four distinct boards. Each measures a different dimension of your performance, so the rankings recognize different types of excellence rather than a single score.
+
+<CardGroup cols={2}>
+  <Card title="Reputation" icon="star">
+    Ranks researchers by total reputation points accumulated through valid, accepted reports. Reputation is the primary measure of your overall standing on the platform.
+  </Card>
+  <Card title="Impact" icon="bolt">
+    Ranks researchers by the number of Critical and High severity findings in accepted reports. This board highlights researchers who consistently uncover the most dangerous vulnerabilities.
+  </Card>
+  <Card title="Valid" icon="circle-check">
+    Ranks researchers by the raw count of valid (accepted) reports. This board rewards consistency and volume — finding many real vulnerabilities across many programs.
+  </Card>
+  <Card title="Countries" icon="globe">
+    Ranks researchers within a selected country by reputation. Use the country filter to see how you compare to researchers in your region.
+  </Card>
+</CardGroup>
+
+## Time period filters
+
+You can filter any leaderboard view by time period to see both long-term standings and recent momentum:
+
+<Tabs>
+  <Tab title="All Time">
+    Shows the cumulative leaderboard since each researcher joined the platform. Reputation points are drawn directly from your profile's total. This view rewards sustained, long-term contributions to the community.
+  </Tab>
+  <Tab title="Last 90 Days">
+    Shows only activity from the past 90 days. Reputation for this view is calculated from earned reputation events within the window, so recently active researchers can appear prominently even if they are newer to the platform. This is a great way to see who is most active right now.
+  </Tab>
+</Tabs>
+
+<Note>
+  Leaderboard data is cached for up to 24 hours. If you just had a report accepted, your ranking may not update until the next cache refresh.
+</Note>
+
+## How reputation points are earned
+
+Your reputation score increases each time a company accepts one of your reports. The number of points awarded per report depends on the severity of the finding:
+
+| Severity | Points awarded |
+|---|---|
+| Critical | Highest point value |
+| High | Significant point value |
+| Medium | Moderate point value |
+| Low | Smaller point value |
+| Informational | Minimal or no points |
+
+In addition to your raw reputation score, your profile also tracks two performance ratios:
+
+- **Hacker Power (Vulnerability Rate)** — reflects the proportion of your reports that contain High or Critical severity findings. A higher Hacker Power means your submissions tend to target the most impactful vulnerabilities.
+- **Hacker Rate** — reflects the overall validity rate of your reports. A higher Hacker Rate means a greater proportion of everything you submit is accepted as a genuine finding, rather than marked as duplicate, out of scope, or informational.
+
+Both ratios are visible on your public profile and on the leaderboard, giving companies additional context beyond raw score.
+
+## Country filter
+
+On the Countries board, you can filter rankings by a specific country to see how researchers from a particular region compare. Your country is set on your profile and — once your identity is verified — is locked to your verified country of residence.
+
+<Tip>
+  If your country is not appearing, make sure you have set your country in **Account Settings → Profile**. Researchers who have not shared their country will not appear on any country-specific board.
+</Tip>
+
+## What reputation unlocks
+
+Your reputation is more than a vanity metric. Companies use it to gate access to their most sensitive and rewarding programs:
+
+<Accordion title="Private program access">
+  Many companies run invite-only or private programs that are not visible to all researchers. When evaluating who to invite, program administrators often look at reputation score, Hacker Rate, and whether your account is verified. A higher reputation significantly increases the likelihood that you receive invitations to high-value private programs.
+</Accordion>
+
+<Accordion title="Platform standing and trust">
+  Researchers with strong reputations and verified identities appear with distinctive profile indicators (such as the verified badge and elite status badge). These signals build trust with companies that are considering working with you.
+</Accordion>
+
+<Accordion title="Elite status">
+  The platform distinguishes Elite researchers based on a combination of factors including reputation, track record, and program feedback. Elite status appears on your public profile and on the leaderboard, further increasing your visibility.
+</Accordion>
+
+## How to improve your ranking
+
+<Steps>
+  <Step title="Focus on quality over quantity">
+    A single Critical severity finding earns more reputation than several Low severity reports. Prioritize deep investigation of high-value targets within a program's scope.
+  </Step>
+  <Step title="Be accurate with severity">
+    Mis-rating severity — claiming Critical when a company rates the issue as Medium — can slow triage and reduce trust. Study the CVSS scoring criteria and use it consistently; accuracy builds your Hacker Rate over time.
+  </Step>
+  <Step title="Write thorough reports">
+    Well-documented reports with clear reproduction steps, CVSS breakdowns, and impact analysis are accepted faster and are more likely to earn bonuses. Faster acceptance means faster reputation gains.
+  </Step>
+  <Step title="Stay active in the 90-day window">
+    Even if your all-time ranking is static, being active in the current 90-day window keeps you visible to companies browsing the recent leaderboard.
+  </Step>
+  <Step title="Complete identity verification">
+    Verified researchers appear with a badge on the leaderboard. Verification also unlocks access to more programs, giving you more opportunities to earn reputation points. See [Verification](/researchers/account/verification) for details.
+  </Step>
+</Steps>

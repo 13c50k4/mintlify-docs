@@ -1,0 +1,149 @@
+{
+  "projectType": "saas",
+  "projectName": "Hackrate Ethical Hacking Platform",
+  "projectDescription": "Hackrate is an ethical hacking platform that connects companies with a global community of verified security researchers through managed bug bounty programs, vulnerability disclosure programs, and penetration testing as a service.",
+  "theme": "luma",
+  "primaryColor": "#E63946",
+  "lightColor": "#FF6B6B",
+  "darkColor": "#B71C2A",
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "For Companies",
+        "groups": [
+          {
+            "group": "Get Started",
+            "pages": [
+              "companies/introduction",
+              "companies/quickstart",
+              "companies/account-setup"
+            ]
+          },
+          {
+            "group": "Programs",
+            "pages": [
+              "companies/programs/overview",
+              "companies/programs/bug-bounty",
+              "companies/programs/vulnerability-disclosure",
+              "companies/programs/ptaas",
+              "companies/programs/targets-scope"
+            ]
+          },
+          {
+            "group": "Reports",
+            "pages": [
+              "companies/reports/overview",
+              "companies/reports/report-statuses",
+              "companies/reports/triaging",
+              "companies/reports/bounty-rewards"
+            ]
+          },
+          {
+            "group": "Team & Access",
+            "pages": [
+              "companies/team/roles-permissions",
+              "companies/team/admin-groups",
+              "companies/team/business-units"
+            ]
+          },
+          {
+            "group": "Integrations",
+            "pages": [
+              "companies/integrations/github",
+              "companies/integrations/jira",
+              "companies/integrations/slack",
+              "companies/integrations/webhooks"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "For Researchers",
+        "groups": [
+          {
+            "group": "Get Started",
+            "pages": [
+              "researchers/introduction",
+              "researchers/quickstart",
+              "researchers/profile-setup"
+            ]
+          },
+          {
+            "group": "Finding Programs",
+            "pages": [
+              "researchers/programs/catalog",
+              "researchers/programs/private-programs",
+              "researchers/programs/understanding-scope"
+            ]
+          },
+          {
+            "group": "Submitting Reports",
+            "pages": [
+              "researchers/reports/writing-a-report",
+              "researchers/reports/severity-cvss",
+              "researchers/reports/evidence-guidelines",
+              "researchers/reports/report-statuses"
+            ]
+          },
+          {
+            "group": "Rewards & Recognition",
+            "pages": [
+              "researchers/rewards/bounties",
+              "researchers/rewards/leaderboard",
+              "researchers/rewards/hacktivity"
+            ]
+          },
+          {
+            "group": "Account",
+            "pages": [
+              "researchers/account/verification",
+              "researchers/account/payment-settings"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "keyFeatures": [
+    "Managed Bug Bounty Programs with private and public options",
+    "Vulnerability Disclosure Programs (VDP / mVDP)",
+    "Penetration Testing as a Service (PTaaS)",
+    "Report triage workflow with 14 granular status states",
+    "CVSS-based severity scoring (Low, Medium, High, Critical, Exceptional)",
+    "Tiered bounty tables (Tier 1 & Tier 2 targets)",
+    "GitHub integration for issue and advisory creation",
+    "Jira integration for ticket management",
+    "Slack and Microsoft Teams notifications",
+    "Zapier automation support",
+    "Embedded report submission form for company websites",
+    "Role-based access control (SuperAdmin, StandardAdmin, Analytics, Read-Only)",
+    "Admin Groups for team-based permissions",
+    "Business Units for fine-grained scope management",
+    "Leaderboard and reputation system for researchers",
+    "Hacktivity feed for publicly disclosed findings",
+    "Identity verification for researchers",
+    "CSV export of report data",
+    "Organization-level and program-level analytics dashboards"
+  ],
+  "publicApiSurface": [
+    "GET /Catalog — browse public bug bounty programs",
+    "GET /Catalog/Program/{alias} — view program details, scope, and bounty table",
+    "GET /Reports — researcher inbox (own submitted reports)",
+    "GET /Reports/MyProgramReports — company report inbox with filtering",
+    "POST /Reports/Create?program={alias} — submit a new vulnerability report",
+    "GET /Reports/Details/{id} — view report details (researcher)",
+    "GET /Reports/Manage/{id} — triage report (company admin)",
+    "POST /Reports/GetReportsData — paginated/filterable report list (JSON)",
+    "POST /Reports/CsvExport — export reports to CSV",
+    "GET /Reports/EmbeddedReportForm?program={alias} — embeddable submission form",
+    "GET /api/integrations/github/install?programId={id} — initiate GitHub App install",
+    "POST /api/reports/{reportId}/integrations/github/issues — create GitHub issue from report",
+    "GET /Hacktivity — public feed of disclosed reports",
+    "GET /hacktivity/{id} — individual hacktivity entry",
+    "GET /Profiles — researcher profile page",
+    "GET /Profiles/Leaderboard — researcher leaderboard",
+    "GET /Programs/Analytics?alias={alias} — program analytics dashboard",
+    "GET /Organizations/Analytics?alias={alias} — organization-level analytics",
+    "POST /webhook/complycube — identity verification webhook"
+  ]
+}

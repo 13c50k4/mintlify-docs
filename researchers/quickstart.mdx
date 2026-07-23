@@ -1,0 +1,109 @@
+---
+title: "Quickstart: Find and Report Your First Vulnerability"
+sidebarTitle: "Quickstart"
+description: "Get started on Hackrate: register, complete your profile, get verified, pick a program, review scope, and submit your first valid vulnerability report."
+---
+
+Getting started on Hackrate takes less than an hour of setup. This guide walks you through every step — from registering your account to submitting your first report — so you can begin hunting vulnerabilities with confidence and without accidentally violating program rules.
+
+<Steps>
+  <Step title="Create your Hackrate account">
+    Navigate to [hckrt.com](https://www.hckrt.com) and register for a new account. You will need a valid email address. During registration, your account is provisioned as a researcher account, which gives you access to the program catalog, report submission, and the leaderboard.
+
+    <Tip>
+      Use an email address you check regularly. Program owners and the Hackrate team communicate with you through the platform and via email when your reports are updated.
+    </Tip>
+  </Step>
+
+  <Step title="Complete your researcher profile">
+    Before you start hunting, take five minutes to fill out your profile at **Manage → Profile Settings**. A complete profile makes a strong impression on program owners reviewing your reports and considering you for private program invitations.
+
+    - **Nickname** — Choose carefully. Your nickname is public, shown on every report you submit, and displayed on the leaderboard. It can be up to 16 characters and must be unique across the platform. You cannot change it after it is set.
+    - **Name** — Your real name (used for identity verification and payment records, not displayed publicly by default).
+    - **About Me** — A short bio up to 500 characters. Describe your background, specialties, and experience. Markdown formatting is supported.
+    - **Country** — Your country of residence. This appears on the leaderboard and is required for identity verification.
+    - **Social links** — Add your GitHub, LinkedIn, Twitter/X, and personal website to help program owners evaluate your background.
+    - **Profile picture** — Upload a photo (JPEG, PNG, or GIF, max 5 MB) to make your profile recognizable.
+  </Step>
+
+  <Step title="Start the identity verification process">
+    Visit **Manage → Verification** to begin the ID verification process. You will need a government-issued identity document (passport, national ID card, or driving licence) and a proof of address document (bank statement or utility bill).
+
+    <Note>
+      Identity verification is required to receive monetary bounty payouts. Your verification is reviewed by Hackrate's compliance team. The process typically takes one to two business days after you submit your documents. Start early so you are ready the moment your first bounty is awarded.
+    </Note>
+
+    Once verified, a blue checkmark badge appears on your public profile. Verified researchers are more frequently considered for private program invitations.
+  </Step>
+
+  <Step title="Browse the program catalog">
+    Go to the Program Catalog (under the **Catalog** menu in your dashboard) to see all publicly available programs. Each program card shows the program name, whether it offers monetary bounties or recognition points only, the managed/unmanaged status, and the launch date.
+
+    Click **View program** on any card to open the full program detail page, which includes:
+    - **Scope** — the list of in-scope targets you are authorized to test
+    - **About company** — background on the organization running the program
+    - **Program Rules** — the policy governing what and how you may test
+    - **Bounty Table** — the reward amounts for each severity level and target tier (on bounty programs)
+
+    <Tip>
+      If you are new to the platform, start with a program that has many in-scope targets and a detailed program policy. Programs with more targets give you more surface area to find issues and more context to understand what the company considers a vulnerability.
+    </Tip>
+  </Step>
+
+  <Step title="Apply to a private program (optional)">
+    If you receive an invitation to a private program, or if a program provides a public application link, you can apply through your researcher dashboard. Your application creates a request for the program owner to review. Once accepted, the program becomes visible in your dashboard and you can submit reports against it.
+
+    If you are just starting out, focus on public programs first. Build your reputation score through validated findings, and private program invitations will follow naturally.
+  </Step>
+
+  <Step title="Read the scope and policy carefully">
+    Before you write a single line of test traffic, read the **Scope** section and **Program Rules** on the program detail page. Understand:
+
+    - Which targets are **in scope** (active, not marked as out of scope)
+    - Which assets are **explicitly out of scope** — reports against these will be closed immediately
+    - Any specific testing restrictions (e.g., no automated scanning, no denial-of-service testing, specific testing hours)
+    - The testing period, if the program specifies one
+
+    <Warning>
+      Submitting a report for an out-of-scope target wastes your time and reflects poorly on your profile. Always verify a target's scope status before testing it.
+    </Warning>
+  </Step>
+
+  <Step title="Find a vulnerability">
+    Test in-scope targets manually and methodically. Focus on the types of vulnerabilities most likely to affect the target type — for example, injection flaws and authentication weaknesses on web applications, and insecure data storage or API communication issues on mobile apps.
+
+    <Tip>
+      Start with lower severity findings to get familiar with the program's response style and validation process. Once you understand how the program team triages reports, you will be better positioned to write high-severity reports that are accepted on the first submission.
+    </Tip>
+
+    If the program provides test credentials (available in your **Credential Store** under the Profiles section), use them instead of targeting real user accounts. This keeps your testing safe, ethical, and within program rules.
+  </Step>
+
+  <Step title="Write and submit your report">
+    When you find a valid vulnerability, navigate to the program page and click **Submit report**. Follow the report form carefully:
+
+    - **One issue per report** — Never bundle multiple vulnerabilities into a single report. Each finding needs its own title, description, and reproduction steps.
+    - **Provide clear reproduction steps** — The program owner must be able to reproduce the issue from your steps alone. Include screenshots, request/response captures, or a proof-of-concept where appropriate.
+    - **Select the correct severity** — Be honest about severity. Overstating severity damages your reputation; understating it may reduce your reward.
+    - **Describe the impact** — Explain what an attacker could achieve by exploiting the vulnerability, not just what the technical flaw is.
+
+    After submission, you will receive notifications as the program owner triages, validates, and resolves your report.
+  </Step>
+</Steps>
+
+## Quick tips for new researchers
+
+<CardGroup cols={2}>
+  <Card title="One bug, one report" icon="file-lines">
+    Always submit separate reports for separate vulnerabilities, even if they affect the same target. Bundled reports slow down triage and can result in lower rewards.
+  </Card>
+  <Card title="Read the policy first" icon="book-open">
+    Program rules vary significantly. Some restrict the use of automated tools; others require you to contact the security team before testing certain endpoints. Skipping the policy is the fastest way to have a report rejected.
+  </Card>
+  <Card title="Build reputation steadily" icon="chart-line">
+    A track record of lower-severity, well-written reports is far more valuable than a single high-severity finding with poor documentation. Consistency earns invitations to private programs.
+  </Card>
+  <Card title="Use test credentials" icon="key">
+    When a program provides test accounts through the Credential Store, always use them. Testing with real accounts — even your own — may violate program rules.
+  </Card>
+</CardGroup>

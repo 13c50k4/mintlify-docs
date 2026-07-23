@@ -1,0 +1,121 @@
+---
+title: "How to Browse the Hackrate Bug Bounty Program Catalog"
+sidebarTitle: "Program Catalog"
+description: "Navigate the public program catalog, read program pages, interpret scope and bounty tables, and check activity statistics before committing to a target."
+---
+
+The Hackrate Program Catalog is the central hub for discovering publicly available programs. Every program listed there is open to any registered researcher — no invitation needed. The catalog is your starting point for finding organizations to test, understanding what they offer, and choosing where to invest your hacking time.
+
+Programs in the catalog span a range of industries, target types, and reward structures. Some are **bounty programs** that pay monetary rewards for valid findings; others are **Vulnerability Disclosure Programs (VDPs)** that award reputation points instead of cash. Both types appear in the catalog.
+
+## Reading the catalog cards
+
+Each program in the catalog is displayed as a card. Here is what each card tells you at a glance:
+
+<CardGroup cols={2}>
+  <Card title="Program name" icon="building">
+    The official name of the bug bounty or VDP program. Click **View program** to open the full detail page.
+  </Card>
+  <Card title="Bounty badge" icon="dollar-sign">
+    Programs marked with a **Bounty** badge offer monetary rewards for valid findings. Programs without this badge award reputation points through their VDP process.
+  </Card>
+  <Card title="Management status" icon="star">
+    A **Hackrate Managed** badge means Hackrate's team handles triage, validation, and researcher communication on behalf of the program owner. **Unmanaged** programs are run directly by the company.
+  </Card>
+  <Card title="New badge" icon="bolt">
+    Programs launched within the last 10 days show a **New** badge. Fresh programs often have untouched attack surface — a good opportunity for early findings.
+  </Card>
+</CardGroup>
+
+<Note>
+  You may also see **Private program** cards in the catalog. These display a placeholder description and a disabled **View program** button. They appear in the catalog listing to signal that private programs exist on the platform, but you cannot access them without a direct invitation. See [Private Programs](/researchers/programs/private-programs) for details.
+</Note>
+
+## The program detail page
+
+Clicking **View program** on a catalog card opens the full program detail page. This is where you spend the most time before deciding to test a program — and before making your first test request.
+
+### Program header
+
+The header of the program detail page shows:
+
+- **Program name and alias** — The alias (e.g., `@acme`) is the short identifier used in report submission and internal references.
+- **Company website** — A direct link to the organization's main site.
+- **Launch date** — When the program first became active on Hackrate.
+- **Testing period** — If the program owner has defined a specific testing window (e.g., `24/7`, or specific days and hours), it appears here. Always respect the stated testing period.
+
+### Activity summary
+
+Below the header, you will find a live summary of program activity:
+
+| Metric | What it means |
+|---|---|
+| **All Bounties / Reports** | On bounty programs: the total amount paid out to researchers (in EUR or USD) and the total report count. On VDP programs: the raw total report count. |
+| **Last report** | The date of the most recently submitted report. A recent date means the program is actively being tested and triaged. |
+
+<Tip>
+  A program with a large bounty total and recent activity is a strong signal that the organization takes the program seriously and pays promptly. A program with zero reports and an old launch date may be less actively maintained.
+</Tip>
+
+### Scope section
+
+The **Scope** section lists every **in-scope target** — the systems you are authorized to test. Each target entry shows:
+
+- **Name** — The specific domain, URL, app, or asset name (e.g., `api.example.com`, `Example Android App`)
+- **Type** — The asset category (e.g., Web Application, API, Mobile App, Network)
+- **Bounty indicator** — Whether this specific target is eligible for monetary rewards (some targets within a bounty program may be VDP-only)
+- **Tier** — Tier 1 targets are primary/critical assets with higher bounty rewards; Tier 2 targets are secondary assets with lower rewards
+
+Only the targets shown in the Scope section are authorized for testing. Any asset not listed — even if it belongs to the same company — is outside the program's authorization.
+
+### About company
+
+This section contains a Markdown-formatted description of the organization running the program: what the company does, what products or services are in scope, and any relevant context about their security posture. Read this before testing — understanding the business context helps you identify higher-impact vulnerabilities.
+
+### Program Rules (Policy)
+
+The **Program Rules** section is the legal and operational contract between you and the program owner. It specifies:
+
+- Testing restrictions (e.g., no automated scanning, no denial-of-service attacks)
+- Disclosure rules (e.g., coordinated disclosure timelines, embargo periods)
+- Vulnerability types that are out of scope even on in-scope targets
+- Safe harbor language — the legal protection the company extends to researchers operating within the rules
+
+<Warning>
+  Violating the Program Rules can result in your report being rejected, your account being suspended, or — in serious cases — legal consequences. Read the policy in full before submitting any report, and re-read it before testing any new type of vulnerability.
+</Warning>
+
+### Bounty table
+
+On bounty programs, a **Bounty Table** is displayed below the Program Rules. It shows the exact monetary award for each combination of **severity** (Critical, High, Medium, Low) and **target tier** (Tier 1, Tier 2):
+
+|  | Critical | High | Medium | Low |
+|---|---|---|---|---|
+| **Tier 1** | Highest reward | High reward | Moderate reward | Low reward |
+| **Tier 2** | High reward | Moderate reward | Low reward | Minimal reward |
+
+Actual values vary by program. The currency (EUR or USD) is specified per program. Use the bounty table to prioritize your testing — focus on Tier 1 targets with critical or high-severity findings to maximize potential earnings.
+
+### Announcements
+
+If the program owner has posted a recent announcement (for example, a scope change, a known issue exclusion, or a temporary testing pause), it appears as a highlighted alert at the top of the program page. Always read the latest announcement before testing, as it may override information in the main description or policy.
+
+## Evaluating programs before you commit
+
+Not all programs are equally worth your time. Use these signals to evaluate a program before investing significant effort:
+
+<Accordion title="Active triage cadence">
+  Check the **Last report** date in the activity summary. If reports were submitted recently, the program is being actively monitored. A last report date of over six months ago may indicate slow triage or low program owner engagement.
+</Accordion>
+
+<Accordion title="Bounty table completeness">
+  On bounty programs, a fully populated bounty table with competitive rates signals that the company is serious about compensating researchers fairly. Very low bounties (e.g., single-digit dollar amounts) may not justify the time investment for complex findings.
+</Accordion>
+
+<Accordion title="Scope breadth">
+  Programs with many diverse in-scope targets give you more surface area to find issues. A program with only one or two targets may be heavily tested already, making new findings harder to find.
+</Accordion>
+
+<Accordion title="Policy clarity">
+  A detailed, well-written Program Rules section indicates a mature, well-run program. Vague or minimal policies can lead to disputes over whether a finding is in scope — choose programs where expectations are clear.
+</Accordion>

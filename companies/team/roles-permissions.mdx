@@ -1,0 +1,100 @@
+---
+title: "Managing Team Roles and Permission Scopes in Hackrate"
+sidebarTitle: "Roles"
+description: "Understand the four Hackrate roles, what each can do, and how to apply them at the right scope — from your whole organization down to a single report."
+---
+
+Every person you invite to help manage your Hackrate programs gets exactly one role at a given scope. The role defines *what* they can do; the scope defines *where* that permission applies. Getting this combination right means your triage team can work efficiently without accidentally exposing sensitive reports to people who shouldn't see them — and it means you can bring in an external stakeholder for a single report without giving them access to your entire program.
+
+## The Four Roles
+
+Hackrate has four roles, ordered from most to least privileged:
+
+<CardGroup cols={2}>
+  <Card title="SuperAdmin" icon="shield-halved">
+    Full access across every feature. A SuperAdmin can see all report statuses — including Pre-submission, New, Needs more info, Duplicate, Invalid, Spam, Out of Scope, and Self-Closed — change any status, award bounties, manage team membership, and alter program settings.
+  </Card>
+  <Card title="StandardAdmin" icon="user-shield">
+    Triage and management access. A StandardAdmin can review, comment on, update reports, award bounties, manage program settings, and invite team members within their scope. They work in a filtered view that hides early-stage and rejection statuses, keeping their queue focused on actionable items.
+  </Card>
+  <Card title="Analytics" icon="chart-bar">
+    Read-only access to analytics dashboards and aggregated report data. Useful for management stakeholders who need visibility into program metrics without interacting with individual reports.
+  </Card>
+  <Card title="Read-Only" icon="eye">
+    Read-only access to reports within the assigned scope. The user can view report details and comments but cannot take any action or see analytics dashboards.
+  </Card>
+</CardGroup>
+
+## Role Comparison
+
+The table below shows which actions each role can perform:
+
+| Capability | SuperAdmin | StandardAdmin | Analytics | Read-Only |
+|---|:---:|:---:|:---:|:---:|
+| View all report statuses (including Pre-submission, Duplicate, Spam, and other rejection statuses) | ✅ | ❌ | ❌ | ❌ |
+| Triage reports (change status, add internal comments) | ✅ | ✅ | ❌ | ❌ |
+| Award bounties and bonuses | ✅ | ✅ | ❌ | ❌ |
+| Manage program settings | ✅ | ✅ | ❌ | ❌ |
+| Manage team members and invitations | ✅ | ✅ | ❌ | ❌ |
+| View analytics dashboards | ✅ | ✅ | ✅ | ❌ |
+| Export reports to CSV (including sensitive fields) | ✅ | ❌ | ❌ | ❌ |
+| View reports (read access) | ✅ | ✅ | ✅ | ✅ |
+
+<Note>
+  StandardAdmins see a focused report queue that omits the following statuses: Pre-submission, New, Needs more info, Duplicate, Invalid, Spam, Out of Scope, and Self-Closed. This keeps their inbox clean and prevents premature triage of reports that have not yet passed initial validation or have already been closed as noise.
+</Note>
+
+## Permission Scopes
+
+A role only takes effect within the *scope* it was assigned to. Hackrate supports four scope levels, from broadest to most narrow:
+
+<Steps>
+  <Step title="Organization">
+    The role applies to every program under your organization. Use this scope for trusted team members who need to work across all programs — for example, your head of security or a platform-wide analytics user.
+  </Step>
+  <Step title="Program">
+    The role applies only to one specific program and all reports within it. This is the most common scope for triage staff.
+  </Step>
+  <Step title="Business Unit">
+    The role applies only to the subset of targets assigned to a particular Business Unit. For example, a "Mobile Team" Business Unit might contain only your iOS and Android app targets, limiting a triager's view to those reports only.
+  </Step>
+  <Step title="Report">
+    The role applies to a single report. This is useful for temporarily bringing in a specialist — a developer who owns the affected component, for instance — without exposing the rest of your program.
+  </Step>
+</Steps>
+
+## Role Priority
+
+A user may hold multiple roles if they belong to multiple Admin Groups or have been assigned rights at different scopes. Hackrate always applies the **most privileged role** a user holds across all their assignments. The priority order is:
+
+1. SuperAdmin
+2. StandardAdmin
+3. Analytics
+4. Read-Only
+
+For example, if a user is a Read-Only at the organization level but a StandardAdmin on a specific program, they will have StandardAdmin access on that program and Read-Only access everywhere else.
+
+## Assigning Roles
+
+<Steps>
+  <Step title="Go to Organization Management">
+    Navigate to your organization dashboard and open the **Team** or **Organization Management** section.
+  </Step>
+  <Step title="Invite or select a member">
+    Click **Invite member** to add a new person by email, or select an existing member from the list.
+  </Step>
+  <Step title="Choose the role and scope">
+    Select the role you want to assign, then choose whether it applies at the organization level, a specific program, a Business Unit, or a single report.
+  </Step>
+  <Step title="Send the invitation">
+    The invitee receives an email. Until they accept, their invitation appears as **Pending** in the team list.
+  </Step>
+</Steps>
+
+<Tip>
+  For managing teams of people rather than individuals, use **Admin Groups** instead of assigning roles one person at a time. Any role you assign to a group automatically applies to every member.
+</Tip>
+
+<Warning>
+  Only a SuperAdmin at the organization level can assign the SuperAdmin role to others. Make sure at least two people in your organization hold this role so you are never locked out.
+</Warning>

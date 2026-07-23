@@ -1,0 +1,108 @@
+---
+title: "Hacktivity Feed: Public Security Disclosure on Hackrate"
+sidebarTitle: "Hacktivity"
+description: "Understand how the Hackrate Hacktivity feed works, what information is shared in disclosed reports, and why published findings build your reputation."
+---
+
+Hacktivity is the platform-wide public feed of disclosed security findings. When a company resolves a vulnerability and chooses to share it publicly, the report becomes a Hacktivity entry — a permanent, indexed record of your research that anyone can read. It serves as the platform's transparency layer, showing the security community what kinds of vulnerabilities are being found and fixed across participating programs.
+
+## How a finding gets published
+
+The decision to publish a report to Hacktivity rests entirely with the company, not the researcher. After a report reaches a resolved or accepted status, the company can submit it for publication. Platform administrators review and approve the submission before it goes live on the public feed.
+
+<Steps>
+  <Step title="Report resolved">
+    Your report reaches a closing status — such as Resolved or Accepted Risk — after the company has addressed or acknowledged the finding.
+  </Step>
+  <Step title="Company submits for disclosure">
+    The company opts to share the report publicly. They may add a Team Summary, adjust visible fields, and choose what details to include in the disclosure.
+  </Step>
+  <Step title="Platform review">
+    Hackrate administrators review the submission to ensure no sensitive details are inadvertently exposed before publication.
+  </Step>
+  <Step title="Published to the feed">
+    The entry becomes visible on the public Hacktivity feed and receives a permanent, shareable detail page that you can link to from your portfolio.
+  </Step>
+</Steps>
+
+<Note>
+  You cannot self-publish a report to Hacktivity. Disclosure is always initiated by the company after resolution. If you want your finding disclosed, discuss it with the program team once the issue is fully resolved.
+</Note>
+
+## What each Hacktivity entry shows
+
+The feed lists all published entries in reverse-chronological order. Each card on the feed displays:
+
+| Field | Description |
+|---|---|
+| **Title** | The title of the finding as published |
+| **Program** | The name of the company or program that the report belongs to |
+| **Author** | Your researcher nickname, linked to your public profile |
+| **Severity** | The severity level assigned to the finding (e.g., Critical, High, Medium) |
+| **Status** | The final report status at time of disclosure |
+| **Publication date** | When the entry was published to the feed |
+| **Summary** | A short description of the finding |
+
+## Viewing full disclosure details
+
+Clicking the **Details** button on any feed entry takes you to the full disclosure page for that finding. This page includes:
+
+<Accordion title="Finding metadata">
+  The full detail view shows the program name, affected target and its tier, severity, CVSS score (if provided), CVE number (if assigned), affected versions, and CWE weakness classification. These fields give readers the technical context to understand the vulnerability class and its potential impact.
+</Accordion>
+
+<Accordion title="Summary and description">
+  The publication includes a researcher-authored summary and description of the finding, rendered in formatted Markdown. Well-written summaries make your disclosed work more valuable as a portfolio piece.
+</Accordion>
+
+<Accordion title="Impact statement">
+  A dedicated Impact section describes what an attacker could have achieved by exploiting the vulnerability — for example, data exfiltration, privilege escalation, or denial of service.
+</Accordion>
+
+<Accordion title="Team summary">
+  If the company added a Team Summary, it appears at the top of the disclosure. This is the company's perspective on the finding — typically acknowledging the researcher's contribution and describing how they responded.
+</Accordion>
+
+<Accordion title="Timeline">
+  The disclosure includes a curated timeline drawn from the report's activity log, showing key milestones such as when the report was created, when it was accepted, when severity was adjusted, and when the bounty was awarded.
+</Accordion>
+
+<Accordion title="Bounty information">
+  If a bounty was awarded and the company chose to include it in the disclosure, the amount is shown on the detail page.
+</Accordion>
+
+## Public vs. private programs
+
+The way your name appears in a Hacktivity entry depends on the program's visibility setting:
+
+<Tabs>
+  <Tab title="Public programs">
+    When a finding from a public program is disclosed, the full program name appears on the entry. Your nickname, severity, status, and all approved metadata are displayed. The entry is fully indexed and searchable.
+  </Tab>
+  <Tab title="Private programs">
+    For private programs, the program name may be withheld from the public entry to protect the company's confidentiality. Your nickname still appears as the author of the finding, and the technical details remain visible, but the program context is redacted.
+  </Tab>
+</Tabs>
+
+## Why Hacktivity matters for your reputation
+
+Having your reports published to Hacktivity provides benefits that go beyond the bounty itself:
+
+<CardGroup cols={2}>
+  <Card title="Public portfolio" icon="id-card">
+    Disclosed findings link to your public profile. Potential employers, clients, and program administrators can see your track record of real-world vulnerabilities — not just your score, but the actual work.
+  </Card>
+  <Card title="Community recognition" icon="users">
+    A strong Hacktivity presence demonstrates that companies trust you enough to disclose your work publicly. It signals quality and professionalism to the broader security community.
+  </Card>
+  <Card title="Verified author badge" icon="circle-check">
+    Disclosed entries show your verified status badge if your identity is confirmed. This increases credibility and is visible to anyone reading the feed.
+  </Card>
+  <Card title="Platform transparency" icon="eye">
+    Published findings contribute to the platform's public record of security improvements — helping other researchers understand what vulnerability classes are in scope and what companies value.
+  </Card>
+</CardGroup>
+
+<Tip>
+  Write your report summaries and impact sections with public disclosure in mind. A well-articulated technical write-up that is later disclosed becomes a lasting demonstration of your research depth. Even if you do not control whether the company discloses, you can always ensure the underlying report is worth sharing.
+</Tip>

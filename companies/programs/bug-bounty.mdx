@@ -1,0 +1,130 @@
+---
+title: "Managed Bug Bounty Program: Setup and Configuration Guide"
+sidebarTitle: "Bug Bounty"
+description: "Configure a Hackrate Managed Bug Bounty Program — set up bounty tables, define asset tiers, choose public or private access, and manage your budget."
+---
+
+A Managed Bug Bounty Program on Hackrate puts your assets in front of a global community of ethical hackers who are motivated to find real vulnerabilities. Unlike automated scanners, human researchers bring creativity, business context, and adversarial thinking that uncover logic flaws, chained attack paths, and high-impact issues that rule-based tools will never catch. Hackrate's managed service wraps the program with professional triage, researcher communication, and validated reports — so your security team can focus on fixing vulnerabilities rather than managing a crowd.
+
+## How bug bounty works on Hackrate
+
+The lifecycle of a managed bug bounty program follows four phases:
+
+<Steps>
+  <Step title="Plan — Define scope and rewards">
+    Work with the Hackrate team to define which assets are in scope, what types of vulnerabilities are eligible for rewards, and how much you are willing to pay for each severity level. Setting the right bounty amounts and clear boundaries is the foundation of a successful program. A well-scoped program attracts quality researchers and produces actionable findings.
+  </Step>
+  <Step title="Prepare — Finalize rules and launch strategy">
+    Finalize the program policy: what researchers can and cannot do during testing, which vulnerability classes are in scope, how to report findings, and the expected response time from your team. Decide whether to start with a private (invite-only) program or go public immediately. Hackrate's team reviews and approves the program before it goes live.
+  </Step>
+  <Step title="Test — Researchers find and report vulnerabilities">
+    Once the program is published, researchers begin testing. Each submission arrives in your report inbox with a structured format: title, affected target, reproduction steps, evidence, and the researcher's severity assessment. Hackrate's managed triage validates reports for accuracy before they reach your team, eliminating duplicate and low-quality submissions.
+  </Step>
+  <Step title="Fix — Resolve findings and reward researchers">
+    Review validated reports, collaborate with researchers through the platform's messaging thread, and track remediation progress. When a report is accepted, you approve the bounty payout. Hackrate handles the actual payment to the researcher after your authorization, and the researcher earns both the monetary reward and reputation points on the platform.
+  </Step>
+</Steps>
+
+## Setting up your bounty table
+
+The **Bounty Table** defines exactly how much a researcher earns for a valid finding, based on the severity of the vulnerability and the tier of the affected target.
+
+### Severity levels
+
+Hackrate uses five severity levels, aligned with industry-standard vulnerability scoring practices:
+
+| Severity | Description |
+|---|---|
+| **Exceptional** | Extraordinary findings with immediate, catastrophic business impact — included only when your program opts in to this tier |
+| **Critical** | Full system compromise, remote code execution, authentication bypass, or mass data exposure |
+| **High** | Significant impact on confidentiality, integrity, or availability of a major asset |
+| **Medium** | Moderate impact requiring some user interaction or limited scope of effect |
+| **Low** | Minor security issues with limited practical exploitability |
+
+### Tiers: prioritizing your most important assets
+
+Hackrate's bounty table uses a **two-tier** system that lets you pay more for vulnerabilities in your most critical assets without affecting payouts for secondary systems.
+
+- **Tier 1** — Primary or business-critical assets, such as your main customer-facing application, core API, or payment system. Tier 1 vulnerabilities command the highest bounties.
+- **Tier 2** — Secondary assets, such as staging environments, marketing sites, or less sensitive internal tools. Tier 2 payouts are lower, reflecting the reduced business risk.
+
+When you add a target to your program, you assign it to Tier 1 or Tier 2. The bounty table then maps each severity-tier combination to a payout amount.
+
+### Example bounty table
+
+The table below shows a typical bounty configuration. Your actual amounts will depend on your budget, the sensitivity of your assets, and market benchmarks for your industry.
+
+| Severity | Tier 1 | Tier 2 |
+|---|---|---|
+| **Exceptional** | $3,000 | $1,500 |
+| **Critical** | $2,000 | $1,000 |
+| **High** | $800 | $400 |
+| **Medium** | $300 | $150 |
+| **Low** | $100 | $50 |
+
+<Note>
+  The Exceptional severity row is optional — you can choose whether to include it in your program. Bounty amounts can also be configured as **fixed values** or as **ranges** (a minimum and maximum per cell). Ranges give your team flexibility to reward exceptional report quality within a severity band. Contact the Hackrate team to configure range-based payouts.
+</Note>
+
+### Currency
+
+Each program is denominated in either **USD** or **EUR**. All bounty table values and budget tracking use the currency you select at program creation. Currency cannot be changed after the program is published.
+
+## Managing your budget
+
+Every bug bounty program has an associated **Budget** — the total funds allocated for bounty payments across the program's lifetime. The Hackrate analytics dashboard gives you live visibility into:
+
+- **Bounties paid** — the sum of all approved payouts to date
+- **Bonus payments** — any additional discretionary rewards granted on top of standard bounties
+- **Budget consumption percentage** — how much of your total budget has been spent
+- **Bounty forecast** — the estimated future spend based on open, unresolved reports
+
+<Warning>
+  The Hackrate platform adds a service fee to each bounty payout. Budget planning should account for this when setting your total program budget. Contact the Hackrate team for current fee details.
+</Warning>
+
+## Public vs. private bug bounty programs
+
+<Tabs>
+  <Tab title="Private (Invite-Only)">
+    A private bug bounty program is only accessible to researchers you explicitly invite. This approach is ideal when you are:
+
+    - Running your first bug bounty program and want to start with a small, trusted cohort
+    - Testing a sensitive or pre-release product
+    - Working within regulatory constraints that require controlled access
+
+    To invite researchers, go to **Invite Hackers** in the program management menu. You can browse the Hackrate researcher community, filter by skills and reputation, and send invitations. Invitations expire after 12 days, and you can resend or revoke them at any time.
+  </Tab>
+  <Tab title="Public">
+    A public bug bounty program is listed in the Hackrate catalog and open to any registered, verified researcher. This maximizes your testing coverage and gives you access to the widest range of expertise. Public programs typically generate more reports but also more diversity of vulnerability types.
+
+    The Hackrate managed triage service is especially valuable for public programs, where report volume can be higher.
+  </Tab>
+</Tabs>
+
+## Program models and maturity paths
+
+Bug bounty programs do not have to follow a one-size-fits-all model. Hackrate supports several common approaches:
+
+<CardGroup cols={2}>
+  <Card title="Private → Public" icon="arrow-right">
+    Start with a controlled, invite-only program. Once your team is comfortable triaging reports and your scope is well-defined, expand to a public program for broader coverage.
+  </Card>
+  <Card title="Continuous" icon="rotate">
+    An always-on program with no fixed end date. Ideal for products that ship continuously and need ongoing security validation as each release introduces new code.
+  </Card>
+  <Card title="Hybrid (alongside PTaaS)" icon="layer-group">
+    Run a bug bounty program for continuous coverage while commissioning targeted PTaaS engagements for deep-dive assessments of specific features or compliance requirements.
+  </Card>
+  <Card title="Gradual scope expansion" icon="expand">
+    Begin with a narrow scope — one or two core assets — and expand the target list as your remediation capacity grows and your team's confidence increases.
+  </Card>
+</CardGroup>
+
+## Sending notifications to researchers
+
+You can send a direct email notification to all enrolled researchers from the **Send Notification** feature in the program management menu. This is useful for communicating scope changes, temporary testing restrictions, or program news that is more urgent than a standard announcement. A preview function lets you review the email before sending.
+
+## Credentials for researchers
+
+If your in-scope assets require login access, you can provide **test credentials** to researchers through the credential management system. Credentials can be scoped to the entire program or to individual targets. The platform distributes credentials automatically to researchers who join the program, ensuring each researcher gets a unique set of login details.

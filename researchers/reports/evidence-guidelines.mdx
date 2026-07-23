@@ -1,0 +1,188 @@
+---
+title: "Evidence Guidelines for Hackrate Vulnerability Reports"
+sidebarTitle: "Evidence"
+description: "Learn what types of evidence to collect, how to upload files to your report, and what separates convincing proof-of-concept from weak documentation."
+---
+
+Evidence is the foundation of a credible vulnerability report. No matter how well-written your description is, a finding without proof is difficult for a triage team to verify — and a finding that cannot be verified is far more likely to be rejected, deprioritized, or delayed. Strong evidence makes your report reproducible by an independent reviewer from scratch, which is exactly what the triage team needs to confirm your finding and move it toward acceptance.
+
+This page covers what types of evidence are accepted, how to upload files, what makes evidence compelling, and how to handle sensitive data responsibly.
+
+---
+
+## Why evidence is required
+
+The pre-validation check that runs before every report submission requires **at least one evidence file**. If no evidence is attached, the form will not allow submission. This is intentional — it encourages researchers to document their work before filing, rather than submitting speculative reports and adding evidence later.
+
+Beyond passing validation, good evidence:
+
+- **Speeds up triage.** A clear screenshot or screen recording can confirm a finding in seconds. A text-only report may take many back-and-forth comment rounds to verify.
+- **Prevents duplicate disputes.** Timestamped evidence establishes when you found the vulnerability.
+- **Supports bounty decisions.** Reward amounts are often finalized after the impact is confirmed, and strong evidence directly supports a higher severity assessment.
+- **Demonstrates professionalism.** Well-documented reports build your reputation as a researcher the program team can trust.
+
+---
+
+## Accepted evidence types
+
+<CardGroup cols={2}>
+  <Card title="Screenshots" icon="image">
+    The most common evidence type. Capture the browser showing the vulnerability in action — the URL bar, any relevant request parameters, and the proof of exploitation should all be visible. Annotate with arrows or highlights if clarity helps.
+  </Card>
+  <Card title="Screen recordings / videos" icon="video">
+    Ideal for vulnerabilities that involve multi-step interactions, timing-dependent behavior, or client-side execution (XSS firing, CSRF in action, etc.). A short video demonstrating the full exploit flow is often more persuasive than a series of screenshots.
+  </Card>
+  <Card title="HTTP request/response logs" icon="code">
+    Captured traffic from a proxy tool (Burp Suite, OWASP ZAP, etc.) exported as a text file. Include the full request and the server's response. For injection vulnerabilities, show the payload in the request and the evidence of successful execution in the response.
+  </Card>
+  <Card title="Proof-of-concept code" icon="terminal">
+    A script, exploit module, or minimal reproducible example that triggers the vulnerability. PoC code is especially valuable for authentication bypasses, logic flaws, and API vulnerabilities. Include comments explaining each step.
+  </Card>
+  <Card title="Log files or error output" icon="file-lines">
+    Application error logs, stack traces, or debug output that confirm unexpected behavior or information disclosure. Particularly useful for server-side findings.
+  </Card>
+  <Card title="Code snippets" icon="file-code">
+    If the vulnerability is in a publicly available source repository or client-side JavaScript, a snippet showing the vulnerable code path alongside the exploit helps triagers locate and fix the root cause faster.
+  </Card>
+</CardGroup>
+
+---
+
+## Accepted file formats and size limits
+
+The evidence uploader accepts the following file types:
+
+| Category | Formats |
+|---|---|
+| Images | `.jpg`, `.jpeg`, `.png`, `.gif` |
+| Videos | `.mp4`, `.avi`, `.flv`, `.wmv`, `.mov` |
+| Text & code | `.txt`, `.md`, `.mdx` |
+
+**Maximum file size:** 150 MB per file.
+
+<Note>
+  You can upload multiple evidence files to a single report, either during initial submission or afterward via the **Upload new evidence** panel on your report's detail page. You can add evidence to a report after submission as long as the report is still open.
+</Note>
+
+---
+
+## How to upload evidence
+
+### During report creation
+
+<Steps>
+  <Step title="Prepare your files before opening the form">
+    Have all evidence files ready on your machine before you start filling out the report. The uploader appears at the bottom of the form.
+  </Step>
+  <Step title="Locate the Upload Evidences panel">
+    Scroll to the **Upload Evidences** section at the bottom of the report form. The upload area supports drag-and-drop or click-to-browse.
+  </Step>
+  <Step title="Drop or select your files">
+    Drag your files into the drop zone or click to open the file picker. Files are uploaded via a secure presigned URL directly to storage — they never leave Hackrate's infrastructure.
+  </Step>
+  <Step title="Wait for upload confirmation">
+    Each file shows an upload progress indicator. Wait for all files to finish uploading before clicking **Submit**. Partially uploaded files will not be attached to the report.
+  </Step>
+</Steps>
+
+### After submission
+
+You can add additional evidence to an existing report from the report's detail page at any time while the report is open:
+
+1. Navigate to **My Reports** and open the relevant report.
+2. Scroll to the **Upload new evidence** panel on the right side.
+3. Drop or select a single file. (Evidence is added one file at a time after submission.)
+4. Click **Upload** to finalize. A comment is automatically added to the report's timeline noting the new upload.
+
+---
+
+## What makes evidence compelling
+
+Not all evidence is equal. Triagers review dozens of reports — clear, well-organized evidence is noticed and appreciated.
+
+<Accordion title="For screenshots">
+  - Show the full browser window including the URL bar so the endpoint is clearly visible
+  - If demonstrating XSS or injection, include both the payload in the input and the proof of execution (alert box, exfiltrated data, reflected content)
+  - For IDOR or access control issues, show the account context (logged in as User A) and the unauthorized access (data belonging to User B)
+  - Annotate with arrows, boxes, or highlights to draw attention to the key part of the image
+  - Use a consistent naming convention: `01-login-page.png`, `02-payload-injected.png`, `03-xss-fired.png`
+</Accordion>
+
+<Accordion title="For screen recordings">
+  - Keep recordings short and focused — under 3 minutes if possible
+  - Narrate or annotate key steps in the recording itself (captions, on-screen text)
+  - Start from a clean, unauthenticated (or freshly authenticated) state to show the full attack chain
+  - Include a brief setup section showing that the vulnerability is not already known/pre-configured
+</Accordion>
+
+<Accordion title="For HTTP request/response files">
+  - Export the full request including all headers, not just the body
+  - Include the complete server response — status code, headers, and body
+  - Redact your own authentication tokens from evidence if not needed for context (replace with `[REDACTED]`)
+  - For multi-step exploits, include the full sequence in order with clear labels
+</Accordion>
+
+<Accordion title="For PoC code">
+  - Include comments explaining what each section does
+  - Document prerequisites (target URL, required session tokens, environment setup)
+  - Keep it minimal — a 20-line PoC is more trusted than a 2,000-line framework
+  - Test your PoC before including it to verify it actually works against the target
+</Accordion>
+
+---
+
+## Handling sensitive data in evidence
+
+When you find a vulnerability that exposes real user data, you face a responsibility to minimize the harm caused by your own research.
+
+<Warning>
+  **Do not capture, store, or include real user data (PII, credentials, financial data) in your evidence files unless strictly necessary to demonstrate the vulnerability.**
+</Warning>
+
+Follow these practices:
+
+- **Use your own test accounts.** When demonstrating data access, use accounts you control. If you must demonstrate cross-account access, use a second test account you own rather than accessing real user data.
+- **Blur or redact real data in screenshots.** If real data is visible in a screenshot, blur it before uploading. The presence of the data field is usually enough — the actual values rarely need to be readable.
+- **For mass data exposure, demonstrate scope without extracting.** A screenshot showing the first row of a database dump with the rest blurred, combined with a clear description of the structure, is sufficient. You do not need to include hundreds of rows.
+- **Delete local copies.** Once uploaded to your report, delete any locally stored copies of data that contains real user information.
+
+Responsible handling of sensitive data is part of the ethical standards all Hackrate researchers are expected to uphold.
+
+---
+
+## File validation
+
+After you upload a file, it goes through an automated validation process. Each file shows one of three states in your report:
+
+| Status | Meaning |
+|---|---|
+| **Pending** | The file has been uploaded and is queued for validation |
+| **Valid** | The file passed validation and can be downloaded by triagers |
+| **Invalid** | The file failed validation (e.g., unsupported format, corrupted file) — upload a replacement |
+
+If a file shows **Invalid**, upload a replacement before submitting or following up with the triage team. Triagers cannot access invalid files.
+
+---
+
+## Common evidence mistakes to avoid
+
+<CardGroup cols={2}>
+  <Card title="No evidence at all" icon="triangle-exclamation">
+    Reports without evidence are blocked by pre-validation. Even a single screenshot of the vulnerability in action is better than nothing.
+  </Card>
+  <Card title="Cropped screenshots missing context" icon="triangle-exclamation">
+    A cropped screenshot that shows a result but not the URL, account context, or payload makes verification much harder.
+  </Card>
+  <Card title="Uploading real user PII" icon="triangle-exclamation">
+    Including actual names, emails, or financial data in screenshots or dumps is a serious ethical violation. Blur or redact it.
+  </Card>
+  <Card title="Expired or inaccessible links" icon="triangle-exclamation">
+    Do not link to external services (Google Drive, Dropbox, Imgur) for evidence. Upload directly to the report. External links expire and cannot be archived.
+  </Card>
+  <Card title="Evidence that doesn't match the description" icon="triangle-exclamation">
+    Evidence that shows something different from what the Description says creates confusion. Make sure your files match the steps you describe.
+  </Card>
+  <Card title="Broken PoC code" icon="triangle-exclamation">
+    Untested PoC that doesn't work undermines the entire report. Run it at least once against the target before uploading.
+  </Card>
+</CardGroup>

@@ -1,0 +1,171 @@
+---
+title: "Bounty Rewards: Payouts, Tables, and Bonus Amounts"
+sidebarTitle: "Bounty Rewards"
+description: "Learn how bounty payouts are calculated from the bounty table, how to award rewards from the report view, and how to add discretionary bonus amounts."
+---
+
+Bounty rewards are the financial incentive at the heart of a paid bug bounty programme. Hackrate's bounty system is designed to give you precise, transparent control over how much you pay for each finding — based on the vulnerability's severity and the tier of the affected target — while still leaving room to recognise exceptional researcher effort through bonus payments. This page explains how the bounty table works, how to configure fixed or ranged payouts, and how to award a bounty (and optional bonus) from the report management view.
+
+## How bounty amounts are determined
+
+A bounty payout is the intersection of two dimensions: **severity** and **target tier**.
+
+- **Severity** reflects how dangerous the vulnerability is: Critical, High, Medium, Low, or Exceptional (if your programme enables this tier).
+- **Target tier** reflects the relative importance of the affected asset to your business. Tier 1 targets are your highest-value assets (core production systems, customer-facing APIs, payment infrastructure); Tier 2 targets are less critical assets (staging environments, internal tools, lower-priority subdomains).
+
+The bounty table maps every combination of severity and tier to a specific payout amount — or a payout range if your programme uses interval-based pricing.
+
+## The bounty table structure
+
+Your programme's bounty table has two tiers (Tier 1 and Tier 2) and up to five severity levels:
+
+| Severity | Tier 1 Payout | Tier 2 Payout |
+|---|---|---|
+| Exceptional | Set per programme | Set per programme |
+| Critical | Set per programme | Set per programme |
+| High | Set per programme | Set per programme |
+| Medium | Set per programme | Set per programme |
+| Low | Set per programme | Set per programme |
+
+<Note>
+  The **Exceptional** severity level is optional. It is only available if your programme explicitly enables it in the bounty table configuration. Use it for vulnerabilities that significantly exceed the typical Critical threshold — for example, a fully unauthenticated remote code execution on a core production system.
+</Note>
+
+### Fixed amounts vs. ranges
+
+Your bounty table can operate in one of two modes:
+
+<Tabs>
+  <Tab title="Fixed amounts">
+    Every severity/tier combination maps to a single, exact payout figure. When you award a bounty for an Accepted or Resolved report, the system shows the exact amount from the table and you confirm the award.
+
+    **Example fixed bounty table (USD):**
+
+    | Severity | Tier 1 | Tier 2 |
+    |---|---|---|
+    | Exceptional | $10,000 | $5,000 |
+    | Critical | $5,000 | $2,500 |
+    | High | $2,000 | $1,000 |
+    | Medium | $500 | $250 |
+    | Low | $100 | $50 |
+
+    Fixed amounts provide researchers with complete certainty about what they will earn before they submit, which is a strong motivation for thorough, high-quality reports.
+  </Tab>
+  <Tab title="Ranges (interval mode)">
+    Each severity/tier cell defines a **minimum** and **maximum** payout. When awarding a bounty, you choose the actual amount within that range, giving you discretion to reward a particularly well-written report more generously than a minimally sufficient one.
+
+    **Example range bounty table (USD):**
+
+    | Severity | Tier 1 Range | Tier 2 Range |
+    |---|---|---|
+    | Exceptional | $8,000 – $15,000 | $4,000 – $7,500 |
+    | Critical | $3,000 – $6,000 | $1,500 – $3,000 |
+    | High | $1,000 – $2,500 | $500 – $1,250 |
+    | Medium | $200 – $600 | $100 – $300 |
+    | Low | $50 – $150 | $25 – $75 |
+
+    Range-based tables are common for programmes that want to reward researcher effort and report quality, not just the severity of the finding. A critical finding in an unusually hard-to-reach system, documented with exceptional clarity, might justify the top of the range even if a standard critical would land in the middle.
+  </Tab>
+</Tabs>
+
+## Currency
+
+Bounty amounts are denominated in the currency set at the programme level. Hackrate supports **USD (US dollars)** and **EUR (euros)**. The currency applies to all bounties and bonuses on that programme and is shown throughout the report management interface and the researcher's payout history.
+
+<Warning>
+  Currency is set when the programme is created or configured. If you need to change the currency for an existing programme, contact your Hackrate account manager — changing currency mid-programme can cause confusion for researchers who have been operating under a different expectation.
+</Warning>
+
+## Awarding a bounty from the report view
+
+You can award a bounty directly from the report management page once the report has been reviewed and you are ready to reward the researcher.
+
+<Steps>
+  ### Confirm severity and tier
+
+  Before awarding, verify that the severity on the report accurately reflects your assessment — not the researcher's original claim if you have adjusted it. The bounty amount is calculated based on the current severity on the report and the tier of the affected target.
+
+  The target's tier (Tier 1 or Tier 2) is shown in the Target card at the top of the management page.
+
+  ### Open the bounty section
+
+  Scroll to the **Bounty** section in the report management view. The system shows the applicable amount (or range) from your programme's bounty table for the current severity and tier combination.
+
+  ### Enter the bounty amount
+
+  If your programme uses **fixed amounts**, the amount is pre-filled. Confirm it is correct and proceed.
+
+  If your programme uses **ranges**, enter the amount you wish to award within the min–max range for the applicable severity and tier.
+
+  ### Submit the bounty
+
+  Click **Award bounty** to confirm the payment. The bounty amount is recorded on the report and a payment record is generated with a unique tracking identifier. The researcher is notified that a bounty has been awarded and can see the amount in their account. Each bounty record has a shareable page that the researcher can use as proof of payment.
+
+  The bounty amount is also visible in the **Bounty** column of your CSV exports, giving you a straightforward way to reconcile programme spend.
+</Steps>
+
+## Adding a bonus payment
+
+In addition to the standard bounty, you can award a **bonus** to recognise exceptional quality, unusual depth of research, or a finding that had particularly significant business impact beyond what the severity score alone captures.
+
+The bonus is a separate amount recorded alongside the bounty. Both appear on the report:
+- **Bounty** — the standard award calculated from the bounty table
+- **Bonus** — the additional discretionary amount
+
+Both the bounty and the bonus appear in CSV exports, and both are included in the researcher's payout history.
+
+<Tip>
+  Consider awarding a bonus when:
+  - The researcher provided an unusually detailed write-up with clear remediation recommendations
+  - The report was marked **Good quality duplicate** and you want to acknowledge the effort even though the finding was already known
+  - The finding had a real-world impact (e.g. the vulnerability was discovered to already be exploited) that the severity score alone does not fully reflect
+  - The researcher was exceptionally responsive and cooperative throughout the triage process
+</Tip>
+
+## Budget management and forecasting
+
+Running a sustainable bug bounty programme requires understanding your bounty spend over time. Use the **CSV export** from the report inbox with the **Bounty** and **Bonus** columns selected to produce a detailed ledger of every reward paid out, filterable by programme, date range, and severity.
+
+For forecasting, the bounty table itself is your primary planning tool:
+
+- Multiply your expected monthly report volume (from historical data or programme benchmarks) by severity distribution to estimate average monthly spend
+- Tier 1 assets drive the majority of bounty spend; if you are adding high-value Tier 1 targets, plan your budget accordingly
+- Range-based tables give you a natural upper bound: your maximum possible payout per report is the Tier 1 Exceptional maximum
+
+<Accordion title="Bounty table planning example">
+  Suppose your programme receives roughly 20 valid reports per month with the following severity distribution:
+  - 2 Critical (both Tier 1)
+  - 5 High (mix of Tier 1 and Tier 2)
+  - 8 Medium (mostly Tier 2)
+  - 5 Low (Tier 2)
+
+  Using the example fixed table above (USD):
+
+  | Severity | Count | Avg payout | Subtotal |
+  |---|---|---|---|
+  | Critical (Tier 1) | 2 | $5,000 | $10,000 |
+  | High (Tier 1 × 2, Tier 2 × 3) | 5 | ~$1,400 | $7,000 |
+  | Medium (Tier 2) | 8 | $250 | $2,000 |
+  | Low (Tier 2) | 5 | $50 | $250 |
+  | **Total** | **20** | | **~$19,250/month** |
+
+  This kind of estimate gives your finance team a defensible monthly budget figure. Actual spend will vary — especially if an exceptional finding comes in — but the table makes the variance predictable.
+</Accordion>
+
+## Frequently asked questions
+
+<Accordion title="Can I award a bounty on a report that is not yet Resolved?">
+  Yes. You can award a bounty at any point after accepting a report — you do not have to wait until you have deployed a fix. Many programmes award bounties upon **Accepted** status to reward the researcher promptly, then move the report to **Resolved** separately when remediation is complete.
+</Accordion>
+
+<Accordion title="What if I awarded the wrong amount?">
+  Contact your Hackrate account manager if you need to correct a bounty record. Bounty records are tracked with a unique identifier and are linked to the researcher's payout history, so corrections need to be coordinated to ensure the researcher's account reflects the right amount.
+</Accordion>
+
+<Accordion title="Can I award a bounty on a duplicate report?">
+  Standard **Duplicate** reports are typically not rewarded. However, if you close a report as **Good quality duplicate**, you can use the bonus field to make a discretionary payment acknowledging the researcher's quality work without implying you are paying a full bounty for a duplicate finding.
+</Accordion>
+
+<Accordion title="Does awarding a bounty automatically change the report status?">
+  No. Awarding a bounty and changing the report status are independent actions. You can award a bounty while the report is in **Accepted** status and close it as **Resolved** later, or you can close it first and then award the bounty. The order is up to your programme's internal workflow.
+</Accordion>

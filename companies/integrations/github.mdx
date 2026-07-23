@@ -1,0 +1,108 @@
+---
+title: "Connect Hackrate to GitHub for Issue and Advisory Tracking"
+sidebarTitle: "GitHub"
+description: "Install the Hackrate GitHub App on your repositories and create issues or security advisories directly from reports without leaving the platform."
+---
+
+The GitHub integration bridges your Hackrate program and your engineering workflow. Once connected, you can turn any triaged report into a GitHub issue — with a title, description, labels, and a link back to the Hackrate report — with one click from the report management page. For vulnerability disclosures that require coordinated remediation, you can also draft a GitHub Security Advisory directly from a report. The integration keeps the two systems in sync by tracking the last-known state of every issue it creates.
+
+## How the Integration Works
+
+Hackrate connects to GitHub through a GitHub App installed on your organization's or user's GitHub account. The App grants Hackrate the ability to read your repository list and create issues or advisories on your behalf. The connection is stored per-program, so if you run multiple programs, each one can be linked to the same GitHub App installation.
+
+All authentication uses GitHub's official OAuth and App flows — Hackrate never stores your GitHub credentials.
+
+## Installing the GitHub App
+
+<Steps>
+  <Step title="Open Program Settings">
+    Navigate to your program in Hackrate and open **Settings**. You need a SuperAdmin or StandardAdmin role on the program to connect integrations.
+  </Step>
+  <Step title="Click Connect GitHub">
+    In the **Integrations** section, find the GitHub card and click **Connect GitHub**. Hackrate will redirect you to GitHub to authorize the App installation.
+  </Step>
+  <Step title="Authorize on GitHub">
+    On the GitHub authorization page, choose whether to install the App on all repositories or only on selected ones. Hackrate recommends selecting only the repositories where you track security work — this follows the principle of least privilege.
+  </Step>
+  <Step title="Complete the callback">
+    GitHub redirects you back to Hackrate automatically. The system records your installation and syncs the list of repositories you granted access to. You land back on the program settings page with the GitHub integration shown as **Connected**.
+  </Step>
+</Steps>
+
+<Note>
+  If you have already installed the Hackrate GitHub App for another program in the same organization, the new program will share the same installation. You do not need to go through the GitHub authorization flow again — simply connect the program in its settings and select from the already-synced repository list.
+</Note>
+
+## Creating a GitHub Issue from a Report
+
+Once the integration is connected, a **Create GitHub Issue** action appears in the report management view for every report in your program.
+
+<Steps>
+  <Step title="Open the report">
+    Navigate to **Reports → Manage** and open the report you want to track in GitHub.
+  </Step>
+  <Step title="Click Create GitHub Issue">
+    Find the GitHub Issues section in the report management sidebar or action panel and click **Create Issue**.
+  </Step>
+  <Step title="Fill in the issue details">
+    A form appears with the following fields:
+    - **Repository** — select from the repositories synced from your GitHub App installation
+    - **Title** — defaults to the report title; edit as needed
+    - **Body** — the issue description; you can include a summary of the vulnerability and a reference to the Hackrate report ID
+    - **Labels** — optionally add labels such as `security`, `bug`, or a severity label
+  </Step>
+  <Step title="Submit">
+    Click **Create**. Hackrate calls the GitHub API, creates the issue, and stores a link record containing the repository name, issue number, direct issue URL, and current issue state. This link is displayed on the report page so anyone managing the report can jump to GitHub in one click.
+  </Step>
+</Steps>
+
+<Tip>
+  Use GitHub labels that match your team's severity taxonomy (e.g., `sev:critical`, `sev:high`) so the issue appears correctly in your engineering board filters as soon as it is created.
+</Tip>
+
+## Creating a GitHub Security Advisory
+
+For vulnerabilities that require a CVE or a coordinated public disclosure, Hackrate can create a **GitHub Security Advisory** (GHSA) directly from the report management page, in addition to a regular issue.
+
+<Steps>
+  <Step title="Open the report management page">
+    Find the report you want to disclose and open its management view.
+  </Step>
+  <Step title="Use the Security Advisory action">
+    In the GitHub integration section, choose **Create Security Advisory** instead of **Create Issue**. Complete the advisory form, including the ecosystem and affected package details required by GitHub.
+  </Step>
+  <Step title="Review on GitHub">
+    Hackrate creates a draft advisory in your chosen repository's **Security** tab. Your engineering team can refine the advisory, request a CVE, and publish it when the vulnerability is fully resolved.
+  </Step>
+</Steps>
+
+## Synced Data
+
+Hackrate tracks the following fields for every issue it creates:
+
+| Field | Description |
+|---|---|
+| Repository | Full name of the repository (e.g., `acme-corp/security-tracker`) |
+| Issue number | The GitHub issue number |
+| Issue URL | Direct link to the issue on GitHub |
+| Last known state | The state of the issue the last time Hackrate synced with GitHub (`open` or `closed`) |
+
+The state is updated automatically via GitHub webhooks whenever the issue is opened, closed, or reopened.
+
+## Troubleshooting
+
+<Accordion title="The GitHub integration shows as disconnected after I install the App">
+  This can happen if the OAuth callback did not complete successfully. Try reconnecting from program settings. If the problem persists, check whether any browser extensions or firewalls blocked the GitHub redirect back to Hackrate.
+</Accordion>
+
+<Accordion title="No repositories appear in the issue creation form">
+  Hackrate only shows repositories that were explicitly granted access during the App installation. Go to your GitHub App installation settings (GitHub → Settings → Applications → Installed GitHub Apps) and ensure the Hackrate App has access to the repositories you expect. Then return to Hackrate program settings and click **Sync Repositories** to refresh the list.
+</Accordion>
+
+<Accordion title="The installation was uninstalled from GitHub">
+  If the Hackrate GitHub App is removed from your GitHub account, the integration will stop working. New issues cannot be created and webhook syncs will fail. To restore the integration, go to program settings and click **Connect GitHub** to go through the installation flow again. Previously created issue links remain stored in Hackrate but will no longer receive state updates.
+</Accordion>
+
+<Warning>
+  Only SuperAdmins and StandardAdmins can create GitHub issues and advisories from reports. Read-Only and Analytics users will not see these actions in the report management view.
+</Warning>

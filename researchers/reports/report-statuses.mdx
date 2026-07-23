@@ -1,0 +1,214 @@
+---
+title: "Understanding Every Report Status on Hackrate Platform"
+sidebarTitle: "Report Statuses"
+description: "A complete reference of all 14 report statuses on Hackrate — what each means for you as a researcher, what action to take, and when bounties are awarded."
+---
+
+Every report you submit on Hackrate moves through a defined set of statuses that reflect where it is in the triage and remediation lifecycle. Knowing what each status means — and what you should or should not do at each stage — helps you manage your pipeline effectively, respond to triagers promptly, and understand when to expect a bounty decision.
+
+You can see the status of all your reports at any time by navigating to **My Reports** from the main navigation. The table shows each report's ID, title, program, creation date, last activity date, status, and severity. You can sort by any column and filter by status or program.
+
+---
+
+## Status overview
+
+Statuses fall into two categories:
+
+- **Open** — the report is active and still being worked on by you and/or the triage team
+- **Closed** — the report has reached a terminal state; no further triage action is expected
+
+<Note>
+  You can always add evidence or comments to an open report. Once a report is closed, normal editing is no longer available, but you can still use the comment thread to communicate with the triage team if you have questions.
+</Note>
+
+---
+
+## Open statuses
+
+These statuses indicate your report is in an active state. Pay close attention to them — especially **Needs More Info**, which requires a response from you.
+
+<CardGroup cols={1}>
+  <Card title="Pre-submission" icon="pen-to-square">
+    **Your report was saved but not yet formally submitted.**
+
+    This status appears when a report has been created but not completed. If you see this status, it means the report did not go through the full submission process. Return to the report and complete all required fields, then submit it properly so the triage team can review it.
+  </Card>
+
+  <Card title="New" icon="inbox">
+    **Your report was submitted successfully and is awaiting triage.**
+
+    This is the first active status after a successful submission. The company's triage team has been notified and will begin reviewing your report. No action is required from you at this point — the ball is in the triage team's court.
+
+    Depending on program volume, initial triage can take anywhere from a few days to a couple of weeks. Be patient and avoid sending follow-up messages demanding a faster response.
+  </Card>
+
+  <Card title="New – To Review" icon="clock">
+    **Your report came in via an embedded report form and is pending initial assignment.**
+
+    This status is specific to reports submitted through a program's embedded form rather than the standard Hackrate platform. It functions similarly to **New** — the report is awaiting initial review and assignment to a triager. No action is required from you.
+  </Card>
+
+  <Card title="Accepted" icon="circle-check">
+    **The company confirmed your finding is valid and is actively working on a fix.**
+
+    Great news — your report has been triaged, the vulnerability has been verified, and the program team considers it a real security issue. The team is now working on remediation. You may receive updates as the fix progresses.
+
+    A bounty decision is typically made before or when the status moves to **Resolved**. In some programs, a bounty may be awarded while the report is still in Accepted status.
+  </Card>
+
+  <Card title="Needs More Info" icon="circle-exclamation" color="#ffc107">
+    **The triage team needs additional details from you to continue their review.**
+
+    This is the most action-critical open status. Check the **Timeline** (comment thread) on your report immediately — the triager has left a specific question or request. Common requests include:
+
+    - Clarification on reproduction steps
+    - Additional evidence (different browser, authenticated session, specific account type)
+    - Confirmation that the issue still exists on the latest version
+    - Explanation of the attack scenario or impact
+
+    **Respond as soon as possible.** Reports left in Needs More Info without a response from you may eventually be closed as Not Accepted (Invalid) or Not Accepted (Self-Closed). A timely, detailed response keeps the triage process moving and shows professionalism.
+  </Card>
+</CardGroup>
+
+---
+
+## Closed statuses
+
+Closed statuses represent the final outcome of a report. Understanding the distinction between them helps you learn from each submission and improve future reports.
+
+<Tabs>
+  <Tab title="Positive / Neutral outcomes">
+    <Card title="Resolved" icon="circle-check" color="#198754">
+      **The vulnerability has been fixed by the company.**
+
+      This is the ideal outcome for a security finding. The program team has patched or mitigated the vulnerability you reported. If a bounty is applicable for this finding, it is typically awarded when the report reaches Resolved status (or sometimes when it first reaches Accepted). Check the **Bounty** field on your report detail page to see if a payment has been recorded.
+    </Card>
+
+    <Card title="Accepted Risk" icon="shield" color="#6c757d">
+      **The company is aware of the vulnerability but has decided to accept the risk rather than fix it.**
+
+      This is a legitimate business decision. The company reviewed your finding, considered the effort and impact of remediation, and concluded that the risk is within their acceptable threshold. This does not mean your report was wrong — the finding was valid. A bounty may or may not be awarded depending on the program's policies. Check the comment thread for context on the decision.
+    </Card>
+
+    <Card title="Good Quality Duplicate" icon="medal" color="#6f42c1">
+      **Your report was a duplicate of an earlier submission, but it was recognized as high quality.**
+
+      Another researcher submitted the same vulnerability before you, so the first reporter is the primary recipient of any bounty. However, the triage team has flagged your report as well-written, well-evidenced, or otherwise noteworthy. You may receive recognition (such as acknowledgment in the hall of fame) even without a full bounty payout. This status is a signal that your reporting methodology is strong — keep it up.
+    </Card>
+
+    <Card title="Informative" icon="circle-info" color="#0d6efd">
+      **Your finding is noted but is not classified as an exploitable security risk.**
+
+      The triage team reviewed your report and determined that, while the behavior you observed may be unintended or suboptimal, it does not represent a real security vulnerability under their threat model. This might happen if the "vulnerability" has no realistic attack path, requires impossible attacker preconditions, or is a known and accepted design trade-off. No bounty is awarded for Informative findings. Consider reviewing the program's scope and out-of-scope descriptions before testing similar areas.
+    </Card>
+  </Tab>
+
+  <Tab title="Rejection outcomes">
+    <Card title="Duplicate" icon="copy" color="#fd7e14">
+      **This vulnerability was already reported by another researcher.**
+
+      A report with the same root cause and affected component was submitted before yours. Only the first reporter of a valid vulnerability is eligible for a bounty. The **Duplicate of** field on your report detail page may reference the original report ID.
+
+      If you believe the duplicate marking is incorrect — for example, your report covers a different attack path or a different affected component — leave a comment explaining the distinction and ask the triage team to reconsider.
+    </Card>
+
+    <Card title="Not Accepted (Invalid)" icon="circle-xmark" color="#dc3545">
+      **The report does not demonstrate a real vulnerability.**
+
+      The triage team reviewed your submission and could not reproduce the issue, or determined the behavior is intentional and not a security concern. Check the comment thread for a specific explanation. Common reasons include:
+
+      - Steps could not be reproduced as written
+      - The behavior is a known and accepted design decision
+      - The reported issue requires attacker prerequisites that are equivalent to the damage (e.g., already having admin access)
+      - The finding is theoretical with no demonstrated exploit path
+
+      Review the feedback, improve your methodology, and try again on a future finding.
+    </Card>
+
+    <Card title="Not Accepted (Spam)" icon="ban" color="#dc3545">
+      **The report was low quality, automated, or did not follow program rules.**
+
+      This outcome is reserved for reports that show clear signs of automated scanning output, copy-pasted CVE descriptions without program-specific verification, or submissions that disregard the program's guidelines. To avoid this outcome, always test manually, verify findings in the specific program context, and read the program rules before submitting.
+    </Card>
+
+    <Card title="Not Accepted (Out of Scope)" icon="location-crosshairs" color="#dc3545">
+      **The vulnerability was in an asset not covered by the program.**
+
+      The target you reported against is not listed as an in-scope asset, or the asset type is explicitly excluded in the program's scope table. Always verify scope before testing. If you believe the target should be in scope, you can reach out to the program team, but do not resubmit without clarification.
+    </Card>
+
+    <Card title="Not Accepted (Self-Closed)" icon="right-from-bracket" color="#6c757d">
+      **The report was closed at your own request, or was closed without a resolution after inactivity.**
+
+      You can self-close a report that is in **Pre-submission**, **New**, or **New – To Review** status from the Actions section of the report detail page. This is useful if you realize you submitted a report in error, found a duplicate yourself, or no longer want to pursue the finding. Reports can also be moved to this status after extended periods without a researcher response to a Needs More Info request.
+    </Card>
+  </Tab>
+</Tabs>
+
+---
+
+## Full status reference table
+
+| Status | Type | What it means for you |
+|---|---|---|
+| Pre-submission | Open | Draft saved — complete and resubmit |
+| New | Open | Submitted, awaiting triage — no action needed |
+| Accepted | Open | Finding confirmed valid — fix in progress |
+| Needs More Info | Open | **Respond in the comment thread promptly** |
+| New – To Review | Open | Embedded form submission awaiting assignment |
+| Resolved | Closed | Vulnerability fixed; bounty typically awarded here |
+| Informative | Closed | Noted but not a security risk; no bounty |
+| Duplicate | Closed | Already reported; no bounty for you |
+| Good Quality Duplicate | Closed | Duplicate but recognized for quality; possible recognition |
+| Not Accepted (Invalid) | Closed | Could not verify; no bounty |
+| Not Accepted (Spam) | Closed | Low quality or violated rules; no bounty |
+| Not Accepted (Out of Scope) | Closed | Asset not covered by program; no bounty |
+| Not Accepted (Self-Closed) | Closed | Closed without resolution |
+| Accepted Risk | Closed | Valid but company chose not to fix it |
+
+---
+
+## Bounty timing
+
+Bounties are awarded by the program team and are not automatic. Here is the general timing:
+
+- **Accepted → Resolved:** Most bounties are paid when the status moves from Accepted to Resolved, confirming the fix is in place.
+- **Accepted (while open):** Some programs award bounties as soon as the finding is confirmed valid, before the fix is deployed.
+- **Accepted Risk:** The program may choose to award a bounty even though the vulnerability will not be fixed, depending on its policies.
+- **Duplicate:** Only the first reporter receives the bounty. If you were marked as **Good Quality Duplicate**, you may receive partial recognition or acknowledgment but not the primary reward.
+- **All other closed statuses:** No bounty is awarded.
+
+<Tip>
+  Check the program's **Rewards** table for details on when and how bounties are paid, as policies differ between programs.
+</Tip>
+
+---
+
+## What to do — and what not to do
+
+<CardGroup cols={2}>
+  <Card title="Do: Respond promptly to Needs More Info" icon="reply">
+    This is the most important action you can take. Read the triager's request carefully, gather the requested evidence or clarification, and respond clearly in the comment thread. Fast, complete responses are the single biggest factor in keeping a report on track.
+  </Card>
+  <Card title="Do: Add evidence at any time while open" icon="paperclip">
+    If you find additional proof that strengthens your report, upload it via the **Upload new evidence** panel. More evidence is almost always better.
+  </Card>
+  <Card title="Don't: Spam the triage team" icon="bell-slash">
+    Sending repeated comments asking for a status update does not speed up the review process and reflects poorly on you as a researcher. Allow the program's stated response time before following up once.
+  </Card>
+  <Card title="Don't: Publicly disclose open reports" icon="lock">
+    Reports with Open status must not be shared publicly. The platform displays a reminder of this on every open report. Public disclosure before the vulnerability is resolved can harm users and result in your removal from the program.
+  </Card>
+</CardGroup>
+
+---
+
+## Tracking your reports
+
+Your **My Reports** inbox shows all the reports you have submitted, across all programs. You can:
+
+- **Sort** by ID, title, program, creation date, last activity, status, or severity
+- **Search** by keyword to find a specific report quickly
+- **Click any report** to open the full detail view, including the comment thread, evidence files, and current status
+
+The **Last Activity** column shows the timestamp of the most recent comment on a report — useful for spotting reports that have had recent triage activity and may need your attention.

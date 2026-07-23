@@ -1,0 +1,184 @@
+---
+title: "Severity Levels and CVSS Scoring Guide for Hackrate"
+sidebarTitle: "Severity & CVSS"
+description: "Understand how Hackrate's five severity tiers work, how to use the built-in CVSS calculator, and how your rating affects bounty amounts."
+---
+
+Severity is one of the most important decisions you make when filing a report. It shapes how quickly the triage team prioritizes your submission, determines the bounty tier your finding falls into, and signals to the company the urgency of remediation. Getting severity right — not too high, not too low — reflects well on your judgment and builds long-term trust with program owners.
+
+This page explains each severity level, how the CVSS calculator works, how the two relate to each other, and what triagers look at when they reassess your rating.
+
+---
+
+## Severity levels
+
+Hackrate uses five severity levels. Four of them are available to self-assign when you submit a report; the fifth is reserved for exceptional cases.
+
+<CardGroup cols={1}>
+  <Card title="Low" icon="circle" iconType="solid" color="#6c757d">
+    Minor issues with limited real-world impact. Often requires unusual conditions or significant attacker access that is already equivalent to the damage caused. Examples: open redirects, low-impact CSRF affecting only the current user's own data, missing security headers with no exploitable consequence.
+  </Card>
+  <Card title="Medium" icon="circle" iconType="solid" color="#0d6efd">
+    Moderate risk. The vulnerability is real and exploitable, but requires specific conditions such as user interaction, a particular account type, or a non-default configuration. Examples: reflected XSS requiring a crafted link, CSRF with meaningful but limited impact on the victim's account.
+  </Card>
+  <Card title="High" icon="circle" iconType="solid" color="#ffc107">
+    Significant risk that can lead to data exposure, privilege escalation, or account takeover. Authentication bypass on non-critical but sensitive systems, stored XSS that fires without user interaction, and access to other users' data are typical High findings.
+  </Card>
+  <Card title="Critical" icon="circle" iconType="solid" color="#dc3545">
+    Severe vulnerability that can lead to full system compromise, mass data leakage, or complete loss of confidentiality, integrity, or availability for the affected system. Includes SQL injection with read/write access, remote code execution, full database dumps, and access to all customer personal data.
+  </Card>
+  <Card title="Exceptional" icon="star" iconType="solid" color="#6f42c1">
+    Reserved for extraordinary findings — typically RCE or equivalent impact on core Hackrate infrastructure, or a chained exploit with catastrophic cross-tenant consequences. **Do not self-assign Exceptional.** This level is assigned by the program team after review.
+  </Card>
+</CardGroup>
+
+### Real-world examples by severity
+
+<Accordion title="Critical examples">
+  - Remote code execution on the application server
+  - SQL injection with full database read and write access
+  - Access to all customer personal details (PII dump)
+  - Authentication bypass granting admin access without credentials
+  - Full takeover of any user account without interaction
+</Accordion>
+
+<Accordion title="High examples">
+  - Stored XSS that executes without any victim interaction
+  - Privilege escalation from a regular user to an admin role
+  - Insecure direct object reference exposing another user's sensitive data
+  - Authentication bypass on important but non-core systems
+</Accordion>
+
+<Accordion title="Medium examples">
+  - Reflected XSS requiring a victim to click a crafted link
+  - CSRF that changes security settings (email, password) with significant but scoped impact
+  - Server-side request forgery (SSRF) with limited internal access
+  - Broken access control that exposes partial user data
+</Accordion>
+
+<Accordion title="Low examples">
+  - Open redirect to an external domain (no data exposure)
+  - CSRF affecting low-value, easily reversible actions
+  - Missing `Secure` or `HttpOnly` cookie flags without a practical attack path
+  - Clickjacking on pages that do not perform sensitive actions
+</Accordion>
+
+---
+
+## What is CVSS and why does it matter?
+
+**CVSS (Common Vulnerability Scoring System)** is an industry-standard framework for rating the severity of security vulnerabilities. It produces a numeric score between 0.0 and 10.0 based on a set of defined metrics describing how a vulnerability is exploited and what the consequences are.
+
+Hackrate uses CVSS scores alongside severity labels to give the triage team a quantitative reference point. The CVSS vector string you generate is stored with your report and is visible to reviewers.
+
+### CVSS metrics overview
+
+<Tabs>
+  <Tab title="Base Score – Exploitability">
+    | Metric | What it measures |
+    |---|---|
+    | **Attack Vector (AV)** | How the attacker reaches the vulnerable component: Network, Adjacent, Local, or Physical |
+    | **Attack Complexity (AC)** | Whether special conditions beyond the attacker's control are required: Low or High |
+    | **Privileges Required (PR)** | What level of privilege the attacker needs: None, Low, or High |
+    | **User Interaction (UI)** | Whether a human victim must take an action: None or Required |
+  </Tab>
+  <Tab title="Base Score – Impact">
+    | Metric | What it measures |
+    |---|---|
+    | **Scope (S)** | Whether the vulnerability can affect components beyond the vulnerable one: Unchanged or Changed |
+    | **Confidentiality (C)** | Impact on data secrecy: None, Low, or High |
+    | **Integrity (I)** | Impact on data trustworthiness: None, Low, or High |
+    | **Availability (A)** | Impact on system availability: None, Low, or High |
+  </Tab>
+</Tabs>
+
+---
+
+## Using the built-in CVSS calculator
+
+The report submission form includes a **CVSS calculator panel** directly on the page — you do not need any external tools. To use it:
+
+<Steps>
+  <Step title="Locate the CVSS Calculator section">
+    On the report form, find the **CVSS Calculator** field below the Target selector. The interactive calculator is embedded inline.
+  </Step>
+  <Step title="Set each metric">
+    Click through each metric group and select the value that best describes your finding. The calculator updates the score and vector string in real time as you make selections.
+  </Step>
+  <Step title="Review the resulting score">
+    Check the overall numeric score before moving on. Use the guidance below to verify it aligns with the severity level you intend to select.
+  </Step>
+  <Step title="Select a matching severity">
+    Choose the Severity dropdown value that corresponds to your CVSS score range. The score is automatically saved to your report — you do not need to copy it anywhere.
+  </Step>
+</Steps>
+
+<Note>
+  The CVSS vector string and numeric score are saved as part of your report. Triagers use this data when reviewing your severity self-assessment, so take time to set each metric thoughtfully.
+</Note>
+
+---
+
+## Mapping CVSS scores to severity
+
+Use this table as a guide when deciding which severity label to select. Note that CVSS score ranges are guidelines, not strict rules — the actual business impact of a finding may cause a triager to adjust severity up or down.
+
+| Severity | Typical CVSS range | Notes |
+|---|---|---|
+| **Low** | 0.1 – 3.9 | Limited exploitability or minimal impact |
+| **Medium** | 4.0 – 6.9 | Exploitable but requires conditions; partial impact |
+| **High** | 7.0 – 8.9 | Network-reachable, low complexity, significant impact |
+| **Critical** | 9.0 – 10.0 | High impact across C/I/A with low barriers to exploitation |
+| **Exceptional** | Typically 9.5+ | Assigned by program team only |
+
+---
+
+## How severity affects bounty amounts
+
+Bounty amounts on Hackrate are impact-based and structured around both severity and the tier of the target you reported against. Higher-tier targets that form the core of the program's product command higher rewards.
+
+The general bounty priority order is:
+
+1. **Tier 1 Critical** — highest possible reward
+2. **Tier 1 High**
+3. **Tier 2 Critical**
+4. **Tier 1 Medium**
+5. **Tier 2 High**
+6. …and so on down the tier and severity matrix
+
+<Note>
+  Bounty amounts are set by the program owner and vary between programs. Check the program's **Rewards** table for the exact payout structure before testing.
+</Note>
+
+---
+
+## How triage reassesses your severity
+
+After you submit, the company's triage team reviews your CVSS vector and severity label independently. Severity adjustments during triage are normal and expected — they are not automatically a negative signal about your work.
+
+Common reasons for a downgrade:
+- The vulnerability requires significantly more attacker access than indicated (e.g., PR: None set when admin credentials are actually required)
+- The impact is more limited in the program's specific architecture than a generic CVSS score would suggest
+- The finding is already mitigated by a compensating control not visible from the outside
+
+Common reasons for an upgrade:
+- The triage team identifies a more severe exploit path than you described
+- The finding has broader blast radius than the initial assessment suggested
+
+<Warning>
+  Intentionally inflating CVSS scores (e.g., setting Attack Vector to Network and Privileges Required to None for a vulnerability that actually requires local access and admin rights) is considered poor practice and can damage your reputation with the program team.
+</Warning>
+
+---
+
+## Quick self-assessment checklist
+
+Before finalizing your severity selection, ask yourself:
+
+- Can this be exploited remotely over the network, or does it require local access?
+- Does exploitation require any special privileges or user interaction?
+- What is the worst realistic outcome if someone exploited this right now?
+- Does the impact affect a single user, a subset of users, or all users?
+- Is there a compensating control (rate limiting, WAF, MFA) that reduces real-world exploitability?
+
+Answering these honestly will guide you to a defensible severity rating that stands up to triage scrutiny.
