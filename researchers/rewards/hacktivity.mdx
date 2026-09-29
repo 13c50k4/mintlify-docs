@@ -31,6 +31,8 @@ The decision to publish a report to Hacktivity rests entirely with the company, 
 
 ## What each Hacktivity entry shows
 
+Published entries are also available through the public, unauthenticated API. `GET /api/v1/hacktivity` lists published entries, `GET /api/v1/hacktivity/{id}` returns one entry, and `GET /api/v1/hacktivity/organizations/{organization}` filters by organization ID or alias. The API does not return unpublished submissions.
+
 The feed lists all published entries in reverse-chronological order. Each card on the feed displays:
 
 | Field | Description |

@@ -92,8 +92,8 @@ The embedded form is only available on active, non-paused VDP programs that have
   </Step>
   <Step title="Get the embed URL">
     The form is served at the following URL, where `{alias}` is your program's alias:
-    ```
-    https://app.hackrate.com/Reports/EmbeddedReportForm?program={alias}
+    ```text
+    https://www.hckrt.com/Reports/EmbeddedReportForm?program={alias}
     ```
     Replace `{alias}` with your actual program alias.
   </Step>
@@ -101,14 +101,14 @@ The embedded form is only available on active, non-paused VDP programs that have
     Embed the form on your security disclosure page using a standard HTML iframe:
     ```html
     <iframe
-      src="https://app.hackrate.com/Reports/EmbeddedReportForm?program=your-program-alias"
+      src="https://www.hckrt.com/Reports/EmbeddedReportForm?program=your-program-alias"
       width="100%"
       height="800"
       frameborder="0"
       title="Vulnerability Disclosure Report Form">
     </iframe>
     ```
-    Adjust the `height` value to suit your page layout.
+    Adjust the `height` value to suit your page layout. The **Embed code** dialog also provides an auto-resizing version if you want the iframe height to follow the form content.
   </Step>
   <Step title="Test the submission">
     Submit a test report through the embedded form on your website and confirm it appears in your Hackrate inbox. Check that your notification settings fire correctly for embedded submissions.

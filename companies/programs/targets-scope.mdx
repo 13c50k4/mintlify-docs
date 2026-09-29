@@ -21,6 +21,8 @@ Every target has the following properties:
 | **Bounty eligible** | Whether valid findings on this target qualify for monetary rewards |
 | **Active** | Whether the target is currently visible to researchers. Inactive targets are hidden from the program's scope page. |
 | **In / Out of scope** | Whether the target is something researchers are authorized to test, or an asset they must explicitly avoid |
+| **Maximum severity** | The highest severity accepted for findings on this target |
+| **Business units** | The teams whose administrators can access reports for this target; no assignment means all units |
 
 ## In scope vs. out of scope
 
@@ -119,7 +121,9 @@ Your product changes over time — new features are shipped, old services are de
 
 ## Adding targets to a program
 
-Targets are managed from the **Scope** section of your program management page. Contact the Hackrate team to add new targets or modify existing ones — this ensures the change is reviewed and that researchers are notified appropriately when scope expands.
+Open your program's **Manage** page and go to **Scope**. A program **SuperAdmin** can click **Add target**, or use the action buttons beside a target to edit or disable it. The table shows status, scope, type, tier, business units, maximum severity, and bounty eligibility. Save each change from its form.
+
+Only a program **SuperAdmin** sees the target management actions. Other program administrators can review the scope table.
 
 <Note>
   Adding a significant new target to an active program is treated as a scope expansion. It is good practice to post an **Announcement** to the program when you expand scope so that researchers are aware of the new testing opportunity.
@@ -127,7 +131,7 @@ Targets are managed from the **Scope** section of your program management page. 
 
 ## Deactivating targets
 
-If you need to remove an asset from scope — for example, because it has been retired or because you need to take it offline for maintenance — you can **deactivate** the target rather than deleting it. Deactivated targets are hidden from the public scope table and from researcher view, but they remain in your program's history along with any reports associated with them.
+If you need to remove an asset from scope — for example, because it has been retired or because you need to take it offline for maintenance — click **Disable** beside the target. Disabled targets remain in historical reports and can be enabled again. Use **Enable** when testing can resume.
 
 <Warning>
   Deactivating a target does not automatically notify researchers. If the change is time-sensitive (for example, you are taking a production system offline for maintenance and need to prevent testing immediately), post an announcement or send a direct notification to enrolled researchers.
@@ -136,6 +140,8 @@ If you need to remove an asset from scope — for example, because it has been r
 ## Providing test credentials
 
 Many web applications and APIs require authenticated access to test properly. Hackrate's **credential management** system lets you securely provision test accounts to researchers.
+
+Open **Credential dashboard** from the program management page to review available credentials and set the required number of credential sets for each target. You can also download a sample CSV and upload credentials in bulk.
 
 ### How credentials work
 

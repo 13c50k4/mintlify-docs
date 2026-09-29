@@ -31,7 +31,9 @@
               "companies/programs/bug-bounty",
               "companies/programs/vulnerability-disclosure",
               "companies/programs/ptaas",
-              "companies/programs/targets-scope"
+              "companies/programs/targets-scope",
+              "companies/programs/researcher-requirements",
+              "companies/programs/known-issues"
             ]
           },
           {
@@ -40,7 +42,9 @@
               "companies/reports/overview",
               "companies/reports/report-statuses",
               "companies/reports/triaging",
-              "companies/reports/bounty-rewards"
+              "companies/reports/bounty-rewards",
+              "companies/reports/bounty-ledger",
+              "companies/reports/analytics"
             ]
           },
           {
@@ -56,11 +60,17 @@
             "pages": [
               "companies/integrations/github",
               "companies/integrations/jira",
+              "companies/integrations/linear",
               "companies/integrations/slack",
-              "companies/integrations/webhooks"
+              "companies/integrations/webhooks",
+              "companies/integrations/external-api"
             ]
           }
         ]
+      },
+      {
+        "tab": "API reference",
+        "openapi": "/openapi/external-admin-v1.json"
       },
       {
         "tab": "For Researchers",

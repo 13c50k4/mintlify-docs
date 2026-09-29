@@ -1,0 +1,154 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Hackrate External Admin API",
+    "version": "v1",
+    "description": "Program discovery and report triage for users with assigned Hackrate roles. Tokens are created in Profile Settings > External API."
+  },
+  "servers": [{ "url": "https://www.hckrt.com/api/v1/admin" }],
+  "security": [{ "personalToken": [] }],
+  "components": {
+    "parameters": {
+      "reportId": { "name": "id", "in": "path", "required": true, "schema": { "type": "integer" } }
+    },
+    "securitySchemes": {
+      "personalToken": { "type": "http", "scheme": "bearer", "bearerFormat": "hckrt_pat token" }
+    },
+    "schemas": {
+      "ProblemDetails": { "type": "object", "properties": { "type": { "type": "string" }, "title": { "type": "string" }, "status": { "type": "integer" }, "detail": { "type": "string" } } },
+      "Program": { "type": "object", "properties": { "id": { "type": "integer" }, "alias": { "type": "string" }, "name": { "type": "string" }, "description": { "type": "string" }, "currency": { "type": "string" }, "isActive": { "type": "boolean" }, "isPaused": { "type": "boolean" }, "isPublished": { "type": "boolean" } } },
+      "Target": { "type": "object", "properties": { "id": { "type": "integer" }, "name": { "type": "string" }, "description": { "type": "string" }, "type": { "type": "string" }, "maximumSeverity": { "type": "string" }, "tier": { "type": "integer" }, "isOutOfScope": { "type": "boolean" }, "isBountyEligible": { "type": "boolean" }, "isActive": { "type": "boolean" } } },
+      "Person": { "type": "object", "properties": { "id": { "type": "string" }, "nickname": { "type": "string" }, "email": { "type": "string", "format": "email" } } },
+      "NamedIntegerValue": { "type": "object", "properties": { "id": { "type": "integer" }, "name": { "type": "string" } } },
+      "ReportSummary": { "type": "object", "properties": { "id": { "type": "integer" }, "name": { "type": "string" }, "createdAt": { "type": "string", "format": "date-time" }, "lastActivityAt": { "type": "string", "format": "date-time", "description": "Newest report timeline comment timestamp, or createdAt when the report has no comments." }, "programId": { "type": "integer" }, "target": { "$ref": "#/components/schemas/NamedIntegerValue" }, "status": { "$ref": "#/components/schemas/NamedIntegerValue" }, "severity": { "$ref": "#/components/schemas/NamedIntegerValue" }, "reporter": { "$ref": "#/components/schemas/Person" }, "assignedTo": { "allOf": [{ "$ref": "#/components/schemas/Person" }], "nullable": true } } },
+      "Report": { "allOf": [{ "$ref": "#/components/schemas/ReportSummary" }, { "type": "object", "properties": { "summary": { "type": "string" }, "description": { "type": "string" }, "impact": { "type": "string" }, "vulnerabilityTypeId": { "type": "integer", "nullable": true }, "cweTypeId": { "type": "integer", "nullable": true }, "cvss": { "type": "string", "nullable": true }, "cve": { "type": "string", "nullable": true }, "bounty": { "type": "integer" }, "bonus": { "type": "integer" }, "duplicateOf": { "type": "integer" }, "effectiveRole": { "type": "string" } } }] },
+      "ReportPage": { "type": "object", "properties": { "items": { "type": "array", "items": { "$ref": "#/components/schemas/ReportSummary" } }, "nextCursor": { "type": "string", "nullable": true, "description": "Opaque base64url seek cursor. Pass it unchanged with the same filters and sort." } } },
+      "ReportActivity": { "type": "object", "description": "A comment or system entry from the Report Management timeline. Legacy text is not classified into inferred event types.", "properties": { "id": { "type": "integer", "format": "int64" }, "message": { "type": "string", "description": "Markdown timeline message." }, "createdAt": { "type": "string", "format": "date-time" }, "isInternal": { "type": "boolean" }, "hasEvidence": { "type": "boolean", "description": "True when the timeline comment has PicFromAzure evidence." }, "actor": { "allOf": [{ "$ref": "#/components/schemas/Person" }], "nullable": true } } },
+      "ActivityPage": { "type": "object", "properties": { "items": { "type": "array", "items": { "$ref": "#/components/schemas/ReportActivity" } }, "nextCursor": { "type": "string", "nullable": true } } },
+      "CommentInput": { "type": "object", "required": ["description"], "properties": { "description": { "type": "string" }, "isInternal": { "type": "boolean" } } },
+      "AssignmentInput": { "type": "object", "properties": { "userId": { "type": "string", "nullable": true } } },
+      "ClassificationInput": { "type": "object", "required": ["severityId"], "properties": { "severityId": { "type": "integer" }, "vulnerabilityTypeId": { "type": "integer", "nullable": true }, "cweTypeId": { "type": "integer", "nullable": true }, "cvss": { "type": "string", "nullable": true } } },
+      "ReportPatch": { "type": "object", "properties": { "name": { "type": "string" }, "targetId": { "type": "integer" } } },
+      "TransitionInput": { "type": "object", "required": ["transition"], "properties": { "transition": { "type": "string", "enum": ["invalid", "spam", "out_of_scope", "needs_more_info", "triaged", "resolved", "accepted_risk", "new_to_review", "informative", "duplicate", "reopen"] }, "message": { "type": "string" }, "duplicateOfReportId": { "type": "integer" } } },
+      "AvailableTransition": { "type": "object", "properties": { "transition": { "type": "string", "enum": ["invalid", "spam", "out_of_scope", "needs_more_info", "triaged", "resolved", "accepted_risk", "new_to_review", "informative", "duplicate", "reopen"] }, "targetStatus": { "$ref": "#/components/schemas/NamedIntegerValue" }, "requiresMessage": { "type": "boolean" }, "requiresDuplicateOfReportId": { "type": "boolean" } } },
+      "ReportTransitions": { "type": "object", "properties": { "currentStatus": { "$ref": "#/components/schemas/NamedIntegerValue" }, "availableTransitions": { "type": "array", "items": { "$ref": "#/components/schemas/AvailableTransition" } } } },
+      "RewardInput": { "type": "object", "properties": { "bounty": { "type": "integer", "minimum": 0 }, "bonus": { "type": "integer", "minimum": 0 } } },
+      "KnownIssueInput": { "type": "object", "required": ["name", "targetId", "severityId", "summary", "description", "impact"], "properties": { "name": { "type": "string", "maxLength": 127 }, "targetId": { "type": "integer" }, "severityId": { "type": "integer" }, "summary": { "type": "string" }, "description": { "type": "string" }, "impact": { "type": "string" }, "cvss": { "type": "string", "nullable": true }, "cweTypeId": { "type": "integer", "nullable": true }, "vulnerabilityTypeId": { "type": "integer", "nullable": true } } },
+      "KnownIssue": { "type": "object", "properties": { "id": { "type": "integer" }, "programId": { "type": "integer" }, "targetId": { "type": "integer" }, "severityId": { "type": "integer" }, "name": { "type": "string" }, "createdAt": { "type": "string", "format": "date-time" }, "knownIssue": { "type": "boolean" } } },
+      "Evidence": { "type": "object", "properties": { "id": { "type": "string" }, "filename": { "type": "string" }, "size": { "type": "integer", "format": "int64" }, "mimeType": { "type": "string" }, "status": { "type": "string" } } }
+    },
+    "responses": {
+      "Unauthorized": { "description": "Missing, invalid, expired, or revoked token", "content": { "application/problem+json": { "schema": { "$ref": "#/components/schemas/ProblemDetails" } } } },
+      "Forbidden": { "description": "The role or token scope does not allow the operation", "content": { "application/problem+json": { "schema": { "$ref": "#/components/schemas/ProblemDetails" } } } },
+      "NotFound": { "description": "Resource not found or outside the token owner's access" },
+      "BadRequest": { "description": "Invalid filter, sort, range, limit, direction, or cursor", "content": { "application/problem+json": { "schema": { "$ref": "#/components/schemas/ProblemDetails" } } } },
+      "RateLimited": { "description": "Per-token limit of 120 requests per minute exceeded" }
+    }
+  },
+  "paths": {
+    "/programs": { "get": { "summary": "List accessible programs", "responses": { "200": { "description": "Programs", "content": { "application/json": { "schema": { "type": "array", "items": { "$ref": "#/components/schemas/Program" } } } } }, "401": { "$ref": "#/components/responses/Unauthorized" }, "403": { "$ref": "#/components/responses/Forbidden" } } } },
+    "/programs/{id}": { "get": { "summary": "Get an accessible program", "parameters": [{ "name": "id", "in": "path", "required": true, "schema": { "type": "integer" } }], "responses": { "200": { "description": "Program", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Program" } } } }, "404": { "$ref": "#/components/responses/NotFound" } } } },
+    "/programs/{id}/targets": { "get": { "summary": "List program scope targets", "parameters": [{ "name": "id", "in": "path", "required": true, "schema": { "type": "integer" } }], "responses": { "200": { "description": "Targets", "content": { "application/json": { "schema": { "type": "array", "items": { "$ref": "#/components/schemas/Target" } } } } }, "404": { "$ref": "#/components/responses/NotFound" } } } },
+    "/programs/{id}/known-issues": { "post": { "summary": "Create a known issue", "description": "Requires the known-issues:write scope and a SuperAdmin or StandardAdmin role for the program.", "parameters": [{ "name": "id", "in": "path", "required": true, "schema": { "type": "integer" } }], "requestBody": { "required": true, "content": { "application/json": { "schema": { "$ref": "#/components/schemas/KnownIssueInput" } } } }, "responses": { "201": { "description": "Known issue created", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/KnownIssue" } } } }, "400": { "description": "Invalid known issue fields" }, "403": { "$ref": "#/components/responses/Forbidden" }, "404": { "$ref": "#/components/responses/NotFound" } } } },
+    "/reports": { "get": { "summary": "Search accessible reports", "description": "Requires reports:read. Repeated values are ORed within one filter and different filters are ANDed. Up to 100 values are accepted per repeated filter. Sorting accepts at most three unique requested fields; report ID is added as a deterministic tie-breaker. New cursors are versioned opaque base64url values bound to the canonical filters and sort. Legacy createdAt:id cursors remain accepted only for the default -createdAt,-id ordering.", "parameters": [
+      { "name": "programId", "in": "query", "description": "Repeat to match any program ID.", "style": "form", "explode": true, "schema": { "type": "array", "maxItems": 100, "items": { "type": "integer" } } },
+      { "name": "statusId", "in": "query", "description": "Repeat to match any status ID.", "style": "form", "explode": true, "schema": { "type": "array", "maxItems": 100, "items": { "type": "integer" } } },
+      { "name": "severityId", "in": "query", "description": "Repeat to match any severity ID.", "style": "form", "explode": true, "schema": { "type": "array", "maxItems": 100, "items": { "type": "integer" } } },
+      { "name": "targetId", "in": "query", "description": "Repeat to match any target ID.", "style": "form", "explode": true, "schema": { "type": "array", "maxItems": 100, "items": { "type": "integer" } } },
+      { "name": "assignedToUserId", "in": "query", "description": "Repeat to match any assignee user ID. Cannot be combined with isAssigned=false.", "style": "form", "explode": true, "schema": { "type": "array", "maxItems": 100, "items": { "type": "string" } } },
+      { "name": "reporterUserId", "in": "query", "description": "Repeat to match any reporter user ID.", "style": "form", "explode": true, "schema": { "type": "array", "maxItems": 100, "items": { "type": "string" } } },
+      { "name": "isAssigned", "in": "query", "schema": { "type": "boolean", "nullable": true } },
+      { "name": "isKnownIssue", "in": "query", "schema": { "type": "boolean", "nullable": true } },
+      { "name": "isEmbeddedSubmission", "in": "query", "schema": { "type": "boolean", "nullable": true } },
+      { "name": "isDuplicate", "in": "query", "schema": { "type": "boolean", "nullable": true } },
+      { "name": "hasReward", "in": "query", "description": "Matches reports with a positive bounty or bonus.", "schema": { "type": "boolean", "nullable": true } },
+      { "name": "q", "in": "query", "description": "Trimmed keyword, up to 200 characters, searched across report ID, title, summary, description, impact, and CVE.", "schema": { "type": "string", "maxLength": 200 }, "example": "CVE-2026-1234" },
+      { "name": "createdFromUtc", "in": "query", "description": "Inclusive creation lower bound.", "schema": { "type": "string", "format": "date-time" } },
+      { "name": "createdToUtc", "in": "query", "description": "Inclusive creation upper bound.", "schema": { "type": "string", "format": "date-time" } },
+      { "name": "lastActivityFromUtc", "in": "query", "description": "Inclusive last-activity lower bound.", "schema": { "type": "string", "format": "date-time" } },
+      { "name": "lastActivityToUtc", "in": "query", "description": "Inclusive last-activity upper bound.", "schema": { "type": "string", "format": "date-time" } },
+      { "name": "sort", "in": "query", "description": "Comma-separated fields; prefix descending fields with -. Allowed: id, createdAt, lastActivityAt, severity, status, bounty, name. Default: -createdAt,-id.", "schema": { "type": "string", "default": "-createdAt,-id" }, "example": "-lastActivityAt,-severity" },
+      { "name": "cursor", "in": "query", "description": "Opaque cursor from nextCursor. It is rejected if reused with different filters or sorting.", "schema": { "type": "string" }, "example": "eyJWZXJzaW9uIjoyLC4uLn0" },
+      { "name": "limit", "in": "query", "schema": { "type": "integer", "default": 50, "minimum": 1, "maximum": 100 } }
+    ], "responses": { "200": { "description": "Stable cursor page of reports", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ReportPage" } } } }, "400": { "$ref": "#/components/responses/BadRequest" }, "403": { "$ref": "#/components/responses/Forbidden" }, "429": { "$ref": "#/components/responses/RateLimited" } } } },
+    "/reports/{id}": { "get": { "summary": "Get report details", "parameters": [{ "$ref": "#/components/parameters/reportId" }], "responses": { "200": { "description": "Report", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Report" } } } }, "404": { "$ref": "#/components/responses/NotFound" } } }, "patch": { "summary": "Update supported report fields", "parameters": [{ "$ref": "#/components/parameters/reportId" }], "requestBody": { "required": true, "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ReportPatch" } } } }, "responses": { "204": { "description": "Updated" }, "403": { "$ref": "#/components/responses/Forbidden" } } } },
+    "/reports/{id}/comments": { "get": { "summary": "List report comments", "parameters": [{ "$ref": "#/components/parameters/reportId" }], "responses": { "200": { "description": "Comments" } } }, "post": { "summary": "Add a report comment", "parameters": [{ "$ref": "#/components/parameters/reportId" }], "requestBody": { "required": true, "content": { "application/json": { "schema": { "$ref": "#/components/schemas/CommentInput" } } } }, "responses": { "201": { "description": "Created" } } } },
+    "/reports/{id}/activities": {
+      "get": {
+        "summary": "List the Report Management timeline",
+        "description": "Requires reports:read and uses the same report access rules as report details. Activities are existing comments and system comments; no legacy text classification is inferred.",
+        "parameters": [
+          { "$ref": "#/components/parameters/reportId" },
+          { "name": "direction", "in": "query", "description": "Ascending matches the management timeline.", "schema": { "type": "string", "enum": ["asc", "desc"], "default": "asc" } },
+          { "name": "cursor", "in": "query", "description": "Opaque cursor bound to this report and the selected direction.", "schema": { "type": "string" } },
+          { "name": "limit", "in": "query", "schema": { "type": "integer", "minimum": 1, "maximum": 100, "default": 50 } }
+        ],
+        "responses": {
+          "200": {
+            "description": "Cursor page of timeline activities",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ActivityPage" },
+                "examples": {
+                  "timeline": {
+                    "value": {
+                      "items": [{ "id": 845, "message": "Severity changed to **High**.", "createdAt": "2026-09-21T10:15:00Z", "isInternal": true, "hasEvidence": false, "actor": null }],
+                      "nextCursor": null
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "404": { "$ref": "#/components/responses/NotFound" },
+          "429": { "$ref": "#/components/responses/RateLimited" }
+        }
+      }
+    },
+    "/reports/{id}/assignment": { "post": { "summary": "Set or clear report assignment", "parameters": [{ "$ref": "#/components/parameters/reportId" }], "requestBody": { "required": true, "content": { "application/json": { "schema": { "$ref": "#/components/schemas/AssignmentInput" } } } }, "responses": { "204": { "description": "Updated" } } } },
+    "/reports/{id}/classification": { "post": { "summary": "Update report classification", "parameters": [{ "$ref": "#/components/parameters/reportId" }], "requestBody": { "required": true, "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ClassificationInput" } } } }, "responses": { "204": { "description": "Updated" } } } },
+    "/reports/{id}/transitions": {
+      "get": {
+        "summary": "List available report transitions",
+        "description": "Returns only transitions that the token owner can execute from the report's current status. Requires reports:triage and a StandardAdmin or SuperAdmin report role.",
+        "parameters": [{ "$ref": "#/components/parameters/reportId" }],
+        "responses": {
+          "200": {
+            "description": "Current status and executable transitions",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ReportTransitions" },
+                "examples": {
+                  "newReport": {
+                    "value": {
+                      "currentStatus": { "id": 1, "name": "New" },
+                      "availableTransitions": [
+                        { "transition": "triaged", "targetStatus": { "id": 3, "name": "Triaged" }, "requiresMessage": false, "requiresDuplicateOfReportId": false },
+                        { "transition": "duplicate", "targetStatus": { "id": 7, "name": "Duplicate" }, "requiresMessage": false, "requiresDuplicateOfReportId": true }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "404": { "$ref": "#/components/responses/NotFound" },
+          "429": { "$ref": "#/components/responses/RateLimited" }
+        }
+      },
+      "post": {
+        "summary": "Transition report status",
+        "description": "Requires reports:triage. Use GET on this resource to discover currently executable transitions.",
+        "parameters": [{ "$ref": "#/components/parameters/reportId" }],
+        "requestBody": { "required": true, "content": { "application/json": { "schema": { "$ref": "#/components/schemas/TransitionInput" } } } },
+        "responses": { "204": { "description": "Transitioned" }, "400": { "$ref": "#/components/responses/BadRequest" }, "403": { "$ref": "#/components/responses/Forbidden" }, "404": { "$ref": "#/components/responses/NotFound" }, "409": { "description": "Invalid source status or role" }, "429": { "$ref": "#/components/responses/RateLimited" } }
+      }
+    },
+    "/reports/{id}/rewards": { "post": { "summary": "Set bounty or bonus", "parameters": [{ "$ref": "#/components/parameters/reportId" }], "requestBody": { "required": true, "content": { "application/json": { "schema": { "$ref": "#/components/schemas/RewardInput" } } } }, "responses": { "204": { "description": "Updated" }, "409": { "description": "Status, budget, or duplicate-bounty constraint failed" } } } },
+    "/reports/{id}/evidence": { "get": { "summary": "List evidence metadata", "parameters": [{ "$ref": "#/components/parameters/reportId" }], "responses": { "200": { "description": "Evidence", "content": { "application/json": { "schema": { "type": "array", "items": { "$ref": "#/components/schemas/Evidence" } } } } } } } },
+    "/reports/{id}/evidence/{evidenceId}/download": { "post": { "summary": "Create a five-minute evidence download URL", "parameters": [{ "$ref": "#/components/parameters/reportId" }, { "name": "evidenceId", "in": "path", "required": true, "schema": { "type": "string" } }], "responses": { "200": { "description": "Short-lived download URL" }, "403": { "$ref": "#/components/responses/Forbidden" } } } }
+  }
+}

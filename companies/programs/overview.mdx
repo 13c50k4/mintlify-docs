@@ -25,10 +25,15 @@ When you create a program on Hackrate, you configure a set of fields that togeth
 | **Rewards enabled** | Whether valid reports are eligible for monetary rewards |
 | **Managed** | Whether Hackrate's team provides managed triage and researcher communication |
 | **Testing Period** | The allowed testing hours or windows that researchers must respect |
+| **Researcher requirements** | Optional two-factor authentication, verified identity, and citizenship declaration checks |
 
 <Note>
   Markdown formatting is supported in the Description and Policy fields, allowing you to use headings, lists, code blocks, and emphasis to make your program page clear and professional.
 </Note>
+
+After setup, use [Researcher requirements](/companies/programs/researcher-requirements) to control eligibility and [Known issues](/companies/programs/known-issues) to record findings your team already knows about.
+
+You can also add up to three questions in **Report form fields** on the program management page. These appear on signed-in and embedded report forms. See [Vulnerability disclosure](/companies/programs/vulnerability-disclosure) for field types and form branding.
 
 ## Public vs. private programs
 
@@ -70,6 +75,8 @@ Draft → Published → Active → (Paused) → Ended
 <Accordion title="Paused">
   The program has been temporarily suspended. No new reports can be submitted. All participating researchers receive an automatic email notification when a program is paused. Pausing is typically used when your team needs time to catch up on a backlog of reports, or when significant changes are being made to the product under test.
 </Accordion>
+
+A program **SuperAdmin** can use **Pause** or **Stop** from the program management page. When the program is paused or stopped, use **Start program** to make it active again. Review the program state before announcing that submissions are open.
 
 <Accordion title="Ended">
   The program has concluded. Existing reports remain accessible for your records and compliance needs, but no new submissions are accepted. For time-boxed engagements such as PTaaS, the end date is agreed upon at the start of the engagement.

@@ -15,7 +15,7 @@ Hackrate has four roles, ordered from most to least privileged:
     Full access across every feature. A SuperAdmin can see all report statuses — including Pre-submission, New, Needs more info, Duplicate, Invalid, Spam, Out of Scope, and Self-Closed — change any status, award bounties, manage team membership, and alter program settings.
   </Card>
   <Card title="StandardAdmin" icon="user-shield">
-    Triage and management access. A StandardAdmin can review, comment on, update reports, award bounties, manage program settings, and invite team members within their scope. They work in a filtered view that hides early-stage and rejection statuses, keeping their queue focused on actionable items.
+    Triage and management access. A StandardAdmin can review, comment on, and update accessible reports, award eligible rewards, and set researcher participation requirements. The report inbox filters some early-stage and rejection statuses unless the user also holds SuperAdmin access.
   </Card>
   <Card title="Analytics" icon="chart-bar">
     Read-only access to analytics dashboards and aggregated report data. Useful for management stakeholders who need visibility into program metrics without interacting with individual reports.
@@ -35,6 +35,9 @@ The table below shows which actions each role can perform:
 | Triage reports (change status, add internal comments) | ✅ | ✅ | ❌ | ❌ |
 | Award bounties and bonuses | ✅ | ✅ | ❌ | ❌ |
 | Manage program settings | ✅ | ✅ | ❌ | ❌ |
+| Add, edit, or disable program targets | ✅ | ❌ | ❌ | ❌ |
+| Edit the program bounty table | ✅ | ❌ | ❌ | ❌ |
+| Set researcher participation requirements | ✅ | ✅ | ❌ | ❌ |
 | Manage team members and invitations | ✅ | ✅ | ❌ | ❌ |
 | View analytics dashboards | ✅ | ✅ | ✅ | ❌ |
 | Export reports to CSV (including sensitive fields) | ✅ | ❌ | ❌ | ❌ |
@@ -43,6 +46,8 @@ The table below shows which actions each role can perform:
 <Note>
   StandardAdmins see a focused report queue that omits the following statuses: Pre-submission, New, Needs more info, Duplicate, Invalid, Spam, Out of Scope, and Self-Closed. This keeps their inbox clean and prevents premature triage of reports that have not yet passed initial validation or have already been closed as noise.
 </Note>
+
+For program configuration steps, see [Targets and scope](/companies/programs/targets-scope) and [Researcher requirements](/companies/programs/researcher-requirements).
 
 ## Permission Scopes
 

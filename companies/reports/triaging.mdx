@@ -16,6 +16,8 @@ Every report has a dedicated management page that only company admins can access
 
 ## Step-by-step triage workflow
 
+The report's **Pre-validation** card shows a computed risk score, an assessment, matched indicators, positive signals, and suggested checks when those signals are available. Use these as prompts for manual verification before deciding how to classify the finding.
+
 <Steps>
   ### Review the report header
 
@@ -133,6 +135,8 @@ Every report has a dedicated management page that only company admins can access
   ### Mark duplicates correctly
 
   When closing a report as **Duplicate** or **Good quality duplicate**, use the **Duplicate Of** field to record the ID of the original (first-submitted) report that describes the same vulnerability. The dropdown on the management page shows all earlier reports in the same organisation's programmes, making it easy to find the right reference.
+
+  The report details also show reports already linked as duplicates of the current finding. Review that list before choosing an original report.
 
   <Warning>
     Only mark a report as a duplicate when the root cause and the affected asset genuinely match. A report that describes a related but distinct vulnerability in the same system is not automatically a duplicate — it may deserve separate triage and its own bounty.

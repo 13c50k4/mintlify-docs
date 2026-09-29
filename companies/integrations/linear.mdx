@@ -1,0 +1,28 @@
+---
+title: "Connect Linear to a program"
+sidebarTitle: "Linear"
+description: "Create or link Linear issues from reports and configure two-way activity synchronization."
+---
+
+The Linear integration connects a program's vulnerability reports to a Linear team. After configuration, you can create a Linear issue from a report or link an existing issue in the selected team.
+
+## Configure the connection
+
+1. Open the program's **Manage** page and find **Integrations → Linear**.
+2. Expand **Configure Linear**. Add a Linear personal API key to connect a workspace, or select an existing workspace.
+3. Select a **Team** and, optionally, a **Project**.
+4. Set optional labels, title and description templates, and initial mappings in **Advanced settings**.
+5. If you want Linear changes to sync back to Hackrate, create a Linear webhook for **Issue** and **Comment** events on the selected team. Copy the webhook URL shown in Hackrate into Linear, then enter its signing secret in Hackrate.
+6. Select **Enable integration** and click **Save Linear configuration**.
+
+The personal API key uses the permissions of the Linear user who created it. Hackrate stores the key encrypted. Limit that Linear account to the access your team needs.
+
+## Choose what syncs
+
+In **Advanced settings**, choose which comments, status changes, rewards, assignee changes, disclosure events, and attachments flow from Hackrate to Linear. You can also enable inbound comments, status, assignee, and priority changes from Linear. **Auto-resolve when Linear reaches** is optional.
+
+The title and description templates support variables such as `{{report_id}}`, `{{report_title}}`, `{{severity}}`, and `{{report_link}}`. Initial mappings connect Hackrate severity, status, and assignee values to Linear fields.
+
+## Link a report
+
+Open a report's **Linear** card. Click **Create issue** to use the program templates, with optional title and description overrides. Click **Link existing** to attach a Linear issue from the configured team. The card shows the linked issue, its sync state, and **Retry** or **Unlink** actions when applicable.

@@ -1,0 +1,23 @@
+---
+title: "Record known issues"
+sidebarTitle: "Known issues"
+description: "Create or import known issue reports so your team can track vulnerabilities already identified before researcher submissions."
+---
+
+Use **Known issues** on a program's **Manage** page to record vulnerabilities your team already knows about. Hackrate creates a report marked **Known issue**. You can find it in report management, where the badge distinguishes it from a researcher submission.
+
+## Create one known issue
+
+Open **Known issues** and choose the single issue form. Enter a report title, severity, target, summary, description, and impact. You can also provide a CVSS vector, CWE, and vulnerability type. The text fields support Markdown. Click **Create known issue** to save the report.
+
+The target selector also includes disabled and out-of-scope targets for internal tracking. A known issue is an internal record and is not eligible for a bounty or bonus.
+
+## Import a CSV
+
+Choose the bulk import tab and click **Download sample CSV**. The required columns are `Name`, `TargetId`, `Severity`, `Summary`, `Description`, and `Impact`. Optional columns are `CVSS`, `CWETypeId`, and `VulnTypeId`. Use the target reference in the import dialog to find the correct IDs.
+
+Upload a CSV of at most **500 rows** and **2 MB**. The import is atomic: if any row is invalid, Hackrate creates no reports. Correct the errors and upload the file again.
+
+<Note>
+  Known issues are excluded from the current bounty queue and reward actions. Use [Report triage](/companies/reports/triaging) for researcher submissions.
+</Note>

@@ -46,6 +46,7 @@ In **Advanced view**, a persistent side panel exposes the following filters, whi
 <Accordion title="Available advanced filters">
   - **From date / To date** — filter by report creation date within an inclusive date range
   - **Programs** — select one or more of your accessible programs; leave empty to include all
+  - **Targets** — select one or more targets from the programs you can access
   - **Hacker alias** — filter by the submitting researcher's username
   - **Statuses** — filter by one or more specific status names (e.g. Accepted, Resolved)
   - **Open / Closed** — filter by status type to see only open or only closed reports
@@ -84,6 +85,7 @@ The **Export CSV** button in the inbox header opens an export dialog that lets y
 | Last Activity | Date and time of the most recent comment; falls back to the creation date if no comments exist |
 | CVSS Score | CVSS vector string |
 | VDP | Whether the report was submitted via an embedded/VDP form |
+| Known issue | Whether an administrator recorded the report as an existing issue |
 | Assigned To (Email) | Email address of the team member assigned to the report |
 
 <Note>
@@ -91,6 +93,14 @@ The **Export CSV** button in the inbox header opens an export dialog that lets y
 </Note>
 
 You can use the **Use current table filters** shortcut in the export dialog to carry over whatever program, status, date, and severity filters you already have active in the Advanced view, making it easy to export exactly the subset you are currently looking at.
+
+Click **Refresh** in the upper-right corner of the workspace to load the latest report data. **Export CSV** is beside it.
+
+## Known issues and duplicates
+
+Reports recorded by administrators display a **Known issue** badge in the inbox. Open the report to see its details. You can add one or import a CSV from [Known issues](/companies/programs/known-issues).
+
+The report management page also lists reports that reference the current report as a duplicate. You can open an accessible linked report from that list. See [Triaging reports](/companies/reports/triaging) for the duplicate decision workflow.
 
 ## Role-based report visibility
 

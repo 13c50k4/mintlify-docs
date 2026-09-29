@@ -1,0 +1,30 @@
+---
+title: "Use the external admin API"
+sidebarTitle: "External API"
+description: "Create a scoped personal token and use the v1 API for program discovery and report workflows."
+---
+
+The external admin API lets your internal tools read accessible programs and reports, triage findings, and record known issues. API access follows the token owner's current Hackrate roles.
+
+## Create a token
+
+Open **Profile settings → External API**. Give the token a recognizable name, choose the permissions it needs, and set an expiration of **30**, **90**, or **365 days**. Click **Create token**, then copy the secret into your secret manager. Hackrate shows the full token only once. You can have up to **10 active tokens** and revoke one from the same page.
+
+| Scope | Allows |
+|---|---|
+| `programs:read` | Read accessible programs and targets |
+| `reports:read` | Read reports, comments, activity, and metadata |
+| `reports:triage` | Comment, assign, classify, edit, and transition reports |
+| `reports:rewards` | Award eligible bounties and bonuses |
+| `evidence:read` | List evidence and request short-lived download links |
+| `known-issues:write` | Create known issues in accessible programs |
+
+Send the token as a bearer credential:
+
+```http
+Authorization: Bearer hckrt_pat_<your-token>
+```
+
+The API base path is `/api/v1/admin`. The **API reference** tab in these docs is generated from `openapi/external-admin-v1.json`. The [platform OpenAPI document](https://www.hckrt.com/api/v1/openapi.json) also lists endpoints, request bodies, and responses. A token scope never grants access beyond its owner's current role. Role changes take effect immediately, and revocation stops the next request.
+
+For report search, the API supports filters and cursor pagination. Pass `nextCursor` back unchanged with the same filters and sort order to fetch the next page.
