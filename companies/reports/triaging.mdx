@@ -1,14 +1,14 @@
 ---
-title: "How to Triage Vulnerability Reports as a Company Admin"
+title: "Triage vulnerability reports"
 sidebarTitle: "Triaging"
-description: "Step-by-step guidance for reviewing evidence, validating severity, assigning reports, communicating with researchers, and reaching a final triage decision."
+description: "Review evidence and pre-validation signals, assign a report, communicate with the researcher, and record a triage decision."
 ---
 
-Triaging is the process of turning a raw researcher submission into a clear, actionable decision — whether that means accepting a valid vulnerability, requesting more information, marking a duplicate, or closing the report with a rejection. Done well, triaging protects your organisation, builds trust with the research community, and keeps your programme running efficiently. This guide walks you through everything you need to do from the moment a new report lands in your inbox to the moment you set a final status.
+When a report reaches your inbox, review the evidence, decide whether the finding is valid, and keep the researcher informed. Use this guide to assign the report, check pre-validation signals, record a decision, and handle duplicates or rewards.
 
 ## Accessing the report management view
 
-Every report has a dedicated management page that only company admins can access. You reach it from **Reports → My Program Reports** by clicking the report title in the inbox table. The management view shows the full report contents, a pre-validation checklist, the CVSS scorer, all comments, attached evidence files, and all available triage actions.
+Open **Reports → My Program Reports** and select a report title. The management page shows the submission, pre-validation assessment, CVSS scorer, comments, evidence, and the actions available to your role.
 
 <Note>
   You must have a **SuperAdmin** or **StandardAdmin** role for the relevant programme or organisation to triage reports. Read-Only and Analytics roles can view reports but cannot take triage actions such as changing status, adding comments, or awarding bounties.
@@ -16,138 +16,115 @@ Every report has a dedicated management page that only company admins can access
 
 ## Step-by-step triage workflow
 
-The report's **Pre-validation** card shows a computed risk score, an assessment, matched indicators, positive signals, and suggested checks when those signals are available. Use these as prompts for manual verification before deciding how to classify the finding.
+The **Pre-validation** card highlights signals that may need manual review. It does not determine whether a finding is valid or set the report's severity.
 
-<Steps>
-  ### Review the report header
+### Review the report header
 
-  At the top of the management view you will see three summary cards showing the current **Status** (with its Open/Closed type), the **Target** (with its tier), and the **Severity** the researcher assigned. These give you an immediate at-a-glance orientation before you read the full submission.
+At the top of the management view you will see three summary cards showing the current **Status** (with its Open/Closed type), the **Target** (with its tier), and the **Severity** the researcher assigned. These give you an immediate at-a-glance orientation before you read the full submission.
 
-  Also check:
-  - **Program** — confirms which of your programmes this report belongs to
-  - **Target** — the specific asset the researcher tested; verify it is in-scope for your programme
-  - **Reporter** — the researcher's alias; useful context if you have prior interactions with this person
-  - **VDP flag** — if the report arrived via an embedded/VDP form, this will be indicated on the report
+Also check:
+- **Program** — confirms which of your programmes this report belongs to
+- **Target** — the specific asset the researcher tested; verify it is in-scope for your programme
+- **Reporter** — the researcher's alias; useful context if you have prior interactions with this person
+- **VDP flag** — if the report arrived via an embedded/VDP form, this will be indicated on the report
 
-  ### Check the pre-validation checklist
+### Review the pre-validation assessment
 
-  Hackrate automatically analyses each report against a set of quality criteria and surfaces the results as a pre-validation checklist on the management page. This checklist checks whether the report includes all the elements needed for a productive triage:
+The card shows a **Risk score** from 0 to 100. A higher score means the submission contains more suspicious, speculative, or incomplete content; it is not a CVSS score. The card can also show an **Assessment**, **Matched indicators**, **Positive signals**, and suggested **Triage checks**.
 
-  <CardGroup cols={2}>
-    <Card title="Summary" icon="align-left">
-      Is a summary provided? A missing or very short summary is a signal that the researcher may not have clearly articulated the vulnerability.
-    </Card>
-    <Card title="Description" icon="file-alt">
-      Is a detailed description present? The description should explain how the vulnerability works and how it was discovered.
-    </Card>
-    <Card title="Impact" icon="bolt">
-      Is a business impact statement included? Good reports explain not just what is broken but what an attacker could do with it.
-    </Card>
-    <Card title="Evidence" icon="paperclip">
-      Are proof-of-concept files attached? Screenshots, videos, or request/response logs are critical for validation.
-    </Card>
-    <Card title="Severity" icon="exclamation-triangle">
-      Has the researcher selected a severity level? An unset or implausible severity warrants attention.
-    </Card>
-    <Card title="Target in scope" icon="crosshairs">
-      Is the reported target currently in-scope for the programme? If the target is marked out-of-scope, the checklist will flag this immediately.
-    </Card>
-  </CardGroup>
+Use the suggested checks to guide your review. Confirm the target is in scope, reproduce the reported behavior, examine the evidence, and verify the claimed impact. A missing attachment or a short summary does not automatically make a report invalid.
 
-  Use the checklist as a quick indicator, not an absolute gate. A report can fail one checklist item and still be a high-quality, valid finding — for example, a researcher who submits a clearly demonstrable, critical vulnerability without attaching a file may simply need a gentle prompt to upload a screenshot.
+### Read the full report content
 
-  ### Read the full report content
+Scroll through the **Details** section to read:
+- **Summary** — the researcher's concise description of the issue
+- **Description** — the full technical write-up, including steps to reproduce
+- **Impact** — the researcher's assessment of business risk
+- **CVSS** — the submitted CVSS vector; you can view and recalculate it interactively on the management page using the built-in CVSS scorer
+- **Vulnerability type** (CAPEC/CWE) — the classification the researcher selected
 
-  Scroll through the **Details** section to read:
-  - **Summary** — the researcher's concise description of the issue
-  - **Description** — the full technical write-up, including steps to reproduce
-  - **Impact** — the researcher's assessment of business risk
-  - **CVSS** — the submitted CVSS vector; you can view and recalculate it interactively on the management page using the built-in CVSS scorer
-  - **Vulnerability type** (CAPEC/CWE) — the classification the researcher selected
+Review all **evidence files** (screenshots, videos, HTTP request captures, or code snippets) attached to the report. Evidence quality is often the deciding factor in borderline cases.
 
-  Review all **evidence files** (screenshots, videos, HTTP request captures, or code snippets) attached to the report. Evidence quality is often the deciding factor in borderline cases.
+### Assess and adjust severity
 
-  ### Assess and adjust severity
+The severity the researcher assigned may not match your assessment. If you disagree, you can change it directly from the management view. Severity affects the bounty calculation (if your programme uses a bounty table), so setting it accurately before awarding a payout is important.
 
-  The severity the researcher assigned may not match your assessment. If you disagree, you can change it directly from the management view. Severity affects the bounty calculation (if your programme uses a bounty table), so setting it accurately before awarding a payout is important.
+Severity levels available are: **Critical**, **High**, **Medium**, **Low**, and **None**.
 
-  Severity levels available are: **Critical**, **High**, **Medium**, **Low**, and **None**.
+You can also update the **vulnerability type** (CAPEC classification) and the **CWE type** if the researcher's original selection was imprecise.
 
-  You can also update the **vulnerability type** (CAPEC classification) and the **CWE type** if the researcher's original selection was imprecise.
+<Tip>
+  Use the interactive CVSS calculator on the management page to score the vulnerability yourself if you disagree with the researcher's vector. The recalculated score updates in real time and helps you justify a severity change to the researcher with a concrete, objective basis.
+</Tip>
 
-  <Tip>
-    Use the interactive CVSS calculator on the management page to score the vulnerability yourself if you disagree with the researcher's vector. The recalculated score updates in real time and helps you justify a severity change to the researcher with a concrete, objective basis.
-  </Tip>
+### Assign the report to a team member
 
-  ### Assign the report to a team member
+If your organisation has multiple admins, assign the report to the team member best placed to investigate it — for example, the engineer who owns the affected system, or the security analyst specialising in the relevant vulnerability class. Use the **Assign** control on the management page to select from your programme's admin users.
 
-  If your organisation has multiple admins, assign the report to the team member best placed to investigate it — for example, the engineer who owns the affected system, or the security analyst specialising in the relevant vulnerability class. Use the **Assign** control on the management page to select from your programme's admin users.
+Assigning a report creates clear ownership, prevents reports from falling through the cracks when multiple people are in the inbox, and makes the **Assigned To** column meaningful in CSV exports.
 
-  Assigning a report creates clear ownership, prevents reports from falling through the cracks when multiple people are in the inbox, and makes the **Assigned To** column meaningful in CSV exports.
+### Communicate with the researcher
 
-  ### Communicate with the researcher
+The management view has a comment system with two distinct modes:
 
-  The management view has a comment system with two distinct modes:
+<Tabs>
+  <Tab title="Public comment">
+    Visible to both your team and the researcher. Use public comments to:
+    - Ask for clarification or additional evidence
+    - Confirm that you have reproduced the issue
+    - Update the researcher on remediation progress
+    - Explain the rationale for a triage decision
 
-  <Tabs>
-    <Tab title="Public comment">
-      Visible to both your team and the researcher. Use public comments to:
-      - Ask for clarification or additional evidence
-      - Confirm that you have reproduced the issue
-      - Update the researcher on remediation progress
-      - Explain the rationale for a triage decision
+    Public comments are the primary channel for researcher communication and have a direct effect on programme reputation and researcher satisfaction.
+  </Tab>
+  <Tab title="Internal comment">
+    Visible **only to your admin team**. Use internal comments to:
+    - Document your internal analysis and rationale
+    - Coordinate between team members
+    - Record notes about remediation steps or timeline
+    - Flag concerns that are not appropriate to share with the researcher
 
-      Public comments are the primary channel for researcher communication and have a direct effect on programme reputation and researcher satisfaction.
-    </Tab>
-    <Tab title="Internal comment">
-      Visible **only to your admin team**. Use internal comments to:
-      - Document your internal analysis and rationale
-      - Coordinate between team members
-      - Record notes about remediation steps or timeline
-      - Flag concerns that are not appropriate to share with the researcher
+    Internal comments are highlighted in green in the management view so they are visually distinct from public comments.
+  </Tab>
+</Tabs>
 
-      Internal comments are highlighted in green in the management view so they are visually distinct from public comments.
-    </Tab>
-  </Tabs>
+You can also store an internal **Team Summary** on the report — a free-text field that is never visible to the researcher and is intended for structured internal documentation of the finding and your team's response.
 
-  You can also store an internal **Team Summary** on the report — a free-text field that is never visible to the researcher and is intended for structured internal documentation of the finding and your team's response.
+### Make the triage decision
 
-  ### Make the triage decision
+Once you have reviewed the evidence, assessed severity, and (if needed) gathered additional information from the researcher, change the report's status to reflect your decision. The full set of available statuses is described in the [Report Statuses reference](/companies/reports/report-statuses), but the most common triage actions are:
 
-  Once you have reviewed the evidence, assessed severity, and (if needed) gathered additional information from the researcher, change the report's status to reflect your decision. The full set of available statuses is described in the [Report Statuses reference](/companies/reports/report-statuses), but the most common triage actions are:
+| Action | Status to set |
+|---|---|
+| Confirm valid vulnerability | Accepted |
+| Ask researcher for more details | Needs more info |
+| Vulnerability has been fixed | Resolved |
+| Finding is real but not a security risk | Informative |
+| Already reported by another researcher | Duplicate |
+| Report does not demonstrate a real vulnerability | Not Accepted (Invalid) |
+| Submission is low-quality or irrelevant | Not Accepted (Spam) |
+| Target is not covered by the programme | Not Accepted (Out of Scope) |
+| Researcher withdrew or became unresponsive | Not Accepted (Self-Closed) |
+| Organisation accepts the risk without fixing | Accepted risk |
+| High-quality submission, but still a duplicate | Good quality duplicate |
 
-  | Action | Status to set |
-  |---|---|
-  | Confirm valid vulnerability | Accepted |
-  | Ask researcher for more details | Needs more info |
-  | Vulnerability has been fixed | Resolved |
-  | Finding is real but not a security risk | Informative |
-  | Already reported by another researcher | Duplicate |
-  | Report does not demonstrate a real vulnerability | Not Accepted (Invalid) |
-  | Submission is low-quality or irrelevant | Not Accepted (Spam) |
-  | Target is not covered by the programme | Not Accepted (Out of Scope) |
-  | Researcher withdrew or became unresponsive | Not Accepted (Self-Closed) |
-  | Organisation accepts the risk without fixing | Accepted risk |
-  | High-quality submission, but still a duplicate | Good quality duplicate |
+Always leave a **public comment** when closing a report, especially with a rejection. A brief, specific explanation dramatically improves researcher experience and reduces disputes.
 
-  Always leave a **public comment** when closing a report, especially with a rejection. A brief, specific explanation dramatically improves researcher experience and reduces disputes.
+### Mark duplicates correctly
 
-  ### Mark duplicates correctly
+When closing a report as **Duplicate** or **Good quality duplicate**, use **Duplicate Of** to link the original report describing the same vulnerability. Search the dropdown in the duplicate modal for the earlier report, then confirm the affected asset and root cause before selecting it.
 
-  When closing a report as **Duplicate** or **Good quality duplicate**, use the **Duplicate Of** field to record the ID of the original (first-submitted) report that describes the same vulnerability. The dropdown on the management page shows all earlier reports in the same organisation's programmes, making it easy to find the right reference.
+The report details also show reports already linked as duplicates of the current finding. Review that list before choosing an original report.
 
-  The report details also show reports already linked as duplicates of the current finding. Review that list before choosing an original report.
+<Warning>
+  Only mark a report as a duplicate when the root cause and the affected asset genuinely match. A report that describes a related but distinct vulnerability in the same system is not automatically a duplicate — it may deserve separate triage and its own bounty.
+</Warning>
 
-  <Warning>
-    Only mark a report as a duplicate when the root cause and the affected asset genuinely match. A report that describes a related but distinct vulnerability in the same system is not automatically a duplicate — it may deserve separate triage and its own bounty.
-  </Warning>
+### Award a bounty (if applicable)
 
-  ### Award a bounty (if applicable)
+If the report is valid and your programme is a paid bug bounty programme, you can award a bounty directly from the management view. See [Bounty Rewards](/companies/reports/bounty-rewards) for full details on how bounty amounts are determined and how to record the payment.
 
-  If the report is valid and your programme is a paid bug bounty programme, you can award a bounty directly from the management view. See [Bounty Rewards](/companies/reports/bounty-rewards) for full details on how bounty amounts are determined and how to record the payment.
-
-  You can also award a **bonus** on top of the standard bounty for exceptional quality, unique impact, or particularly thorough documentation.
-</Steps>
+You can also award a **bonus** on top of the standard bounty for exceptional quality, unique impact, or particularly thorough documentation.
 
 ## Integrations available from the report view
 
