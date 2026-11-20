@@ -30,6 +30,7 @@
               "companies/programs/overview",
               "companies/programs/bug-bounty",
               "companies/programs/vulnerability-disclosure",
+              "companies/programs/coordinated-disclosure",
               "companies/programs/ptaas",
               "companies/programs/targets-scope",
               "companies/programs/researcher-requirements",

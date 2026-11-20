@@ -27,4 +27,10 @@ Authorization: Bearer hckrt_pat_<your-token>
 
 The API base path is `/api/v1/admin`. The **API reference** tab in these docs is generated from `openapi/external-admin-v1.json`. The [platform OpenAPI document](https://www.hckrt.com/api/v1/openapi.json) also lists endpoints, request bodies, and responses. A token scope never grants access beyond its owner's current role. Role changes take effect immediately, and revocation stops the next request.
 
+## Review API access for a program
+
+Open the program's **Manage** page and find the **API** card under integrations. It lists users who have an active personal API key and access to that program, including access through admin groups, business units, or individual reports. The card shows each user's role. Click **Create my API key** to open your personal token settings.
+
+Each key belongs to a user. The list does not grant access or change permissions. Revoke your own key from **Profile settings → External API**, or update a user's assigned access through the program's permissions.
+
 For report search, the API supports filters and cursor pagination. Pass `nextCursor` back unchanged with the same filters and sort order to fetch the next page.
